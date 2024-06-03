@@ -1,1 +1,8 @@
-#Merencanakan jenis layanan yang akan dibuat
+# Merencanakan jenis layanan yang akan dibuat
+Membuat layanan pemesanan makanan
+informasi yang ditampilkan:
+1. nama makanan
+2. gambar makanan
+3. harga makanan
+4. deskripsi makanan: bahan-bahan makanan yang digunakan
+5. nama toko: BINGLE FOOD
