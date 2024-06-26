@@ -1,5 +1,11 @@
 # Merencanakan jenis layanan yang akan dibuat
-Membuat layanan pemesanan makanan
+Layanan: Membuat layanan pemesanan makanan
+Fitur: 
+1. dapat memilih makanan
+2. dapat memilih jumlah makanan
+3. dapat update harga sesuai jumlah makanan
+4. dapat memilih dimana pesanan akan dikirim
+
 informasi yang ditampilkan:
 1. nama makanan
 2. gambar makanan

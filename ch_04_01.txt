@@ -1,7 +1,7 @@
 # Merencanakan jenis data yang akan dikelola oleh server
 
 Data yang dikelola:
-1. data jenis makanan: snack, makan berat
+1. jenis makanan: snack, makan berat
 2. harga makanan
 3. data pemesanan
 4. stok makanan/bahan makanan
