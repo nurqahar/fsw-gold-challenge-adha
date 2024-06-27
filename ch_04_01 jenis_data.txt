@@ -1,0 +1,9 @@
+# Merencanakan jenis data yang akan dikelola oleh server
+Layanan: Membuat perangkat ajar guru kurikulum merdeka
+Data yang dikelola:
+1. data mapel
+2. data CP
+3. data TP
+4. data ATP
+5. data siswa kelas X, XI, XII
+6. data presensi pada tiap sesi materi
