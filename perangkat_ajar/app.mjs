@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 import Message from "./message/message.mjs";
 const message = new Message();
-import router from "./router.mjs";
+import router from "./routes/router.mjs";
 
 // setting
 app.set("view engine", "ejs");
@@ -17,3 +17,4 @@ app.use("/", router);
 app.listen(port, () => {
   console.log(message.listen(port));
 });
+
