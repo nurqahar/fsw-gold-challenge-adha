@@ -1,0 +1,8 @@
+# Install third-party module yang dibutuhkan
+Layanan: Membuat perangkat ajar guru kurikulum merdeka
+
+Modul yang diinstall:
+1. express JS
+2. EJS template web engine
+3. morgan untuk logging
+4. nodemon

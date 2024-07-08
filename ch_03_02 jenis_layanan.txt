@@ -1,0 +1,9 @@
+# Merencanakan jenis layanan yang akan dibuat
+Layanan: Membuat perangkat ajar guru kurikulum merdeka
+Fitur: 
+1. input Mata Pelajaran/MAPEL
+2. input Capaian Pembelajaran/CP
+3. input Tujuan Pembelajaran/TP
+4. input Alur Tujuan Pembelajaran/ATP
+5. presensi siswa
+6. penilaian siswa
