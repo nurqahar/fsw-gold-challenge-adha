@@ -21,7 +21,8 @@ function createTable(db) {
   db.exec(`
         CREATE TABLE DATA_SISWA
         (
-        nis                      VARCHAR(100),
+        no                      VARCHAR(100),
+        nis                      int NOT NULL PRIMARY KEY,
         nisn                     VARCHAR(100),
         nik                      VARCHAR(100),
         no_un_sebelumnya         VARCHAR(100),

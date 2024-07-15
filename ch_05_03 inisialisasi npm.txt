@@ -1,6 +1,0 @@
-# Inisialisasi NPM
-Layanan: Membuat perangkat ajar guru kurikulum merdeka
-
-npm init -y
-memanfaatkan express JS.
-memanfaatkan router untuk mengarahkan client ke halaman yang dituju.

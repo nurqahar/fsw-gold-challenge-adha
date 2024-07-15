@@ -1,9 +1,0 @@
-# Membuat folder untuk project
-Layanan: Membuat perangkat ajar guru kurikulum merdeka
-
-folder project: perangkat_ajar
-di dalamnya terdapat folder:
-controllers untuk menangani request dari client.
-models untuk menangani data yang diminta dari client.
-views untuk menangani tampilan yang akan disajikan ke client.
-message untuk menangani pesan error, pesan url untuk proses development.
