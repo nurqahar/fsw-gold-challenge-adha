@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import { getSiswas, getSiswaByNis } from "../controllers/SiswaController.mjs";
 
 // route address to a specifig HTTP method & function
 // /siswa = get, add, modified siswa
@@ -8,8 +9,8 @@ const router = express.Router();
 // /tp = get, add, modified tp
 // /atp = get, add, modified atp - get, post, put
 
-router.get("/", (request, response) => {
-  response.render("menuView");
-});
+router.get("/classes", getSiswas);
+router.get("/classes/:id", getSiswaByNis);
+
 
 export default router;

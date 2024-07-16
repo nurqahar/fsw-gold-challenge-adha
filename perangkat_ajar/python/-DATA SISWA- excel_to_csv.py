@@ -1,9 +1,6 @@
 import openpyxl
 import os
 
-"""
-"""
-
 listStr=""
 directory="E:\\binaracad\\fsw-gc-adha\\perangkat_ajar\\data\\"
 for file in os.listdir(directory):

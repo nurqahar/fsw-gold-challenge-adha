@@ -6,15 +6,12 @@ const message = new Message();
 import router from "./routes/router.mjs";
 
 // setting
-app.set("view engine", "ejs");
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // route page to router
-app.use("/", router);
+app.use("/api", router);
 
 // listen to client
 app.listen(port, () => {
-  console.log(message.listen(port));
+  console.log(message.listenApi(port));
 });
-

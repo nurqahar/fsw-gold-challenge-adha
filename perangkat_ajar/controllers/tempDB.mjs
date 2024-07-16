@@ -87,7 +87,8 @@ function createTable(db) {
         kaos_olahraga            VARCHAR(100),
         jas_almamater            VARCHAR(100),
         wearpack                 VARCHAR(100),
-        sepatu                   VARCHAR(100)
+        sepatu                   VARCHAR(100),
+        kelas                   VARCHAR(100)
         )`);
 }
 
