@@ -10,7 +10,7 @@ import { getSiswas, getSiswaByNis } from "../controllers/SiswaController.mjs";
 // /atp = get, add, modified atp - get, post, put
 
 router.get("/classes", getSiswas);
-router.get("/classes/:id", getSiswaByNis);
+router.get("/classes/:nis", getSiswaByNis);
 
 
 export default router;

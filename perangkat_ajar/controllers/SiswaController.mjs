@@ -1,6 +1,5 @@
 import { Siswas } from "../models/SiswaModel.mjs";
 import Message from "../message/message.mjs";
-const message = new Message();
 
 export const getSiswas = (request, response) => {
   response.json(Siswas.getAllSiswa());
