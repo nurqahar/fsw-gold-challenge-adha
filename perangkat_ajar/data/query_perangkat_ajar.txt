@@ -1,0 +1,91 @@
+%%%%%%%%%% CREATE TABLE:
+CREATE TABLE data_siswa_x_toi_1(
+    id_nis_siswa INT PRIMARY KEY,
+    nama_siswa VARCHAR(100),
+    tahun_angkatan VARCHAR(100),
+    keterangan VARCHAR(100)
+);
+CREATE TABLE data_siswa_x_toi_2(
+    id_nis_siswa INT PRIMARY KEY,
+    nama_siswa VARCHAR(100),
+    tahun_angkatan VARCHAR(100),
+    keterangan VARCHAR(100)
+);
+
+CREATE TABLE data_siswa_xi_toi_1(
+    id_nis_siswa INT PRIMARY KEY,
+    nama_siswa VARCHAR(100),
+    tahun_angkatan VARCHAR(100),
+    keterangan VARCHAR(100)
+);
+CREATE TABLE data_siswa_xi_toi_2(
+    id_nis_siswa INT PRIMARY KEY,
+    nama_siswa VARCHAR(100),
+    tahun_angkatan VARCHAR(100),
+    keterangan VARCHAR(100)
+);
+
+CREATE TABLE data_siswa_xii_toi_1(
+    id_nis_siswa INT PRIMARY KEY,
+    nama_siswa VARCHAR(100),
+    tahun_angkatan VARCHAR(100),
+    keterangan VARCHAR(100)
+);
+CREATE TABLE data_siswa_xii_toi_2(
+    id_nis_siswa INT PRIMARY KEY,
+    nama_siswa VARCHAR(100),
+    tahun_angkatan VARCHAR(100),
+    keterangan VARCHAR(100)
+);
+
+CREATE TABLE guru(
+    id_guru INT PRIMARY KEY,
+    nama_guru VARCHAR(100)
+);
+CREATE TABLE mata_pelajaran(
+    id_mata_pelajaran INT PRIMARY KEY,
+    nama_mata_pelajaran VARCHAR(100)
+);
+
+CREATE TABLE catatan_mengajar(
+    id_catatan_mengajar INT PRIMARY KEY,
+    tanggal VARCHAR(100),
+    keterlambatan VARCHAR(100),
+    jumlah_jam VARCHAR(100),
+    materi VARCHAR(100),
+    tahun_ajaran VARCHAR(100),
+    semester VARCHAR(100),
+    jam VARCHAR(100),
+    kehadiran VARCHAR(100),
+    catatan VARCHAR(100),
+    id_guru INT,
+    id_mata_pelajaran INT,
+    id_nis_siswa INT
+);
+
+%%%%%%%%%% INSERT DATA:
+INSERT INTO data_siswa_x_toi_1(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
+(,,,)
+INSERT INTO data_siswa_x_toi_2(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
+(,,,)
+INSERT INTO data_siswa_xi_toi_1(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
+(,,,)
+INSERT INTO data_siswa_xi_toi_2(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
+(,,,)
+INSERT INTO data_siswa_xii_toi_1(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
+(,,,)
+INSERT INTO data_siswa_xii_toi_2(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
+(,,,)
+
+INSERT INTO guru(id_guru, nama_guru) VALUES
+(,)
+INSERT INTO guru(id_mata_pelajaran, nama_mata_pelajaran) VALUES
+(,)
+
+INSERT INTO catatan_mengajar(id_catatan_mengajar, tanggal, keterlambatan, jumlah_jam, materi, tahun_ajaran, semester, jam, kehadiran, catatan, id_guru, id_mata_pelajaran, id_nis_siswa) VALUES
+(,,,,,,,,,,,,)
+
+
+%%%%%%%%%% READ DATA:
+
+
