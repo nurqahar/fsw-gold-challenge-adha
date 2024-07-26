@@ -2,39 +2,39 @@
 CREATE TABLE data_siswa_x_toi_1(
     id_nis_siswa INT PRIMARY KEY,
     nama_siswa VARCHAR(100),
-    tahun_angkatan VARCHAR(100),
+    tahun_masuk VARCHAR(100),
     keterangan VARCHAR(100)
 );
 CREATE TABLE data_siswa_x_toi_2(
     id_nis_siswa INT PRIMARY KEY,
     nama_siswa VARCHAR(100),
-    tahun_angkatan VARCHAR(100),
+    tahun_masuk VARCHAR(100),
     keterangan VARCHAR(100)
 );
 
 CREATE TABLE data_siswa_xi_toi_1(
     id_nis_siswa INT PRIMARY KEY,
     nama_siswa VARCHAR(100),
-    tahun_angkatan VARCHAR(100),
+    tahun_masuk VARCHAR(100),
     keterangan VARCHAR(100)
 );
 CREATE TABLE data_siswa_xi_toi_2(
     id_nis_siswa INT PRIMARY KEY,
     nama_siswa VARCHAR(100),
-    tahun_angkatan VARCHAR(100),
+    tahun_masuk VARCHAR(100),
     keterangan VARCHAR(100)
 );
 
 CREATE TABLE data_siswa_xii_toi_1(
     id_nis_siswa INT PRIMARY KEY,
     nama_siswa VARCHAR(100),
-    tahun_angkatan VARCHAR(100),
+    tahun_masuk VARCHAR(100),
     keterangan VARCHAR(100)
 );
 CREATE TABLE data_siswa_xii_toi_2(
     id_nis_siswa INT PRIMARY KEY,
     nama_siswa VARCHAR(100),
-    tahun_angkatan VARCHAR(100),
+    tahun_masuk VARCHAR(100),
     keterangan VARCHAR(100)
 );
 
@@ -51,39 +51,259 @@ CREATE TABLE catatan_mengajar(
     id_catatan_mengajar INT PRIMARY KEY,
     tanggal VARCHAR(100),
     keterlambatan VARCHAR(100),
-    jumlah_jam VARCHAR(100),
+    jumlah_jam INT,
     materi VARCHAR(100),
     tahun_ajaran VARCHAR(100),
-    semester VARCHAR(100),
+    semester INT,
     jam VARCHAR(100),
-    kehadiran VARCHAR(100),
     catatan VARCHAR(100),
+    kehadiran VARCHAR(100),
     id_guru INT,
     id_mata_pelajaran INT,
     id_nis_siswa INT
 );
 
 %%%%%%%%%% INSERT DATA:
-INSERT INTO data_siswa_x_toi_1(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
-(,,,)
-INSERT INTO data_siswa_x_toi_2(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
-(,,,)
-INSERT INTO data_siswa_xi_toi_1(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
-(,,,)
-INSERT INTO data_siswa_xi_toi_2(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
-(,,,)
-INSERT INTO data_siswa_xii_toi_1(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
-(,,,)
-INSERT INTO data_siswa_xii_toi_2(id_nis_siswa, nama_siswa, tahun_angkatan, keterangan) VALUES
-(,,,)
+INSERT INTO data_siswa_x_toi_1(id_nis_siswa, nama_siswa, tahun_masuk, keterangan) VALUES
+    (13425,"Killian Durham","2020",""),
+    (13426,"Rodolfo Newton","2020",""),
+    (13427,"Leland Reyes","2020",""),
+    (13428,"Alana Vincent","2020",""),
+    (13429,"Ainsley Delacruz","2020",""),
+    (13430,"Harmony Wiley","2020",""),
+    (13431,"Arely Gallegos","2020",""),
+    (13432,"Skyler Soto","2020",""),
+    (13433,"Claudia Wilkinson","2020",""),
+    (13434,"Sharon Valencia","2020",""),
+    (13435,"Rafael Calhoun","2021",""),
+    (13436,"Peyton Poole","2020",""),
+    (13437,"Kylan Roach","2020",""),
+    (13438,"Johanna Sweeney","2020",""),
+    (13439,"Josue Mueller","2020",""),
+    (13440,"Callie Juarez","2021",""),
+    (13441,"Duncan Snow","2020",""),
+    (13442,"Lorenzo Mooney","2020",""),
+    (13443,"Reece Gilbert","2020",""),
+    (13444,"Kenzie Hensley","2020",""),
+    (13445,"Isabelle Blair","2020",""),
+    (13446,"Pierce Villanueva","2020",""),
+    (13447,"Nigel Gentry","2020",""),
+    (13448,"Rigoberto Shepard","2020",""),
+    (13449,"Brenna Soto","2020",""),
+    (13450,"Freddy Moran","2020",""),
+    (13451,"Lucia Burke","2020",""),
+    (13452,"Simon Roman","2020",""),
+    (13453,"Kevin White","2020",""),
+    (13454,"Margaret Carney","2020",""),
+    (13455,"Simeon Dorsey","2020",""),
+    (13456,"Skylar Lindsey","2020",""),
+    (13457,"Charles Manning","2020",""),
+    (13458,"Danika Malone","2020",""),
+    (13459,"Amari Mooney","2020",""),
+    (13460,"Ryland Buck","2020",""),
+    (13461,"Russell Carson","2020","")
+
+INSERT INTO data_siswa_x_toi_2(id_nis_siswa, nama_siswa, tahun_masuk, keterangan) VALUES
+    (13462,"Cordell","2020",""),
+    (13463,"Dennis","2020",""),
+    (13464,"Ronan","2020",""),
+    (13465,"Keyon","2020",""),
+    (13466,"Marlon","2020",""),
+    (13467,"Scott","2020",""),
+    (13468,"Salvatore","2020",""),
+    (13469,"Zackary","2020",""),
+    (13470,"Braylen","2020",""),
+    (13471,"Nicolas","2020",""),
+    (13472,"Jay","2020",""),
+    (13473,"Maurice","2020",""),
+    (13474,"Kenneth","2020",""),
+    (13475,"Nicholas","2020",""),
+    (13476,"Brandon","2020",""),
+    (13477,"Amir","2020",""),
+    (13478,"Lincoln","2020",""),
+    (13479,"Jaydan","2020",""),
+    (13480,"Royce","2020",""),
+    (13481,"Armani","2020",""),
+    (13482,"Zayden","2020",""),
+    (13483,"Isiah","2020",""),
+    (13484,"Dorian","2020",""),
+    (13485,"Jamari","2020",""),
+    (13486,"Steven","2020",""),
+    (13487,"Matthew","2020",""),
+    (13488,"Micah","2020",""),
+    (13489,"Wesley","2020",""),
+    (13490,"Kymani","2020",""),
+    (13491,"Devyn","2020","")
+
+INSERT INTO data_siswa_xi_toi_1(id_nis_siswa, nama_siswa, tahun_masuk, keterangan) VALUES
+    (13492,"Karter","2020",""),
+    (13493,"Marco","2020",""),
+    (13494,"Ronald","2020",""),
+    (13495,"Khalil","2020",""),
+    (13496,"Jordyn","2020",""),
+    (13497,"Sage","2020",""),
+    (13498,"Zaiden","2020",""),
+    (13499,"Jalen","2020",""),
+    (13500,"Adam","2020",""),
+    (13501,"Bryce","2020",""),
+    (13502,"Ahmad","2020",""),
+    (13503,"Kyan","2020",""),
+    (13504,"Fabian","2020",""),
+    (13505,"Jamarcus","2020",""),
+    (13506,"Cruz","2020",""),
+    (13507,"Heath","2020",""),
+    (13508,"Braedon","2020",""),
+    (13509,"Max","2020",""),
+    (13510,"Marcos","2020",""),
+    (13511,"Seth","2020",""),
+    (13512,"Talan","2020",""),
+    (13513,"Reginald","2020",""),
+    (13514,"Darien","2020",""),
+    (13515,"Deangelo","2020",""),
+    (13516,"Fletcher","2020",""),
+    (13517,"Messiah","2020",""),
+    (13518,"Tyrell","2020",""),
+    (13519,"Ronnie","2020",""),
+    (13520,"Uriah","2020",""),
+    (13521,"Reese","2020",""),
+    (13522,"Elliott","2020",""),
+    (13523,"Omari","2020",""),
+    (13524,"Peyton","2020","")
+
+INSERT INTO data_siswa_xi_toi_2(id_nis_siswa, nama_siswa, tahun_masuk, keterangan) VALUES
+    (13525,"Mohammad","2020",""),
+    (13526,"Jadyn","2020",""),
+    (13527,"Johan","2020",""),
+    (13528,"Isaias","2020",""),
+    (13529,"Deegan","2020",""),
+    (13530,"Aaden","2020",""),
+    (13531,"James","2020",""),
+    (13532,"Coleman","2020",""),
+    (13533,"Jaxon","2020",""),
+    (13534,"Jakob","2020",""),
+    (13535,"Kieran","2020",""),
+    (13536,"Pedro","2020",""),
+    (13537,"Roman","2020",""),
+    (13538,"Ezekiel","2020",""),
+    (13539,"Deven","2020",""),
+    (13540,"Kody","2020",""),
+    (13541,"Grayson","2020",""),
+    (13542,"Josiah","2020",""),
+    (13543,"Cruz","2020",""),
+    (13544,"Maxwell","2020",""),
+    (13545,"Jaxson","2020",""),
+    (13546,"Alvin","2020",""),
+    (13547,"Desmond","2020",""),
+    (13548,"Nick","2020",""),
+    (13549,"Ian","2020",""),
+    (13550,"Cohen","2020",""),
+    (13551,"Yandel","2020",""),
+    (13552,"Tyrone","2020",""),
+    (13553,"Beau","2020",""),
+    (13554,"Felix","2020",""),
+    (13555,"Demarion","2020",""),
+    (13556,"Damion","2020","")
+
+INSERT INTO data_siswa_xii_toi_1(id_nis_siswa, nama_siswa, tahun_masuk, keterangan) VALUES
+    (13557,"Hassan","2020",""),
+    (13558,"Ramon","2020",""),
+    (13559,"Jasiah","2020",""),
+    (13560,"Izaiah","2020",""),
+    (13561,"Hugh","2020",""),
+    (13562,"Edward","2020",""),
+    (13563,"Maurice","2020",""),
+    (13564,"Oscar","2020",""),
+    (13565,"Arnav","2020",""),
+    (13566,"Joel","2020",""),
+    (13567,"Orlando","2020",""),
+    (13568,"Kamden","2020",""),
+    (13569,"Jeffrey","2020",""),
+    (13570,"Jalen","2020",""),
+    (13571,"Micheal","2020",""),
+    (13572,"Javion","2020",""),
+    (13573,"Chase","2020",""),
+    (13574,"Gaige","2020",""),
+    (13575,"Ari","2020",""),
+    (13576,"Jack","2020",""),
+    (13577,"Darian","2020",""),
+    (13578,"Ricardo","2020",""),
+    (13579,"Chris","2020",""),
+    (13580,"Damian","2020",""),
+    (13581,"Bryan","2020",""),
+    (13582,"Braedon","2020",""),
+    (13583,"Jose","2020",""),
+    (13584,"Braeden","2020","")
+
+INSERT INTO data_siswa_xii_toi_2(id_nis_siswa, nama_siswa, tahun_masuk, keterangan) VALUES
+    (13585,"Jasper","2020",""),
+    (13586,"Brendon","2020",""),
+    (13587,"Davian","2020",""),
+    (13588,"Ricardo","2020",""),
+    (13589,"Malik","2020",""),
+    (13590,"Brayan","2020",""),
+    (13591,"Rene","2020",""),
+    (13592,"Camren","2020",""),
+    (13593,"Tyrese","2020",""),
+    (13594,"Clarence","2020",""),
+    (13595,"Nelson","2020",""),
+    (13596,"Alijah","2020",""),
+    (13597,"Jerome","2020",""),
+    (13598,"Rhett","2020",""),
+    (13599,"Josh","2020",""),
+    (13600,"Yusuf","2020",""),
+    (13601,"Case","2020",""),
+    (13602,"Alec","2020",""),
+    (13603,"Kayden","2020",""),
+    (13604,"Ariel","2020",""),
+    (13605,"Kamari","2020",""),
+    (13606,"Matias","2020",""),
+    (13607,"Irvin","2020",""),
+    (13608,"Jensen","2020",""),
+    (13609,"Henry","2020",""),
+    (13610,"Maximilian","2020",""),
+    (13611,"Johnny","2020",""),
+    (13612,"Cameron","2020",""),
+    (13613,"Lee","2020","")
+
 
 INSERT INTO guru(id_guru, nama_guru) VALUES
-(,)
+    (992002249,"Adha Nur Qahar")
 INSERT INTO guru(id_mata_pelajaran, nama_mata_pelajaran) VALUES
-(,)
+    (1,"Sistem Kontrol Industri & Sistem Robot Industri"),
+    (2,"Piranti Sensor & Aktuator dan Sistem Kontrol Elektronik"),
+    (3,"Mapel Pilihan / Gambar MEP"),
+    (4,"Informatika"),
+    (5,"Dasar Kejuruan 1")
 
-INSERT INTO catatan_mengajar(id_catatan_mengajar, tanggal, keterlambatan, jumlah_jam, materi, tahun_ajaran, semester, jam, kehadiran, catatan, id_guru, id_mata_pelajaran, id_nis_siswa) VALUES
-(,,,,,,,,,,,,)
+INSERT INTO catatan_mengajar(id_catatan_mengajar, tanggal, keterlambatan, jumlah_jam, materi, tahun_ajaran, semester, jam, catatan, kehadiran, id_guru, id_mata_pelajaran, id_nis_siswa) VALUES
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13557),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13558),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13559),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13560),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13561),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13562),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13563),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13564),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13565),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13566),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13567),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13568),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13569),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13570),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13571),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13572),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13573),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13574),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13575),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13576),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13577),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13578),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13579),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13580),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13581),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13582),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13583),
+    (1,"22-Juli-2024","15 Menit",5,"Persiapan Software PC & Pengenalan MEP","2024/2025",6,"12:15", "", "HADIR", 992002249, 3, 13584)
 
 
 %%%%%%%%%% READ DATA:
