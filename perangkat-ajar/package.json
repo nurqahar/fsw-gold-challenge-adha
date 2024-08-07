@@ -11,7 +11,8 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "devDependencies": {
+  "devDependencies": {},
+  "dependencies": {
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -19,9 +20,7 @@
     "knex": "^3.1.0",
     "nodemon": "^3.1.4",
     "pg": "^8.12.0",
-    "swagger": "^0.7.5"
-  },
-  "dependencies": {
+    "swagger": "^0.7.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }

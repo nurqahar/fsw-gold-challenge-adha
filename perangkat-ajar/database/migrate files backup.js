@@ -109,7 +109,7 @@ exports.up = function (knex) {
   //   6. user
   knex.schema.createTable("users", (table) => {
     table.increments("id_user");
-    table.string("userName", "255").notNullable();
+    table.string("username", "255").notNullable();
     table.string("email", "328").notNullable().unique();
     table.string("password").notNullable();
   });

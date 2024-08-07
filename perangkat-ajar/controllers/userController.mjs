@@ -2,13 +2,13 @@ import User from "../models/userModel.mjs";
 import userSchema from "../schema/userSchema.mjs";
 
 export const createUser = async (req, res) => {
-  const { errorSchema, valueSchema } = userSchema.validate(req.body);
-  if (errorSchema) {
-    return res.status(400).json({ errorSchema: error.details[0].message });
+  const { error, value } = userSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
   }
-
   try {
-    const newUser = await User.create(valueSchema);
+    const newUser = await User.create(value);
+    // console.log(newUser);
     return res.status(201).json(newUser);
   } catch (err) {
     const { detail } = err;
@@ -30,7 +30,7 @@ export const getUserById = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { errorSchema, valueSchema } = userSchema.validate(req.body);
+  const { error, valueSchema } = userSchema.validate(req.body);
   if (errorSchema) {
     return res.status(400).json({ errorSchema: error.details[0].message });
   }

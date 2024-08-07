@@ -5,13 +5,13 @@
  *     User:
  *       type: object
  *       required:
- *         - userName
+ *         - username
  *         - email
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the user
- *         userName:
+ *         username:
  *           type: string
  *           description: The user name of your user
  *         email:
@@ -21,7 +21,7 @@
  *           type: string
  *           description: thepassword
  *       example:
- *         userName: Schroder
+ *         username: Schroder
  *         email: sampel@email.com
  *         password: password
  */

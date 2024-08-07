@@ -7,11 +7,12 @@ export default class User {
   static async create({ password, ...data }) {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const [{ id }] = await db("users")
-      .insert({
-        password: hashedPassword,
-        ...data,
-      })
-      .returning("id");
+    .insert({
+      password: hashedPassword,
+      ...data,
+    })
+    .returning("id");
+    console.log({id});
     return { ...data, id };
   }
 
