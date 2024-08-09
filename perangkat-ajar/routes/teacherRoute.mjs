@@ -43,12 +43,13 @@
  *               users:
  *                 $ref: '#/components/schemas/Teacher'
  *
- *   post:
+ *
+ * /api/classes/{id}:
  *     summary: Create a new teacher
  *     tags: [Teacher]
  *      parameters:
  *      - in: path
- *        name: id
+ *        name: id_course
  *        schema:
  *          type: string
  *        required: true
@@ -58,82 +59,71 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Class'
- *     responses:
- *       200:
- *         description: The created user.
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Class'
- *       500:
- *         description: Some server error
+ *             $ref: '#/components/schemas/Teacher'
  *
- *
- * /api/classes/{id}:
  *   get:
- *     summary: Get the class by id
- *     tags: [Class]
+ *     summary: Get the teacher by id
+ *     tags: [Teacher]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The user id
+ *         description: The teacher id
  *     responses:
  *       200:
- *         description: The user response by id
+ *         description: The teacher response by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Class'
+ *               $ref: '#/components/schemas/Teacher'
  *       404:
  *         description: The class was not found
  *
  *   put:
- *    summary: Update the class by the id
- *    tags: [Class]
+ *    summary: Update The teacher by the id
+ *    tags: [Teacher]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The user id
+ *        description: The teacher id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Class'
+ *            $ref: '#/components/schemas/Teacher'
  *    responses:
  *      200:
- *        description: The user was updated
+ *        description: The teacher was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Class'
+ *              $ref: '#/components/schemas/Teacher'
  *      404:
- *        description: The class was not found
+ *        description: The teacher was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove the class by id
- *     tags: [Class]
+ *     summary: Remove The teacher by id
+ *     tags: [Teacher]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The class id
+ *         description: The teacher id
  *     responses:
  *       200:
- *         description: The class was deleted
+ *         description: The teacher was deleted
  *       404:
- *         description: The class was not found
+ *         description: The teacher was not found
  */
 
 import express from "express";

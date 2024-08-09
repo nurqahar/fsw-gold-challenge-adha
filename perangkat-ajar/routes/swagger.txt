@@ -160,26 +160,26 @@ class
  * @swagger
  * tags:
  *   name: Course
- *   description: The class on your school
+ *   description: The Course on your school
  *
  *
- * /api/classes:
+ * /api/course:
  *   get:
  *     summary: Lists all the users
- *     tags: [Class]
+ *     tags: [Course]
  *     responses:
  *       200:
- *         description: The list of the classes
+ *         description: The list of the courses
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               users:
- *                 $ref: '#/components/schemas/Class'
+ *                 $ref: '#/components/schemas/Course'
  *
  *   post:
  *     summary: Create a new class
- *     tags: [Class]
+ *     tags: [Course]
 *      parameters:
  *      - in: path
  *        name: id
@@ -192,80 +192,80 @@ class
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Class'
+ *             $ref: '#/components/schemas/Course'
  *     responses:
  *       200:
- *         description: The created user.
+ *         description: The created Course.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Class'
+ *               $ref: '#/components/schemas/Course'
  *       500:
  *         description: Some server error
  *
  *
  * /api/classes/{id}:
  *   get:
- *     summary: Get the class by id
- *     tags: [Class]
+ *     summary: Get The Course by id
+ *     tags: [Course]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The user id
+ *         description: The Course id
  *     responses:
  *       200:
- *         description: The user response by id
+ *         description: The Course response by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Class'
+ *               $ref: '#/components/schemas/Course'
  *       404:
- *         description: The class was not found
+ *         description: The Course was not found
  *
  *   put:
- *    summary: Update the class by the id
- *    tags: [Class]
+ *    summary: Update The Course by the id
+ *    tags: [Course]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The user id
+ *        description: The Course id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Class'
+ *            $ref: '#/components/schemas/Course'
  *    responses:
  *      200:
  *        description: The user was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Class'
+ *              $ref: '#/components/schemas/Course'
  *      404:
- *        description: The class was not found
+ *        description: The Course was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove the class by id
- *     tags: [Class]
+ *     summary: Remove The Course by id
+ *     tags: [Course]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The class id
+ *         description: The Course id
  *     responses:
  *       200:
- *         description: The class was deleted
+ *         description: The Course was deleted
  *       404:
- *         description: The class was not found
+ *         description: The Course was not found
  */
