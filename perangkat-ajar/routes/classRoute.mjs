@@ -5,17 +5,16 @@
  *     User:
  *       type: object
  *       required:
- *         - username
- *         - email
+ *         - namaKelas
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the user
- *         class:
+ *         namaKelas:
  *           type: string
  *           description: The class on your school
  *         FK-course:
- *           type: 
+ *           type:
  *           description: The course
  *         password:
  *           type: string
@@ -134,20 +133,20 @@
  */
 
 import express from "express";
-// import {
-//   createUser,
-//   getAllUser,
-//   getUserById,
-//   updateUser,
-//   deleteUser,
-// } from "../controllers/userController.mjs";
+import {
+  createData,
+  getAllData,
+  getDataById,
+  updateData,
+  deleteData,
+} from "../controllers/classController.mjs";
 
 const router = express.Router();
 
-// router.post("/", createUser);
-// router.get("/", getAllUser);
-// router.get("/:id", getUserById);
-// router.put("/:id", updateUser);
-// router.delete("/:id", deleteUser);
+router.post("/", createData);
+router.get("/", getAllData);
+router.get("/:id", getDataById);
+router.put("/:id", updateData);
+router.delete("/:id", deleteData);
 
 export default router;
