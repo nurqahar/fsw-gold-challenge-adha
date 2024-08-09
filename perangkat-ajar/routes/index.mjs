@@ -1,10 +1,10 @@
 import express from "express";
 import userRoute from "./userRoute.mjs";
-import classRoute from "./classRoute.mjs";
-import courseRoute from "./courseRoute.mjs";
-import studentRoute from "./studentRoute.mjs";
+// import classRoute from "./classRoute.mjs";
+// import courseRoute from "./courseRoute.mjs";
+// import studentRoute from "./studentRoute.mjs";
 import teacherRoute from "./teacherRoute.mjs";
-import teachingNotesRoute from "./teachingNotesRoute.mjs";
+// import teachingNotesRoute from "./teachingNotesRoute.mjs";
 const router = express.Router();
 
 router.use("/users", userRoute);
