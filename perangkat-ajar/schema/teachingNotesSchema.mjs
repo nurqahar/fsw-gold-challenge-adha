@@ -5,9 +5,9 @@ const teachingNotesSchema = Joi.object({
   materi: Joi.string().required(),
   catatan: Joi.string().optional(),
   jam: Joi.string().required(),
-  jumlah_jp: Joi.string().required(),
+  jumlahJp: Joi.string().required(),
   tanggal: Joi.string().required(),
-  tahun_ajaran: Joi.string().required(),
+  tahunAjaran: Joi.string().required(),
   semester: Joi.string().required(),
   nilai: Joi.string().optional(),
 });
