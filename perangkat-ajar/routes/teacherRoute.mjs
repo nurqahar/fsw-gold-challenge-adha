@@ -45,9 +45,10 @@
  *
  *
  * /api/classes/{id}:
- *     summary: Create a new teacher
+ *   post:
+ *     summary: Create a new teacher and link to course
  *     tags: [Teacher]
- *      parameters:
+ *     parameters:
  *      - in: path
  *        name: id_course
  *        schema:

@@ -41,13 +41,6 @@
  *   post:
  *     summary: Create a new Course
  *     tags: [Course]
- *      parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: The course id
  *     requestBody:
  *       required: true
  *       content:
