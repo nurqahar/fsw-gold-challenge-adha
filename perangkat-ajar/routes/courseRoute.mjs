@@ -58,7 +58,7 @@
  *         description: Some server error
  *
  *
- * /api/classes/{id}:
+ * /api/course/{id}:
  *   get:
  *     summary: Get The Course by id
  *     tags: [Course]

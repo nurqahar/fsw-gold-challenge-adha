@@ -44,13 +44,13 @@
  *                 $ref: '#/components/schemas/Teacher'
  *
  *
- * /api/classes/{id}:
+ * /api/teacher/{id}:
  *   post:
  *     summary: Create a new teacher and link to course
  *     tags: [Teacher]
  *     parameters:
  *      - in: path
- *        name: id_course
+ *        name: id_mata_pelajaran
  *        schema:
  *          type: string
  *        required: true
@@ -61,7 +61,17 @@
  *         application/json:
  *           schema:
  *             $ref: '#/components/schemas/Teacher'
- *
+ *     responses:
+ *       201:
+ *         description: The teacher added
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Teacher'
+ *       404:
+ *         description: The course was not found
+ *       500:
+ *         description: Some error happened
  *   get:
  *     summary: Get the teacher by id
  *     tags: [Teacher]
