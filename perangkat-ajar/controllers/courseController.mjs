@@ -7,8 +7,10 @@ export const createData = async (req, res) => {
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
   }
+  console.log(value);
   try {
     const data = await Course.create(value);
+
     return res.status(201).json(data);
   } catch (err) {
     const { detail } = err;

@@ -2,25 +2,25 @@ import db from "../database/knex.mjs";
 
 export default class TeachingNotes {
   static async create(data) {
-    const [{ id_catatan_mengajar }] = await db("catatan_mengajar")
+    const [{ id }] = await db("catatan_mengajar")
       .insert({ data })
-      .returning("id_catatan_mengajar");
-    return { ...data, id_catatan_mengajar };
+      .returning("id");
+    return { ...data, id };
   }
 
   static getAll() {
     return db("catatan_mengajar").select("*");
   }
 
-  static getById(id_catatan_mengajar) {
-    return db("catatan_mengajar").where({ id_catatan_mengajar }).first();
+  static getById(id) {
+    return db("catatan_mengajar").where({ id }).first();
   }
 
-  static async update(id_catatan_mengajar, data) {
-    return db("catatan_mengajar").where({ id_catatan_mengajar }).update(data);
+  static async update(id, data) {
+    return db("catatan_mengajar").where({ id }).update(data);
   }
 
-  static async delete(id_catatan_mengajar) {
-    await db("catatan_mengajar").where({ id_catatan_mengajar }).del();
+  static async delete(id) {
+    await db("catatan_mengajar").where({ id }).del();
   }
 }

@@ -1,8 +1,8 @@
 import Joi from "joi";
 
 const studentSchema = Joi.object({
-  namaSiswa: Joi.string().min(3).required(),
-  jenisKelamin: Joi.string().max(6).required(),
+  siswa: Joi.string().min(3).required(),
+  jenis_kelamin: Joi.string().max(6).required(),
 });
 
 export default studentSchema;

@@ -6,13 +6,13 @@ exports.up = async function up(knex) {
   //   1. mata pelajaran
   await knex.schema.createTable("mata_pelajaran", (table) => {
     table.increments("id");
-    table.string("nama_mata_pelajaran", "328").notNullable();
+    table.string("mata_pelajaran", "328").notNullable();
   });
 
   //   2. guru
   await knex.schema.createTable("guru", (table) => {
     table.increments("id");
-    table.string("nama_guru", "255").notNullable();
+    table.string("guru", "255").notNullable();
     table.string("jenis_kelamin", "100").notNullable();
     table
       .integer("mata_pelajaran_id")
@@ -26,7 +26,7 @@ exports.up = async function up(knex) {
   // 4.  kelas
   await knex.schema.createTable("kelas", (table) => {
     table.increments("id");
-    table.string("nama_kelas", "255").notNullable();
+    table.string("kelas", "255").notNullable();
     table
       .integer("mata_pelajaran_id")
       .unsigned()
@@ -46,7 +46,7 @@ exports.up = async function up(knex) {
   //   4. siswa
   await knex.schema.createTable("siswa", (table) => {
     table.increments("id");
-    table.string("nama_siswa", "328").notNullable();
+    table.string("siswa", "328").notNullable();
     table.string("jenis_kelamin", "100").notNullable();
     table
       .integer("kelas_id")

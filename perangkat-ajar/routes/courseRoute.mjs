@@ -5,16 +5,16 @@
  *     Course:
  *       type: object
  *       required:
- *         - mataPelajaran
+ *         - mata_pelajaran
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the Course
- *         mataPelajaran:
+ *         mata_pelajaran:
  *           type: string
  *           description: The Course on your school
  *       example:
- *         mataPelajaran: Sistem Kontrol Industri
+ *         mata_pelajaran: Sistem Kontrol Industri
  */
 
 /**
@@ -37,7 +37,6 @@
  *               type: array
  *               course:
  *                 $ref: '#/components/schemas/Course'
- *
  *   post:
  *     summary: Create a new Course
  *     tags: [Course]

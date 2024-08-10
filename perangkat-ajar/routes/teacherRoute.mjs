@@ -5,21 +5,21 @@
  *     Teacher:
  *       type: object
  *       required:
- *         - namaGuru
- *         - jenisKelamin
+ *         - guru
+ *         - jenis_kelamin
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the teacher
- *         namaGuru:
+ *         guru:
  *           type: string
  *           description: The teacher name
- *         jenisKelamin:
+ *         jenis_kelamin:
  *           type: string
  *           description: The sex of teacher
  *       example:
- *         namaGuru: John
- *         jenisKelamin: Laki-laki
+ *         guru: John
+ *         jenis_kelamin: Laki-laki
  */
 
 /**
@@ -50,7 +50,7 @@
  *     tags: [Teacher]
  *     parameters:
  *      - in: path
- *        name: id
+ *        name: mata_pelajaran_id
  *        schema:
  *          type: string
  *        required: true

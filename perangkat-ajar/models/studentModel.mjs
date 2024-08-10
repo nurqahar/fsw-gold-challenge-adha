@@ -2,25 +2,25 @@ import db from "../database/knex.mjs";
 
 export default class Student {
   static async create(data) {
-    const [{ id_siswa }] = await db("siswa")
+    const [{ id }] = await db("siswa")
       .insert({ data })
-      .returning("id_siswa");
-    return { ...data, id_siswa };
+      .returning("id");
+    return { ...data, id };
   }
 
   static getAll() {
     return db("siswa").select("*");
   }
 
-  static getById(id_siswa) {
-    return db("siswa").where({ id_siswa }).first();
+  static getById(id) {
+    return db("siswa").where({ id }).first();
   }
 
-  static async update(id_siswa, data) {
-    return db("siswa").where({ id_siswa }).update(data);
+  static async update(id, data) {
+    return db("siswa").where({ id }).update(data);
   }
 
-  static async delete(id_siswa) {
-    await db("siswa").where({ id_siswa }).del();
+  static async delete(id) {
+    await db("siswa").where({ id }).del();
   }
 }
