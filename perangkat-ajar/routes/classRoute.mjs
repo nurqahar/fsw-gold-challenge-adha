@@ -2,131 +2,161 @@
  * @swagger
  * components:
  *   schemas:
- *     User:
+ *     Teacher:
  *       type: object
  *       required:
  *         - kelas
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the user
+ *           description: The auto-generated id of the teacher
  *         kelas:
  *           type: string
- *           description: The class on your school
- *         password:
- *           type: string
- *           description: thepassword
+ *           description: The teacher name
  *       example:
- *         username: Schroder
- *         email: sampel@email.com
- *         password: password
+ *         kelas: X TOI 1
  */
 
 /**
  * @swagger
  * tags:
- *   name: Classes
- *   description: The Classes API
+ *   name: Teacher
+ *   description: The teacher on school
  *
  *
  * /api/classes:
  *   get:
- *     summary: Lists all the Classes
- *     tags: [Classes]
+ *     summary: Lists all the users
+ *     tags: [Teacher]
  *     responses:
  *       200:
- *         description: The list of the Classes
+ *         description: The list of the teachers
  *         content:
  *           application/json:
  *             schema:
  *               type: array
- *               Classes:
- *                 $ref: '#/components/schemas/User'
+ *               users:
+ *                 $ref: '#/components/schemas/Teacher'
  *
+ *
+ * /api/classes/{id}/{id}:
  *   post:
- *     summary: Create a new user
- *     tags: [Classes]
+ *     summary: Create a new teacher and link to course
+ *     tags: [Teacher]
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the mata pelajaran id
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/User'
+ *             $ref: '#/components/schemas/Teacher'
  *     responses:
- *       200:
- *         description: The created user.
+ *       201:
+ *         description: The teacher added
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/Teacher'
+ *       404:
+ *         description: The course was not found
  *       500:
- *         description: Some server error
- *
- *
- * /api/classes/{id}:
+ *         description: Some error happened
+ *   post:
+ *     summary: Create a new teacher and link to course
+ *     tags: [Teacher]
+ *     parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: the guru id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Teacher'
+ *     responses:
+ *       201:
+ *         description: The teacher added
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Teacher'
+ *       404:
+ *         description: The course was not found
+ *       500:
+ *         description: Some error happened
  *   get:
- *     summary: Get the user by id
- *     tags: [Classes]
+ *     summary: Get the teacher by id
+ *     tags: [Teacher]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The user id
+ *         description: The teacher id
  *     responses:
  *       200:
- *         description: The user response by id
+ *         description: The teacher response by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/Teacher'
  *       404:
- *         description: The user was not found
+ *         description: The class was not found
  *
  *   put:
- *    summary: Update the user by the id
- *    tags: [Classes]
+ *    summary: Update The teacher by the id
+ *    tags: [Teacher]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The user id
+ *        description: The teacher id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/User'
+ *            $ref: '#/components/schemas/Teacher'
  *    responses:
  *      200:
- *        description: The user was updated
+ *        description: The teacher was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/User'
+ *              $ref: '#/components/schemas/Teacher'
  *      404:
- *        description: The user was not found
+ *        description: The teacher was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove the user by id
- *     tags: [Classes]
+ *     summary: Remove The teacher by id
+ *     tags: [Teacher]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The user id
+ *         description: The teacher id
  *     responses:
  *       200:
- *         description: The user was deleted
+ *         description: The teacher was deleted
  *       404:
- *         description: The user was not found
+ *         description: The teacher was not found
  */
 
 import express from "express";
@@ -140,7 +170,7 @@ import {
 
 const router = express.Router();
 
-router.post("/", createData);
+router.post("/:id/:id", createData);
 router.get("/", getAllData);
 router.get("/:id", getDataById);
 router.put("/:id", updateData);
