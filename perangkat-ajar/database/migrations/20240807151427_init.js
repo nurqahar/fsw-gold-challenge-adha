@@ -6,7 +6,7 @@ exports.up = async function up(knex) {
   //   1. mata pelajaran
   await knex.schema.createTable("mata_pelajaran", (table) => {
     table.increments("id");
-    table.string("mata_pelajaran", "328").notNullable();
+    table.string("mataPelajaran", "328").notNullable();
   });
 
   //   2. guru
@@ -112,11 +112,11 @@ exports.up = async function up(knex) {
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-exports.down = function (knex) {
-  knex.schema.dropTable("kelas");
-  knex.schema.dropTable("guru");
-  knex.schema.dropTable("mata_pelajaran");
-  knex.schema.dropTable("siswa");
-  knex.schema.dropTable("catatan_mengajar");
-  knex.schema.dropTable("users");
+exports.down = async function (knex) {
+  await knex.schema.dropTable("kelas");
+  await knex.schema.dropTable("guru");
+  await knex.schema.dropTable("mata_pelajaran");
+  await knex.schema.dropTable("siswa");
+  await knex.schema.dropTable("catatan_mengajar");
+  await knex.schema.dropTable("users");
 };

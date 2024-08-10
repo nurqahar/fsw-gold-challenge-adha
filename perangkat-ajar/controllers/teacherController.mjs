@@ -9,8 +9,7 @@ export const createData = async (req, res) => {
   }
 
   const mata_pelajaran_id = parseInt(req.params.id, DECIMAL);
-  console.log(req.params.id);
-  
+
   try {
     const data = await Teacher.create({ mata_pelajaran_id, ...value });
     return res.status(201).json(data);

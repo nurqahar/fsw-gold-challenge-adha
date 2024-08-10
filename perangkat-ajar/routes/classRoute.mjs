@@ -5,17 +5,14 @@
  *     User:
  *       type: object
  *       required:
- *         - namaKelas
+ *         - kelas
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the user
- *         namaKelas:
+ *         kelas:
  *           type: string
  *           description: The class on your school
- *         FK-course:
- *           type:
- *           description: The course
  *         password:
  *           type: string
  *           description: thepassword
@@ -28,27 +25,27 @@
 /**
  * @swagger
  * tags:
- *   name: Users
- *   description: The users API
+ *   name: Classes
+ *   description: The Classes API
  *
  *
- * /api/users:
+ * /api/classes:
  *   get:
- *     summary: Lists all the users
- *     tags: [Users]
+ *     summary: Lists all the Classes
+ *     tags: [Classes]
  *     responses:
  *       200:
- *         description: The list of the users
+ *         description: The list of the Classes
  *         content:
  *           application/json:
  *             schema:
  *               type: array
- *               users:
+ *               Classes:
  *                 $ref: '#/components/schemas/User'
  *
  *   post:
  *     summary: Create a new user
- *     tags: [Users]
+ *     tags: [Classes]
  *     requestBody:
  *       required: true
  *       content:
@@ -66,10 +63,10 @@
  *         description: Some server error
  *
  *
- * /api/users/{id}:
+ * /api/classes/{id}:
  *   get:
  *     summary: Get the user by id
- *     tags: [Users]
+ *     tags: [Classes]
  *     parameters:
  *       - in: path
  *         name: id
@@ -89,7 +86,7 @@
  *
  *   put:
  *    summary: Update the user by the id
- *    tags: [Users]
+ *    tags: [Classes]
  *    parameters:
  *      - in: path
  *        name: id
@@ -117,7 +114,7 @@
  *
  *   delete:
  *     summary: Remove the user by id
- *     tags: [Users]
+ *     tags: [Classes]
  *     parameters:
  *       - in: path
  *         name: id

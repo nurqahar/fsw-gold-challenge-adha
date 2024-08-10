@@ -5,16 +5,16 @@
  *     Course:
  *       type: object
  *       required:
- *         - mata_pelajaran
+ *         - mataPelajaran
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the Course
- *         mata_pelajaran:
+ *         mataPelajaran:
  *           type: string
  *           description: The Course on your school
  *       example:
- *         mata_pelajaran: Sistem Kontrol Industri
+ *         mataPelajaran: Sistem Kontrol Industri
  */
 
 /**

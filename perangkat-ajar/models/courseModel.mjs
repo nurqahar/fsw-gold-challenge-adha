@@ -3,7 +3,7 @@ import db from "../database/knex.mjs";
 export default class Course {
   static async create(data) {
     const [{ id }] = await db("mata_pelajaran")
-      .insert({ data })
+      .insert({ ...data })
       .returning("id");
     return { ...data, id };
   }

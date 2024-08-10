@@ -50,7 +50,7 @@
  *     tags: [Teacher]
  *     parameters:
  *      - in: path
- *        name: mata_pelajaran_id
+ *        name: id
  *        schema:
  *          type: string
  *        required: true
