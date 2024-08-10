@@ -5,61 +5,61 @@
 exports.up = async function up(knex) {
   //   1. mata pelajaran
   await knex.schema.createTable("mata_pelajaran", (table) => {
-    table.increments("id_mata_pelajaran");
+    table.increments("id");
     table.string("nama_mata_pelajaran", "328").notNullable();
   });
 
   //   2. guru
   await knex.schema.createTable("guru", (table) => {
-    table.increments("id_guru");
+    table.increments("id");
     table.string("nama_guru", "255").notNullable();
     table.string("jenis_kelamin", "100").notNullable();
     table
-      .integer("id_mata_pelajaran")
+      .integer("mata_pelajaran_id")
       .unsigned()
       .notNullable()
-      .references("id_mata_pelajaran")
+      .references("id")
       .inTable("mata_pelajaran")
       .onDelete("CASCADE");
   });
 
   // 4.  kelas
   await knex.schema.createTable("kelas", (table) => {
-    table.increments("id_kelas");
+    table.increments("id");
     table.string("nama_kelas", "255").notNullable();
     table
-      .integer("id_mata_pelajaran")
+      .integer("mata_pelajaran_id")
       .unsigned()
       .notNullable()
-      .references("id_mata_pelajaran")
+      .references("id")
       .inTable("mata_pelajaran")
       .onDelete("CASCADE");
     table
-      .integer("id_guru")
+      .integer("guru_id")
       .unsigned()
       .notNullable()
-      .references("id_guru")
+      .references("id")
       .inTable("guru")
       .onDelete("CASCADE");
   });
 
   //   4. siswa
   await knex.schema.createTable("siswa", (table) => {
-    table.increments("id_siswa");
+    table.increments("id");
     table.string("nama_siswa", "328").notNullable();
     table.string("jenis_kelamin", "100").notNullable();
     table
-      .integer("id_kelas")
+      .integer("kelas_id")
       .unsigned()
       .notNullable()
-      .references("id_kelas")
+      .references("id")
       .inTable("kelas")
       .onDelete("CASCADE");
   });
 
   //   5. catatan mengajar
   await knex.schema.createTable("catatan_mengajar", (table) => {
-    table.increments("id_catatan_mengajar");
+    table.increments("id");
     table.string("presensi", "100").notNullable();
     table.string("materi", "328").notNullable();
     table.string("catatan", "328").notNullable();
@@ -70,31 +70,31 @@ exports.up = async function up(knex) {
     table.string("semester", "100").notNullable();
     table.string("nilai", "100").notNullable();
     table
-      .integer("id_siswa")
+      .integer("siswa_id")
       .unsigned()
       .notNullable()
-      .references("id_siswa")
+      .references("id")
       .inTable("siswa")
       .onDelete("CASCADE");
     table
-      .integer("id_kelas")
+      .integer("kelas_id")
       .unsigned()
       .notNullable()
-      .references("id_kelas")
+      .references("id")
       .inTable("kelas")
       .onDelete("CASCADE");
     table
-      .integer("id_mata_pelajaran")
+      .integer("mata_pelajaran_id")
       .unsigned()
       .notNullable()
-      .references("id_mata_pelajaran")
+      .references("id")
       .inTable("mata_pelajaran")
       .onDelete("CASCADE");
     table
-      .integer("id_guru")
+      .integer("guru_id")
       .unsigned()
       .notNullable()
-      .references("id_guru")
+      .references("id")
       .inTable("guru")
       .onDelete("CASCADE");
   });

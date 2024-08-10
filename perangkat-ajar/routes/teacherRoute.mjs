@@ -50,11 +50,11 @@
  *     tags: [Teacher]
  *     parameters:
  *      - in: path
- *        name: id_mata_pelajaran
+ *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The course id
+ *        description: mata pelajaran id
  *     requestBody:
  *       required: true
  *       content:
