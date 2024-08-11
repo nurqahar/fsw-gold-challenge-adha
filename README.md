@@ -1,2 +1,4 @@
 # fsw-gold-challenge-adha
-code repo FSW GOLD CHALLENGE CHECKPOINT
+
+Dokumentasi bisa dibaca pada file BINAR PROJECT.docx (masih dalam tahap perubahan)
+ERD bisa dilihat pada file "perangkat ajar.drawio"
