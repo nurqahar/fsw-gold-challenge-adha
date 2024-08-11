@@ -14,33 +14,12 @@ exports.up = async function up(knex) {
     table.increments("id");
     table.string("guru", "255").notNullable();
     table.string("jenis_kelamin", "100").notNullable();
-    table
-      .integer("mata_pelajaran_id")
-      .unsigned()
-      .notNullable()
-      .references("id")
-      .inTable("mata_pelajaran")
-      .onDelete("CASCADE");
   });
 
   // 4.  kelas
   await knex.schema.createTable("kelas", (table) => {
     table.increments("id");
     table.string("kelas", "255").notNullable();
-    table
-      .integer("mata_pelajaran_id")
-      .unsigned()
-      .notNullable()
-      .references("id")
-      .inTable("mata_pelajaran")
-      .onDelete("CASCADE");
-    table
-      .integer("guru_id")
-      .unsigned()
-      .notNullable()
-      .references("id")
-      .inTable("guru")
-      .onDelete("CASCADE");
   });
 
   //   4. siswa

@@ -42,19 +42,9 @@
  *               type: array
  *               users:
  *                 $ref: '#/components/schemas/Teacher'
- *
- *
- * /api/teacher/{id}:
  *   post:
  *     summary: Create a new teacher and link to course
  *     tags: [Teacher]
- *     parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: mata pelajaran id
  *     requestBody:
  *       required: true
  *       content:
@@ -72,6 +62,9 @@
  *         description: The course was not found
  *       500:
  *         description: Some error happened
+ *
+ *
+ * /api/teacher/{id}:
  *   get:
  *     summary: Get the teacher by id
  *     tags: [Teacher]
@@ -148,7 +141,7 @@ import {
 
 const router = express.Router();
 
-router.post("/:id", createData);
+router.post("/", createData);
 router.get("/", getAllData);
 router.get("/:id", getDataById);
 router.put("/:id", updateData);

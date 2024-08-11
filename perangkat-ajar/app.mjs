@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import routes from "./routes/index.mjs";
 import swaggerJsdoc from "swagger-jsdoc";
@@ -34,6 +35,7 @@ const CSS_URL =
   "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use("/api", routes);
 app.use(
