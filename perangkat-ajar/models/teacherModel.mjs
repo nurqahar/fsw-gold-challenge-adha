@@ -2,11 +2,10 @@ import db from "../database/knex.mjs";
 
 export default class Teacher {
   static async create(data) {
-    console.log(data);
     const [{ id }] = await db("guru")
       .insert({ ...data })
       .returning("id");
-    return { ...data, id };
+    return { id, ...data };
   }
 
   static getAll() {

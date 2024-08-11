@@ -5,7 +5,7 @@ export default class Class {
     const [{ id }] = await db("kelas")
       .insert({ ...data })
       .returning("id");
-    return { ...data, id };
+    return { id, ...data };
   }
 
   static getAll() {

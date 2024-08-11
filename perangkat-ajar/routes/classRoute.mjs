@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *   schemas:
- *     Teacher:
+ *     Classes:
  *       type: object
  *       required:
  *         - kelas
@@ -20,14 +20,14 @@
 /**
  * @swagger
  * tags:
- *   name: Teacher
+ *   name: Classes
  *   description: The teacher on school
  *
  *
  * /api/classes:
  *   get:
  *     summary: Lists all the users
- *     tags: [Teacher]
+ *     tags: [Classes]
  *     responses:
  *       200:
  *         description: The list of the teachers
@@ -36,43 +36,22 @@
  *             schema:
  *               type: array
  *               users:
- *                 $ref: '#/components/schemas/Teacher'
+ *                 $ref: '#/components/schemas/Classes'
  *
  *
- * /api/classes/{id}/{id}:
+ * /api/classes/{id1}/{id2}:
  *   post:
  *     summary: Create a new teacher and link to course
- *     tags: [Teacher]
+ *     tags: [Classes]
  *     parameters:
  *      - in: path
- *        name: id
+ *        name: id1
  *        schema:
  *          type: string
  *        required: true
  *        description: the mata pelajaran id
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Teacher'
- *     responses:
- *       201:
- *         description: The teacher added
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Teacher'
- *       404:
- *         description: The course was not found
- *       500:
- *         description: Some error happened
- *   post:
- *     summary: Create a new teacher and link to course
- *     tags: [Teacher]
- *     parameters:
  *      - in: path
- *        name: id
+ *        name: id2
  *        schema:
  *          type: string
  *        required: true
@@ -82,21 +61,24 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Teacher'
+ *             $ref: '#/components/schemas/Classes'
  *     responses:
  *       201:
  *         description: The teacher added
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Teacher'
+ *               $ref: '#/components/schemas/Classes'
  *       404:
  *         description: The course was not found
  *       500:
  *         description: Some error happened
+ *
+ *
+ * /api/classes/{id}:
  *   get:
  *     summary: Get the teacher by id
- *     tags: [Teacher]
+ *     tags: [Classes]
  *     parameters:
  *       - in: path
  *         name: id
@@ -110,13 +92,13 @@
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Teacher'
+ *               $ref: '#/components/schemas/Classes'
  *       404:
  *         description: The class was not found
  *
  *   put:
  *    summary: Update The teacher by the id
- *    tags: [Teacher]
+ *    tags: [Classes]
  *    parameters:
  *      - in: path
  *        name: id
@@ -129,14 +111,14 @@
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Teacher'
+ *            $ref: '#/components/schemas/Classes'
  *    responses:
  *      200:
  *        description: The teacher was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Teacher'
+ *              $ref: '#/components/schemas/Classes'
  *      404:
  *        description: The teacher was not found
  *      500:
@@ -144,7 +126,7 @@
  *
  *   delete:
  *     summary: Remove The teacher by id
- *     tags: [Teacher]
+ *     tags: [Classes]
  *     parameters:
  *       - in: path
  *         name: id
@@ -170,7 +152,7 @@ import {
 
 const router = express.Router();
 
-router.post("/:id/:id", createData);
+router.post("/:id1/:id2", createData);
 router.get("/", getAllData);
 router.get("/:id", getDataById);
 router.put("/:id", updateData);

@@ -5,7 +5,7 @@ export default class TeachingNotes {
     const [{ id }] = await db("catatan_mengajar")
       .insert({ data })
       .returning("id");
-    return { ...data, id };
+    return { id, ...data };
   }
 
   static getAll() {

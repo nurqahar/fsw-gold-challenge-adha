@@ -3,9 +3,9 @@ import db from "../database/knex.mjs";
 export default class Student {
   static async create(data) {
     const [{ id }] = await db("siswa")
-      .insert({ data })
+      .insert({ ...data })
       .returning("id");
-    return { ...data, id };
+    return { id, ...data };
   }
 
   static getAll() {

@@ -7,8 +7,10 @@ export const createData = async (req, res) => {
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
   }
+
+  const kelas_id = parseInt(req.params.id, DECIMAL)
   try {
-    const data = await Student.create(value);
+    const data = await Student.create({kelas_id, ...value});
     return res.status(201).json(data);
   } catch (err) {
     const { detail } = err;
