@@ -3,7 +3,7 @@ import db from "../database/knex.mjs";
 export default class TeachingNotes {
   static async create(data) {
     const [{ id }] = await db("catatan_mengajar")
-      .insert({ data })
+      .insert({ ...data })
       .returning("id");
     return { id, ...data };
   }

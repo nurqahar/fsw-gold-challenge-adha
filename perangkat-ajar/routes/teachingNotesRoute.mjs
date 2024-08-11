@@ -7,54 +7,52 @@
  *       required:
  *         - presensi
  *         - materi
- *         - catatan
  *         - jam
  *         - jumlah_jp
  *         - tanggal
  *         - tahun_ajaran
  *         - semester
- *         - nilai
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the teacher
+ *           description: The auto-generated id of the Teaching Notes
  *         presensi:
  *           type: string
- *           description: The teacher name
+ *           description: The status presensi of siswa
  *         materi:
  *           type: string
- *           description: The sex of teacher
+ *           description: The materi of your class
  *         catatan:
  *           type: string
- *           description: The sex of teacher
+ *           description: The catatan of your siswa
  *         jam:
  *           type: string
- *           description: The sex of teacher
+ *           description: The jam of your class
  *         jumlah_jp:
  *           type: string
- *           description: The sex of teacher
+ *           description: The jumlah jam pelajaran of your class
  *         tanggal:
  *           type: string
- *           description: The sex of teacher
+ *           description: The tanggal of your class
  *         tahun_ajaran:
  *           type: string
- *           description: The sex of teacher
+ *           description: The tahun ajaran of your class
  *         semester:
  *           type: string
- *           description: The sex of teacher
+ *           description: The semester of your class
  *         nilai:
  *           type: string
- *           description: The sex of teacher
+ *           description: The nilai of your student
  *       example:
  *         presensi : "HADIR"
  *         materi : "Pengenalan PLC"
- *         catatan : ""
+ *         catatan : " "
  *         jam : "07:00"
- *         jumlah_jp : "5jp"
+ *         jumlah_jp : "5 jp"
  *         tanggal : "22-Agustus-2024"
  *         tahun_ajaran : "2024/2025"
  *         semester : "1"
- *         nilai : ""
+ *         nilai : " "
  *
  */
 
@@ -62,133 +60,135 @@
  * @swagger
  * tags:
  *   name: Teaching Notes
- *   description: The teacher on school
+ *   description: The Teaching Notes of your class
  *
  *
- * /api/student:
+ * /api/teaching_notes:
  *   get:
- *     summary: Lists all the users
- *     tags: [TeachingNotes]
+ *     summary: Lists all the Teaching Notes
+ *     tags: [Teaching Notes]
  *     responses:
  *       200:
- *         description: The list of the teachers
+ *         description: The list of the Teaching Notes
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               users:
- *                 $ref: '#/components/schemas/TeachingNotes'
+ *                 $ref: '#/components/schemas/Teaching Notes'
  *
  *
- * /api/student/{id}:
+ * /api/teaching_notes/{id1}/{id2}/{id3}/{id4}:
  *   post:
- *     summary: Create a new teacher and link to course
- *     tags: [TeachingNotes]
+ *     summary: Create a Teaching Notes
+ *     tags: [Teaching Notes]
  *     parameters:
  *      - in: path
  *        name: id1
  *        schema:
  *          type: string
  *        required: true
- *        description: The siswa id
+ *        description: The mata pelajaran id
  *      - in: path
  *        name: id2
  *        schema:
  *          type: string
  *        required: true
- *        description: The kelas id
+ *        description: The guru id
  *      - in: path
  *        name: id3
  *        schema:
  *          type: string
  *        required: true
- *        description: The mata pelajaran id
+ *        description: The kelas id
  *      - in: path
  *        name: id4
  *        schema:
  *          type: string
  *        required: true
- *        description: The guru id
+ *        description: The siswa id
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/TeachingNotes'
+ *             $ref: '#/components/schemas/Teaching Notes'
  *     responses:
  *       201:
- *         description: The teacher added
+ *         description: The Teaching Notes added
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/TeachingNotes'
+ *               $ref: '#/components/schemas/Teaching Notes'
  *       404:
- *         description: The course was not found
+ *         description: The Teaching Notes was not found
  *       500:
  *         description: Some error happened
+ *
+ * /api/teaching_notes/{id}:
  *   get:
- *     summary: Get the teacher by id
- *     tags: [TeachingNotes]
+ *     summary: Get the Teaching Notes by id
+ *     tags: [Teaching Notes]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The teacher id
+ *         description: The Teaching Notes id
  *     responses:
  *       200:
- *         description: The teacher response by id
+ *         description: The Teaching Notes response by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/TeachingNotes'
+ *               $ref: '#/components/schemas/Teaching Notes'
  *       404:
- *         description: The class was not found
+ *         description: The Teaching Notes was not found
  *
  *   put:
- *    summary: Update The teacher by the id
- *    tags: [TeachingNotes]
+ *    summary: Update The Teaching Notes by the id
+ *    tags: [Teaching Notes]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The teacher id
+ *        description: The Teaching Notes id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/TeachingNotes'
+ *            $ref: '#/components/schemas/Teaching Notes'
  *    responses:
  *      200:
- *        description: The teacher was updated
+ *        description: The Teaching Notes was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/TeachingNotes'
+ *              $ref: '#/components/schemas/Teaching Notes'
  *      404:
- *        description: The teacher was not found
+ *        description: The Teaching Notes was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove The teacher by id
- *     tags: [TeachingNotes]
+ *     summary: Remove The Teaching Notes by id
+ *     tags: [Teaching Notes]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The teacher id
+ *         description: The Teaching Notes id
  *     responses:
  *       200:
- *         description: The teacher was deleted
+ *         description: The Teaching Notes was deleted
  *       404:
- *         description: The teacher was not found
+ *         description: The Teaching Notes was not found
  */
 import express from "express";
 import {

@@ -9,10 +9,10 @@
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the teacher
+ *           description: The auto-generated id of the Classes
  *         kelas:
  *           type: string
- *           description: The teacher name
+ *           description: The Classes name
  *       example:
  *         kelas: X TOI 1
  */
@@ -21,12 +21,12 @@
  * @swagger
  * tags:
  *   name: Classes
- *   description: The teacher on school
+ *   description: The Classes on school
  *
  *
  * /api/classes:
  *   get:
- *     summary: Lists all the users
+ *     summary: Lists all the Classes
  *     tags: [Classes]
  *     responses:
  *       200:
@@ -41,7 +41,7 @@
  *
  * /api/classes/{id1}/{id2}:
  *   post:
- *     summary: Create a new teacher and link to course
+ *     summary: Create a new Classes and link to course
  *     tags: [Classes]
  *     parameters:
  *      - in: path
@@ -64,7 +64,7 @@
  *             $ref: '#/components/schemas/Classes'
  *     responses:
  *       201:
- *         description: The teacher added
+ *         description: The Classes added
  *         content:
  *           application/json:
  *             schema:
@@ -77,7 +77,7 @@
  *
  * /api/classes/{id}:
  *   get:
- *     summary: Get the teacher by id
+ *     summary: Get the Classes by id
  *     tags: [Classes]
  *     parameters:
  *       - in: path
@@ -85,10 +85,10 @@
  *         schema:
  *           type: string
  *         required: true
- *         description: The teacher id
+ *         description: The Classes id
  *     responses:
  *       200:
- *         description: The teacher response by id
+ *         description: The Classes response by id
  *         contens:
  *           application/json:
  *             schema:
@@ -97,7 +97,7 @@
  *         description: The class was not found
  *
  *   put:
- *    summary: Update The teacher by the id
+ *    summary: Update The Classes by the id
  *    tags: [Classes]
  *    parameters:
  *      - in: path
@@ -105,7 +105,7 @@
  *        schema:
  *          type: string
  *        required: true
- *        description: The teacher id
+ *        description: The Classes id
  *    requestBody:
  *      required: true
  *      content:
@@ -114,18 +114,18 @@
  *            $ref: '#/components/schemas/Classes'
  *    responses:
  *      200:
- *        description: The teacher was updated
+ *        description: The Classes was updated
  *        content:
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Classes'
  *      404:
- *        description: The teacher was not found
+ *        description: The Classes was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove The teacher by id
+ *     summary: Remove The Classes by id
  *     tags: [Classes]
  *     parameters:
  *       - in: path
@@ -133,12 +133,12 @@
  *         schema:
  *           type: string
  *         required: true
- *         description: The teacher id
+ *         description: The Classes id
  *     responses:
  *       200:
- *         description: The teacher was deleted
+ *         description: The Classes was deleted
  *       404:
- *         description: The teacher was not found
+ *         description: The Classes was not found
  */
 
 import express from "express";

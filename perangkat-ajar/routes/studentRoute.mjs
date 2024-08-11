@@ -10,13 +10,13 @@
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the teacher
+ *           description: The auto-generated id of the Student
  *         siswa:
  *           type: string
- *           description: The teacher name
+ *           description: The Student name
  *         jenis_kelamin:
  *           type: string
- *           description: The sex of teacher
+ *           description: The sex of Student
  *       example:
  *         siswa: khronos
  *         jenis_kelamin: Laki-laki
@@ -26,12 +26,12 @@
  * @swagger
  * tags:
  *   name: Student
- *   description: The teacher on school
+ *   description: The Student on school
  *
  *
  * /api/student:
  *   get:
- *     summary: Lists all the users
+ *     summary: Lists all the Student
  *     tags: [Student]
  *     responses:
  *       200:
@@ -46,7 +46,7 @@
  *
  * /api/student/{id}:
  *   post:
- *     summary: Create a new teacher and link to course
+ *     summary: Create a new Student and link to course
  *     tags: [Student]
  *     parameters:
  *      - in: path
@@ -63,7 +63,7 @@
  *             $ref: '#/components/schemas/Student'
  *     responses:
  *       201:
- *         description: The teacher added
+ *         description: The Student added
  *         content:
  *           application/json:
  *             schema:
@@ -73,7 +73,7 @@
  *       500:
  *         description: Some error happened
  *   get:
- *     summary: Get the teacher by id
+ *     summary: Get the Student by id
  *     tags: [Student]
  *     parameters:
  *       - in: path
@@ -81,10 +81,10 @@
  *         schema:
  *           type: string
  *         required: true
- *         description: The teacher id
+ *         description: The Student id
  *     responses:
  *       200:
- *         description: The teacher response by id
+ *         description: The Student response by id
  *         contens:
  *           application/json:
  *             schema:
@@ -93,7 +93,7 @@
  *         description: The class was not found
  *
  *   put:
- *    summary: Update The teacher by the id
+ *    summary: Update The Student by the id
  *    tags: [Student]
  *    parameters:
  *      - in: path
@@ -101,7 +101,7 @@
  *        schema:
  *          type: string
  *        required: true
- *        description: The teacher id
+ *        description: The Student id
  *    requestBody:
  *      required: true
  *      content:
@@ -110,18 +110,18 @@
  *            $ref: '#/components/schemas/Student'
  *    responses:
  *      200:
- *        description: The teacher was updated
+ *        description: The Student was updated
  *        content:
  *          application/json:
  *            schema:
  *              $ref: '#/components/schemas/Student'
  *      404:
- *        description: The teacher was not found
+ *        description: The Student was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove The teacher by id
+ *     summary: Remove The Student by id
  *     tags: [Student]
  *     parameters:
  *       - in: path
@@ -129,12 +129,12 @@
  *         schema:
  *           type: string
  *         required: true
- *         description: The teacher id
+ *         description: The Student id
  *     responses:
  *       200:
- *         description: The teacher was deleted
+ *         description: The Student was deleted
  *       404:
- *         description: The teacher was not found
+ *         description: The Student was not found
  */
 import express from "express";
 import {

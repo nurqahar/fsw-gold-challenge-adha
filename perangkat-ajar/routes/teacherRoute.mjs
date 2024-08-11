@@ -31,7 +31,7 @@
  *
  * /api/teacher:
  *   get:
- *     summary: Lists all the users
+ *     summary: Lists all the Teacher
  *     tags: [Teacher]
  *     responses:
  *       200:

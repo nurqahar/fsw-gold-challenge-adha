@@ -62,27 +62,13 @@ exports.up = async function up(knex) {
     table.increments("id");
     table.string("presensi", "100").notNullable();
     table.string("materi", "328").notNullable();
-    table.string("catatan", "328").notNullable();
+    table.string("catatan", "328");
     table.string("jam", "100").notNullable();
     table.string("jumlah_jp", "100").notNullable();
     table.string("tanggal", "100").notNullable();
     table.string("tahun_ajaran", "100").notNullable();
     table.string("semester", "100").notNullable();
-    table.string("nilai", "100").notNullable();
-    table
-      .integer("siswa_id")
-      .unsigned()
-      .notNullable()
-      .references("id")
-      .inTable("siswa")
-      .onDelete("CASCADE");
-    table
-      .integer("kelas_id")
-      .unsigned()
-      .notNullable()
-      .references("id")
-      .inTable("kelas")
-      .onDelete("CASCADE");
+    table.string("nilai", "100");
     table
       .integer("mata_pelajaran_id")
       .unsigned()
@@ -96,6 +82,20 @@ exports.up = async function up(knex) {
       .notNullable()
       .references("id")
       .inTable("guru")
+      .onDelete("CASCADE");
+    table
+      .integer("kelas_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("kelas")
+      .onDelete("CASCADE");
+    table
+      .integer("siswa_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("siswa")
       .onDelete("CASCADE");
   });
 
