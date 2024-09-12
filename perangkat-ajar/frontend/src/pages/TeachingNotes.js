@@ -8,71 +8,71 @@ import {
   CardBody,
   CardText,
 } from "reactstrap";
-const route = "teaching_notes";
-const apiUrl = `http://localhost:3001/api/${route}`;
-const routeStudent = "student";
+const routeTeachingNotes = "teaching_notes";
+const apiUrl = `http://localhost:3001/api/${routeTeachingNotes}`;
+const routeStudent = "students";
 const apiUrlStudent = `http://localhost:3001/api/${routeStudent}`;
 const routeClasses = "classes";
 const apiUrlClasses = `http://localhost:3001/api/${routeClasses}`;
-const routeCourse = "course";
-const apiUrlCourse = `http://localhost:3001/api/${routeCourse}`;
-const routeTeacher = "teacher";
+const routeSubject = "subjects";
+const apiUrlCourse = `http://localhost:3001/api/${routeSubject}`;
+const routeTeacher = "teachers";
 const apiUrlTeacher = `http://localhost:3001/api/${routeTeacher}`;
 
 const TeachingNotes = () => {
   const [students, setStudent] = useState([
-    { id: 1, siswa: "Johned", jenis_kelamin: "Laki-laki", kelas_id: "1" },
-    { id: 2, siswa: "Jensen", jenis_kelamin: "Laki-laki", kelas_id: "2" },
+    { id: 1, student: "Johned", sex: "Laki-laki", class_id: "1" },
+    { id: 2, student: "Jensen", sex: "Laki-laki", class_id: "2" },
   ]);
 
   const [classes, setClasses] = useState([
-    { id: 1, kelas: "X TOI 1" },
-    { id: 2, kelas: "X TOI 2" },
+    { id: 1, class: "X TOI 1" },
+    { id: 2, class: "X TOI 2" },
   ]);
 
   const [courses, setCourses] = useState([
-    { id: 1, mataPelajaran: "Sistem Kontrol Industri" },
-    { id: 2, mataPelajaran: "Sistem Kontrol Elektronik" },
+    { id: 1, subject: "Sistem Kontrol Industri" },
+    { id: 2, subject: "Sistem Kontrol Elektronik" },
   ]);
 
   const [teachingNotes, setTeachingNotes] = useState([
     {
       id: 1,
-      presensi: "HADIR",
-      materi: "PLC",
-      catatan: "baik",
-      jam: "07:00",
-      jumlah_jp: "5 jp",
-      tanggal: "22-Agustus-2024",
-      tahun_ajaran: "2024/2025",
+      presence: "HADIR",
+      content: "PLC",
+      notes: "baik",
+      time: "07:00",
+      total_content_time: "5 jp",
+      date: "22-Agustus-2024",
+      school_year: "2024/2025",
       semester: "1",
-      nilai: " ",
-      siswa_id: "Johned",
-      kelas_id: "X TOI 1",
-      guru_id: "john",
-      mata_pelajaran_id: "Sistem Kontrol Industri",
+      grade: " ",
+      student_id: "Johned",
+      class_id: "X TOI 1",
+      teacher_id: "john",
+      subject_id: "Sistem Kontrol Industri",
     },
     {
       id: 2,
-      presensi: "HADIR",
-      materi: "PLC",
-      catatan: "baik",
-      jam: "07:00",
-      jumlah_jp: "5 jp",
-      tanggal: "22-Agustus-2024",
-      tahun_ajaran: "2024/2025",
+      presence: "HADIR",
+      content: "PLC",
+      notes: "baik",
+      time: "07:00",
+      total_content_time: "5 jp",
+      date: "22-Agustus-2024",
+      school_year: "2024/2025",
       semester: "1",
-      nilai: " ",
-      siswa_id: "Jensen",
-      kelas_id: "X TOI 2",
-      guru_id: "john",
-      mata_pelajaran_id: "Sistem Kontrol Elektronik",
+      grade: " ",
+      student_id: "Jensen",
+      class_id: "X TOI 2",
+      teacher_id: "john",
+      subject_id: "Sistem Kontrol Elektronik",
     },
   ]);
 
   const [teachers, setTeacher] = useState([
-    { id: 1, guru: "John Doe", jenis_kelamin: "Laki-Laki" },
-    { id: 2, guru: "Jensen", jenis_kelamin: "Laki-Laki" },
+    { id: 1, teacher: "John Doe", sex: "Laki-Laki" },
+    { id: 2, teacher: "Jensen", sex: "Laki-Laki" },
   ]);
 
   const handleEditClick = (e) => {
@@ -122,13 +122,16 @@ const TeachingNotes = () => {
                 <CardBody>
                   <Row className="justify-content-center align-items-center">
                     <Col md={8}>
-                      <h2>Catatan Mengajar</h2>
-                      <CardText>Siswa: {students[index].siswa} | {teachingNote.presensi}</CardText>
-                      <CardText>Kelas: {classes[index].kelas}</CardText>
-                      <CardText>Mapel: {courses[index].mataPelajaran}</CardText>
-                      <CardText>Materi: {teachingNote.materi}</CardText>
-                      <CardText>Guru: {teachers[index].guru}</CardText>
-                      <CardText>{teachingNote.tanggal}</CardText>
+                      <h2>Teaching Notes</h2>
+                      <CardText>
+                        Student: {students[index].student} |{" "}
+                        {teachingNote.presence}
+                      </CardText>
+                      <CardText>Class: {classes[index].class}</CardText>
+                      <CardText>Subject: {courses[index].subject}</CardText>
+                      <CardText>Content: {teachingNote.content}</CardText>
+                      <CardText>Teacher: {teachers[index].teacher}</CardText>
+                      <CardText>{teachingNote.date}</CardText>
                     </Col>
                     <Col md={4} className="text-center">
                       <Button color="primary" onClick={handleEditClick}>

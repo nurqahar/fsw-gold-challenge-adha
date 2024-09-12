@@ -9,13 +9,19 @@ import {
   CardTitle,
   CardText,
 } from "reactstrap";
-const route = "teacher";
+const route = "student";
 const apiUrl = `http://localhost:3001/api/${route}`;
+const routeClasses = "classes";
+const apiUrlClasses = `http://localhost:3001/api/${routeClasses}`;
+const Student = () => {
+  const [students, setStudent] = useState([
+    { id: 1, student: "Johned", sex: "Laki-laki", kelas_id: "1" },
+    { id: 2, student: "Jensen", sex: "Laki-laki", kelas_id: "2" },
+  ]);
 
-const Teacher = () => {
-  const [teachers, setTeacher] = useState([
-    { id: 1, guru: "John Doe", jenis_kelamin: "Laki-Laki" },
-    { id: 2, guru: "Jensen", jenis_kelamin: "Laki-Laki" },
+  const [classes, setClasses] = useState([
+    { id: 1, kelas: "X TOI 1" },
+    { id: 2, kelas: "X TOI 2" },
   ]);
 
   const handleEditClick = (e) => {
@@ -25,10 +31,14 @@ const Teacher = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const responseClasses = await fetch(`${apiUrlClasses}`);
         const response = await fetch(`${apiUrl}`);
+        if (!responseClasses.ok) throw new Error("Error fetching users");
         if (!response.ok) throw new Error("Error fetching users");
+        const dataClasses = await responseClasses.json();
         const data = await response.json();
-        setTeacher(data);
+        setStudent(data);
+        setClasses(dataClasses);
       } catch (err) {}
     };
     fetchData();
@@ -39,20 +49,19 @@ const Teacher = () => {
       <Row className="justify-content-center">
         <Col md={8} lg={12}>
           <Card className="mt-4">
-            {teachers.map((teacher) => {
+            {students.map((student, index) => {
               return (
                 <CardBody>
                   <Row className="justify-content-center align-items-center">
                     <Col md={8}>
-                      <h2>Teacher {teacher.id}</h2>
-                      <CardTitle tag="h5">{teacher.guru}</CardTitle>
-                      <CardText>
-                        Jenis Kelamin: {teacher.jenis_kelamin}
-                      </CardText>
+                      <h2>Siswa {student.id}</h2>
+                      <CardTitle tag="h5">{student.student}</CardTitle>
+                      <CardText>Jenis Kelamin: {student.sex}</CardText>
+                      <CardText>Kelas: {classes[index].kelas}</CardText>
                     </Col>
                     <Col md={4} className="text-center">
                       <Button color="primary" onClick={handleEditClick}>
-                        Edit Teacher
+                        Edit Student
                       </Button>
                     </Col>
                   </Row>
@@ -66,4 +75,4 @@ const Teacher = () => {
   );
 };
 
-export default Teacher;
+export default Student;

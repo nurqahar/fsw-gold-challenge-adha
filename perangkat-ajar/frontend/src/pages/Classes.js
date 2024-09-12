@@ -14,8 +14,8 @@ const apiUrl = `http://localhost:3001/api/${route}`;
 
 const Classes = () => {
   const [classes, setClasses] = useState([
-    { id: 1, kelas: "X TOI 1" },
-    { id: 2, kelas: "X TOI 2" },
+    { id: 1, class: "X TOI 1" },
+    { id: 2, class: "X TOI 2" },
   ]);
 
   const handleEditClick = (e) => {
@@ -39,13 +39,13 @@ const Classes = () => {
       <Row className="justify-content-center">
         <Col md={8} lg={12}>
           <Card className="mt-4">
-            {classes.map((kelas) => {
+            {classes.map((class_index) => {
               return (
                 <CardBody>
                   <Row className="justify-content-center align-items-center">
                     <Col md={8}>
-                      <CardTitle tag="h5">Kelas ke-{kelas.id}</CardTitle>
-                      <CardText>{kelas.kelas}</CardText>
+                      <CardTitle tag="h5">Kelas ke-{class_index.id}</CardTitle>
+                      <CardText>{class_index.class}</CardText>
                     </Col>
                     <Col md={4} className="text-center">
                       <Button color="primary" onClick={handleEditClick}>

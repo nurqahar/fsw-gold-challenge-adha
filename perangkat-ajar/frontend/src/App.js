@@ -6,22 +6,22 @@ import SignUp from "./pages/Signup";
 import Login from "./pages/Login";
 import EditProfile from "./pages/EditProfile";
 import Profile from "./pages/Profile";
-import Teacher from "./pages/Teacher";
+import Teachers from "./pages/Teachers";
 import Classes from "./pages/Classes";
 import TeachingNotes from "./pages/TeachingNotes";
-import Student from "./pages/Student";
-import Course from "./pages/Course";
+import Students from "./pages/Students";
+import Subjects from "./pages/Subjects";
 
 export default function App() {
   return (
     <BrowserRouter>
       <LandingPage />
       <Routes>
-        <Route path="/teacher" element={<Teacher />} />
+        <Route path="/teacher" element={<Teachers />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/teaching_notes" element={<TeachingNotes />} />
-        <Route path="/student" element={<Student />} />
-        <Route path="/course" element={<Course />} />
+        <Route path="/student" element={<Students />} />
+        <Route path="/subject" element={<Subjects />} />
         <Route path="/crud" element={<CrudTable />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/signup" element={<SignUp />} />
