@@ -1,40 +1,56 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import db from "../database/knex.mjs";
 
 const saltRounds = 10;
 export default class User {
-  // 1. make new user
+  // make new user
   static async create({ password, ...data }) {
     const hashedPassword = await bcrypt.hash(password, saltRounds);
-    const [{ id_user }] = await db("users")
+    const [{ id }] = await db("users")
       .insert({
         password: hashedPassword,
         ...data,
       })
-      .returning("id_user");
-    return { ...data, id_user };
+      .returning("id");
+    return { ...data, id };
   }
 
-  static getAllUser() {
+  static getAll() {
     return db("users").select("*");
   }
 
-  static getUserById(id_user) {
-    return db("users").where({ id_user }).first();
+  static getById(id) {
+    return db("users").where({ id }).first();
   }
 
-  static async update(id_user, data_user) {
-    const { password, ...otherData } = data_user;
+  static async update(id, data) {
+    const { password, ...otherData } = data;
     const updateData = { ...otherData };
     if (password) {
       const hashedPassword = await bcrypt.hash(password, saltRounds);
       updateData.password = hashedPassword;
     }
-    await db("users").where({ id_user }).update(data_user);
-    return { ...updateData, id_user };
+    await db("users").where({ id }).update(data);
+    return { ...updateData, id };
   }
 
-  static async delete(id_user) {
-    await db("users").where({ id_user }).del();
+  static async delete(id) {
+    await db("users").where({ id }).del();
+  }
+
+  static async getByEmailPassword({ email, password }) {
+    const user = await db("users").where({ email }).first();
+
+    if (!user) {
+      throw new Error("User email not found");
+    }
+
+    if (password) {
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+      if (!isPasswordCorrect) {
+        throw new Error("Incorrect password");
+      }
+    }
+    return user;
   }
 }

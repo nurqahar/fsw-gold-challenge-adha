@@ -37,7 +37,7 @@ export const getDataById = async (req, res) => {
   if (data) {
     return res.json(data);
   }
-  return res.status(404).send("catatan mengajar tidak ditemukan");
+  return res.status(404).send("teaching note not found!");
 };
 
 export const updateData = async (req, res) => {
@@ -48,7 +48,7 @@ export const updateData = async (req, res) => {
 
   const dataId = parseInt(req.params.id, DECIMAL);
   const data = await TeachingNotes.getById(dataId);
-  if (!data) return res.status(404).send("catatan mengajar tidak ditemukan");
+  if (!data) return res.status(404).send("teaching note not found!");
   try {
     const updateData = await TeachingNotes.update(dataId, value);
     return res.status(201).json(updateData);
@@ -61,7 +61,7 @@ export const updateData = async (req, res) => {
 export const deleteData = async (req, res) => {
   const dataId = parseInt(req.params.id, DECIMAL);
   const data = await TeachingNotes.getById(dataId);
-  if (!data) return res.status(404).send("catatan mengajar tidak ditemukan");
+  if (!data) return res.status(404).send("teaching note not found!");
   await TeachingNotes.delete(parseInt(req.params.id, DECIMAL));
   return res.status(204).send();
 };
