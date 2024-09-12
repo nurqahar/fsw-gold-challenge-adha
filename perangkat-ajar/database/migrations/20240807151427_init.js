@@ -4,86 +4,90 @@
  */
 exports.up = async function up(knex) {
   //   1. mata pelajaran
-  await knex.schema.createTable("mata_pelajaran", (table) => {
+  await knex.schema.createTable("subjects", (table) => {
     table.increments("id");
-    table.string("mataPelajaran", "328").notNullable();
+    table.string("subject", "328").notNullable();
   });
 
   //   2. guru
-  await knex.schema.createTable("guru", (table) => {
+  await knex.schema.createTable("teachers", (table) => {
     table.increments("id");
-    table.string("guru", "255").notNullable();
-    table.string("jenis_kelamin", "100").notNullable();
+    table.string("teacher", "255").notNullable();
+    table.string("sex", "100").notNullable();
   });
 
   // 4.  kelas
-  await knex.schema.createTable("kelas", (table) => {
+  await knex.schema.createTable("classes", (table) => {
     table.increments("id");
-    table.string("kelas", "255").notNullable();
+    table.string("class", "255").notNullable();
   });
 
   //   4. siswa
-  await knex.schema.createTable("siswa", (table) => {
+  await knex.schema.createTable("students", (table) => {
     table.increments("id");
-    table.string("siswa", "328").notNullable();
-    table.string("jenis_kelamin", "100").notNullable();
+    table.string("student", "328").notNullable();
+    table.string("sex", "100").notNullable();
     table
-      .integer("kelas_id")
+      .integer("class_id")
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("kelas")
+      .inTable("classes")
       .onDelete("CASCADE");
   });
 
   //   5. catatan mengajar
-  await knex.schema.createTable("catatan_mengajar", (table) => {
+  await knex.schema.createTable("teaching_notes", (table) => {
     table.increments("id");
-    table.string("presensi", "100").notNullable();
-    table.string("materi", "328").notNullable();
-    table.string("catatan", "328");
-    table.string("jam", "100").notNullable();
+    table.string("presence", "100").notNullable();
+    table.string("content", "328").notNullable();
+    table.string("notes", "328");
+    table.string("time", "100").notNullable();
     table.string("jumlah_jp", "100").notNullable();
-    table.string("tanggal", "100").notNullable();
-    table.string("tahun_ajaran", "100").notNullable();
+    table.string("date", "100").notNullable();
+    table.string("school_year", "100").notNullable();
     table.string("semester", "100").notNullable();
-    table.string("nilai", "100");
+    table.string("grade", "100");
     table
-      .integer("mata_pelajaran_id")
+      .integer("subject_id")
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("mata_pelajaran")
+      .inTable("subjects")
       .onDelete("CASCADE");
     table
-      .integer("guru_id")
+      .integer("teacher_id")
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("guru")
+      .inTable("teachers")
       .onDelete("CASCADE");
     table
-      .integer("kelas_id")
+      .integer("class_id")
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("kelas")
+      .inTable("classes")
       .onDelete("CASCADE");
     table
-      .integer("siswa_id")
+      .integer("student_id")
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("siswa")
+      .inTable("students")
       .onDelete("CASCADE");
   });
 
   //   6. user
   await knex.schema.createTable("users", (table) => {
-    table.increments("id_user");
-    table.string("username", "255").notNullable();
+    table.increments("id");
     table.string("email", "328").notNullable().unique();
+    table.string("firstName", "255").notNullable();
+    table.string("lastName", "255").notNullable();
+    table.string("phoneNumber", "12").notNullable();
     table.string("password").notNullable();
+    table.timestamp("createdAt").defaultTo(knex.raw("CURRENT_TIMESTAMP"));
+    table.timestamp("updateAt").defaultTo(knex.raw("CURRENT_TIMESTAMP"));
   });
 };
 
