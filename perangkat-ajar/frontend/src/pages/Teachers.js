@@ -12,7 +12,7 @@ import {
 const route = "teacher";
 const apiUrl = `http://localhost:3001/api/${route}`;
 
-const Teacher = () => {
+const Teachers = () => {
   const [teachers, setTeacher] = useState([
     { id: 1, teacher: "John Doe", sex: "Laki-Laki" },
     { id: 2, teacher: "Jensen", sex: "Laki-Laki" },
@@ -64,4 +64,4 @@ const Teacher = () => {
   );
 };
 
-export default Teacher;
+export default Teachers;

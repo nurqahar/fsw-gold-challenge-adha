@@ -10,9 +10,9 @@ const LandingPage = () => {
         PERANGKAT AJAR
       </Link>
       <ul>
-        <CustomLink to="/teacher">Guru</CustomLink>
-        <CustomLink to="/course">Mata Pelajaran</CustomLink>
-        <CustomLink to="/student">Siswa</CustomLink>
+        <CustomLink to="/teachers">Guru</CustomLink>
+        <CustomLink to="/subjects">Mata Pelajaran</CustomLink>
+        <CustomLink to="/students">Siswa</CustomLink>
         <CustomLink to="/classes">Kelas</CustomLink>
         <CustomLink to="/teaching_notes">Catatan Mengajar</CustomLink>
         <CustomLink to="/login">Login</CustomLink>

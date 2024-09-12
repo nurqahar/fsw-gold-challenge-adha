@@ -13,7 +13,7 @@ const route = "student";
 const apiUrl = `http://localhost:3001/api/${route}`;
 const routeClasses = "classes";
 const apiUrlClasses = `http://localhost:3001/api/${routeClasses}`;
-const Student = () => {
+const Students = () => {
   const [students, setStudent] = useState([
     { id: 1, student: "Johned", sex: "Laki-laki", kelas_id: "1" },
     { id: 2, student: "Jensen", sex: "Laki-laki", kelas_id: "2" },
@@ -75,4 +75,4 @@ const Student = () => {
   );
 };
 
-export default Student;
+export default Students;

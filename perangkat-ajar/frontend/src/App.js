@@ -20,7 +20,7 @@ export default function App() {
         <Route path="/teacher" element={<Teachers />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/teaching_notes" element={<TeachingNotes />} />
-        <Route path="/student" element={<Students />} />
+        <Route path="/students" element={<Students />} />
         <Route path="/subject" element={<Subjects />} />
         <Route path="/crud" element={<CrudTable />} />
         <Route path="*" element={<NotFound />} />
