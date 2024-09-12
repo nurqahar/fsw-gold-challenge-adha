@@ -5,54 +5,54 @@
  *     Teaching Notes:
  *       type: object
  *       required:
- *         - presensi
- *         - materi
- *         - jam
- *         - jumlah_jp
- *         - tanggal
- *         - tahun_ajaran
+ *         - presence
+ *         - content
+ *         - time
+ *         - total_content_time
+ *         - date
+ *         - school_year
  *         - semester
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the Teaching Notes
- *         presensi:
+ *         presence:
  *           type: string
- *           description: The status presensi of siswa
- *         materi:
+ *           description: The status presence of siswa
+ *         content:
  *           type: string
- *           description: The materi of your class
- *         catatan:
+ *           description: The content of your class
+ *         notes:
  *           type: string
- *           description: The catatan of your siswa
- *         jam:
+ *           description: The notes of your siswa
+ *         time:
  *           type: string
- *           description: The jam of your class
- *         jumlah_jp:
+ *           description: The time of your class
+ *         total_content_time:
  *           type: string
- *           description: The jumlah jam pelajaran of your class
- *         tanggal:
+ *           description: The jumlah time pelajaran of your class
+ *         date:
  *           type: string
- *           description: The tanggal of your class
- *         tahun_ajaran:
+ *           description: The date of your class
+ *         school_year:
  *           type: string
  *           description: The tahun ajaran of your class
  *         semester:
  *           type: string
  *           description: The semester of your class
- *         nilai:
+ *         grade:
  *           type: string
- *           description: The nilai of your student
+ *           description: The grade of your student
  *       example:
- *         presensi : "HADIR"
- *         materi : "Pengenalan PLC"
- *         catatan : " "
- *         jam : "07:00"
- *         jumlah_jp : "5 jp"
- *         tanggal : "22-Agustus-2024"
- *         tahun_ajaran : "2024/2025"
+ *         presence : "HADIR"
+ *         content : "Pengenalan PLC"
+ *         notes : " "
+ *         time : "07:00"
+ *         total_content_time : "5 jp"
+ *         date : "22-Agustus-2024"
+ *         school_year : "2024/2025"
  *         semester : "1"
- *         nilai : " "
+ *         grade : " "
  *
  */
 
@@ -88,25 +88,25 @@
  *        schema:
  *          type: string
  *        required: true
- *        description: The mata pelajaran id
+ *        description: The subject id
  *      - in: path
  *        name: id2
  *        schema:
  *          type: string
  *        required: true
- *        description: The guru id
+ *        description: The teacher id
  *      - in: path
  *        name: id3
  *        schema:
  *          type: string
  *        required: true
- *        description: The kelas id
+ *        description: The class id
  *      - in: path
  *        name: id4
  *        schema:
  *          type: string
  *        required: true
- *        description: The siswa id
+ *        description: The student id
  *     requestBody:
  *       required: true
  *       content:

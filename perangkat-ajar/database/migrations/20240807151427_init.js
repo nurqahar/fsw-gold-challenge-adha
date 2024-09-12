@@ -43,7 +43,7 @@ exports.up = async function up(knex) {
     table.string("content", "328").notNullable();
     table.string("notes", "328");
     table.string("time", "100").notNullable();
-    table.string("jumlah_jp", "100").notNullable();
+    table.string("total_content_time", "100").notNullable();
     table.string("date", "100").notNullable();
     table.string("school_year", "100").notNullable();
     table.string("semester", "100").notNullable();
@@ -96,10 +96,10 @@ exports.up = async function up(knex) {
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
-  await knex.schema.dropTable("kelas");
-  await knex.schema.dropTable("guru");
-  await knex.schema.dropTable("mata_pelajaran");
-  await knex.schema.dropTable("siswa");
-  await knex.schema.dropTable("catatan_mengajar");
+  await knex.schema.dropTable("classes");
+  await knex.schema.dropTable("teachers");
+  await knex.schema.dropTable("subjects");
+  await knex.schema.dropTable("students");
+  await knex.schema.dropTable("teaching_notes");
   await knex.schema.dropTable("users");
 };

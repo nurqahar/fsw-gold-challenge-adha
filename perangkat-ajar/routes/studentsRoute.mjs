@@ -5,21 +5,21 @@
  *     Student:
  *       type: object
  *       required:
- *         - siswa
- *         - jenis_kelamin
+ *         - student
+ *         - sex
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the Student
- *         siswa:
+ *         student:
  *           type: string
  *           description: The Student name
- *         jenis_kelamin:
+ *         sex:
  *           type: string
  *           description: The sex of Student
  *       example:
- *         siswa: khronos
- *         jenis_kelamin: Laki-laki
+ *         student: khronos
+ *         sex: Laki-laki
  */
 
 /**
@@ -29,7 +29,7 @@
  *   description: The Student on school
  *
  *
- * /api/student:
+ * /api/students:
  *   get:
  *     summary: Lists all the Student
  *     tags: [Student]
@@ -44,7 +44,7 @@
  *                 $ref: '#/components/schemas/Student'
  *
  *
- * /api/student/{id}:
+ * /api/students/{id}:
  *   post:
  *     summary: Create a new Student and link to course
  *     tags: [Student]

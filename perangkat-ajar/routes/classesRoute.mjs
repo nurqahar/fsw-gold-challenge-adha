@@ -5,23 +5,23 @@
  *     Classes:
  *       type: object
  *       required:
- *         - kelas
+ *         - class
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the Classes
- *         kelas:
+ *           description: The auto-generated id of the Class
+ *         class:
  *           type: string
- *           description: The Classes name
+ *           description: The Class name
  *       example:
- *         kelas: X TOI 1
+ *         class: X TOI 1
  */
 
 /**
  * @swagger
  * tags:
- *   name: Classes
- *   description: The Classes on school
+ *   name: Class
+ *   description: The Class on school
  *
  *
  * /api/classes:
@@ -38,21 +38,21 @@
  *               users:
  *                 $ref: '#/components/schemas/Classes'
  *   post:
- *     summary: Create a new Classes and link to course
- *     tags: [Classes]
+ *     summary: Create a new Class and link to Subject
+ *     tags: [Class]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Classes'
+ *             $ref: '#/components/schemas/Class'
  *     responses:
  *       201:
- *         description: The Classes added
+ *         description: The Class added
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Classes'
+ *               $ref: '#/components/schemas/Class'
  *       404:
  *         description: The course was not found
  *       500:
@@ -60,68 +60,68 @@
  *
  * /api/classes/{id}:
  *   get:
- *     summary: Get the Classes by id
- *     tags: [Classes]
+ *     summary: Get the Class by id
+ *     tags: [Class]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The Classes id
+ *         description: The Class id
  *     responses:
  *       200:
- *         description: The Classes response by id
+ *         description: The Class response by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Classes'
+ *               $ref: '#/components/schemas/Class'
  *       404:
  *         description: The class was not found
  *
  *   put:
- *    summary: Update The Classes by the id
- *    tags: [Classes]
+ *    summary: Update The Class by the id
+ *    tags: [Class]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The Classes id
+ *        description: The Class id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Classes'
+ *            $ref: '#/components/schemas/Class'
  *    responses:
  *      200:
- *        description: The Classes was updated
+ *        description: The Class was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Classes'
+ *              $ref: '#/components/schemas/Class'
  *      404:
- *        description: The Classes was not found
+ *        description: The Class was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove The Classes by id
- *     tags: [Classes]
+ *     summary: Remove The Class by id
+ *     tags: [Class]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The Classes id
+ *         description: The Class id
  *     responses:
  *       200:
- *         description: The Classes was deleted
+ *         description: The Class was deleted
  *       404:
- *         description: The Classes was not found
+ *         description: The Class was not found
  */
 
 import express from "express";

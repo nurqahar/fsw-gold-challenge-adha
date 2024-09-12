@@ -5,29 +5,29 @@
  *     Course:
  *       type: object
  *       required:
- *         - mataPelajaran
+ *         - subject
  *       properties:
  *         id:
  *           type: string
- *           description: The auto-generated id of the Course
- *         mataPelajaran:
+ *           description: The auto-generated id of the Subject
+ *         subject:
  *           type: string
- *           description: The Course on your school
+ *           description: The Subject on your school
  *       example:
- *         mataPelajaran: Sistem Kontrol Industri
+ *         subject: Sistem Kontrol Industri
  */
 
 /**
  * @swagger
  * tags:
- *   name: Course
- *   description: The Course on your school
+ *   name: Subject
+ *   description: The Subject on your school
  *
  *
- * /api/course:
+ * /api/subjects:
  *   get:
- *     summary: Lists all the Course
- *     tags: [Course]
+ *     summary: Lists all the Subject
+ *     tags: [Subject]
  *     responses:
  *       200:
  *         description: The list of the courses
@@ -36,91 +36,91 @@
  *             schema:
  *               type: array
  *               course:
- *                 $ref: '#/components/schemas/Course'
+ *                 $ref: '#/components/schemas/Subject'
  *   post:
- *     summary: Create a new Course
- *     tags: [Course]
+ *     summary: Create a new Subject
+ *     tags: [Subject]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Course'
+ *             $ref: '#/components/schemas/Subject'
  *     responses:
  *       200:
- *         description: The created Course.
+ *         description: The created Subject.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Course'
+ *               $ref: '#/components/schemas/Subject'
  *       500:
  *         description: Some server error
  *
  *
- * /api/course/{id}:
+ * /api/subjects/{id}:
  *   get:
- *     summary: Get The Course by id
- *     tags: [Course]
+ *     summary: Get The Subject by id
+ *     tags: [Subject]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The Course id
+ *         description: The Subject id
  *     responses:
  *       200:
- *         description: The Course response by id
+ *         description: The Subject response by id
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Course'
+ *               $ref: '#/components/schemas/Subject'
  *       404:
- *         description: The Course was not found
+ *         description: The Subject was not found
  *
  *   put:
- *    summary: Update The Course by the id
- *    tags: [Course]
+ *    summary: Update The Subject by the id
+ *    tags: [Subject]
  *    parameters:
  *      - in: path
  *        name: id
  *        schema:
  *          type: string
  *        required: true
- *        description: The Course id
+ *        description: The Subject id
  *    requestBody:
  *      required: true
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Course'
+ *            $ref: '#/components/schemas/Subject'
  *    responses:
  *      200:
  *        description: The user was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Course'
+ *              $ref: '#/components/schemas/Subject'
  *      404:
- *        description: The Course was not found
+ *        description: The Subject was not found
  *      500:
  *        description: Some error happened
  *
  *   delete:
- *     summary: Remove The Course by id
- *     tags: [Course]
+ *     summary: Remove The Subject by id
+ *     tags: [Subject]
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: string
  *         required: true
- *         description: The Course id
+ *         description: The Subject id
  *     responses:
  *       200:
- *         description: The Course was deleted
+ *         description: The Subject was deleted
  *       404:
- *         description: The Course was not found
+ *         description: The Subject was not found
  */
 
 import express from "express";

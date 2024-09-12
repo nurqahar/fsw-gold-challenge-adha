@@ -5,21 +5,21 @@
  *     Teacher:
  *       type: object
  *       required:
- *         - guru
- *         - jenis_kelamin
+ *         - teacher
+ *         - sex
  *       properties:
  *         id:
  *           type: string
  *           description: The auto-generated id of the teacher
- *         guru:
+ *         teacher:
  *           type: string
  *           description: The teacher name
- *         jenis_kelamin:
+ *         sex:
  *           type: string
  *           description: The sex of teacher
  *       example:
- *         guru: John
- *         jenis_kelamin: Laki-laki
+ *         teacher: John
+ *         sex: Laki-laki
  */
 
 /**
@@ -31,8 +31,8 @@
  *
  * /api/teacher:
  *   get:
- *     summary: Lists all the Teacher
- *     tags: [Teacher]
+ *     summary: Lists all the Teachers
+ *     tags: [Teachers]
  *     responses:
  *       200:
  *         description: The list of the teachers
@@ -41,7 +41,7 @@
  *             schema:
  *               type: array
  *               users:
- *                 $ref: '#/components/schemas/Teacher'
+ *                 $ref: '#/components/schemas/Teachers'
  *   post:
  *     summary: Create a new teacher and link to course
  *     tags: [Teacher]
