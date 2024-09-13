@@ -8,9 +8,9 @@ export const createData = async (req, res) => {
     return res.status(400).json({ error: error.details[0].message });
   }
 
-  const kelas_id = parseInt(req.params.id, DECIMAL);
+  const class_id = parseInt(req.params.id, DECIMAL);
   try {
-    const data = await Student.create({ kelas_id, ...value });
+    const data = await Student.create({ class_id, ...value });
     return res.status(201).json(data);
   } catch (err) {
     const { detail } = err;
@@ -25,6 +25,14 @@ export const getAllData = async (req, res) => {
 
 export const getDataById = async (req, res) => {
   const data = await Student.getById(parseInt(req.params.id, DECIMAL));
+  if (data) {
+    return res.json(data);
+  }
+  return res.status(404).send("student not found");
+};
+
+export const getClassById = async (req, res) => {
+  const data = await Student.getByClassId(parseInt(req.params.id, DECIMAL));
   if (data) {
     return res.json(data);
   }

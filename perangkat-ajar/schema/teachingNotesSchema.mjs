@@ -6,7 +6,7 @@ const teachingNotesSchema = Joi.object({
   notes: Joi.string().optional(),
   time: Joi.string().required(),
   total_content_time: Joi.string().required(),
-  date: Joi.string().required(),
+  date: Joi.date().required(),
   school_year: Joi.string().required(),
   semester: Joi.string().required(),
   grade: Joi.string().optional(),

@@ -16,6 +16,10 @@ export default class Student {
     return db("students").where({ id }).first();
   }
 
+  static getByClassId(class_id) {
+    return db("students").select("*").where({ class_id });
+  }
+
   static async update(id, data) {
     return db("students").where({ id }).update(data);
   }

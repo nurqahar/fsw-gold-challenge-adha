@@ -44,7 +44,7 @@ exports.up = async function up(knex) {
     table.string("notes", "328");
     table.string("time", "100").notNullable();
     table.string("total_content_time", "100").notNullable();
-    table.string("date", "100").notNullable();
+    table.date("date").notNullable();
     table.string("school_year", "100").notNullable();
     table.string("semester", "100").notNullable();
     table.string("grade", "100");

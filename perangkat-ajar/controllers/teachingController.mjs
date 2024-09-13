@@ -8,16 +8,16 @@ export const createData = async (req, res) => {
     return res.status(400).json({ error: error.details[0].message });
   }
 
-  const mata_pelajaran_id = parseInt(req.params.id1, DECIMAL);
-  const guru_id = parseInt(req.params.id2, DECIMAL);
-  const kelas_id = parseInt(req.params.id3, DECIMAL);
-  const siswa_id = parseInt(req.params.id4, DECIMAL);
+  const subject_id = parseInt(req.params.id1, DECIMAL);
+  const teacher_id = parseInt(req.params.id2, DECIMAL);
+  const class_id = parseInt(req.params.id3, DECIMAL);
+  const student_id = parseInt(req.params.id4, DECIMAL);
   try {
     const data = await TeachingNotes.create({
-      siswa_id,
-      kelas_id,
-      mata_pelajaran_id,
-      guru_id,
+      student_id,
+      class_id,
+      subject_id,
+      teacher_id,
       ...value,
     });
     return res.status(201).json(data);

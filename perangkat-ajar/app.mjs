@@ -4,7 +4,7 @@ import routes from "./routes/index.mjs";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
-const port = 3001;
+const port = 3000;
 const options = {
   definition: {
     openapi: "3.1.0",
@@ -39,10 +39,10 @@ app.use(cors());
 app.use(express.json());
 app.use("/api", routes);
 app.use(
-  "/api-docs",
+  "/",
   swaggerUi.serve,
   swaggerUi.setup(specs, { explorer: true, customCssUrl: CSS_URL })
 );
 app.listen(port, () => {
-  console.log(`API run at http://localhost:${port}/api/`);
+  console.log(`API run at http://localhost:${port}/`);
 });

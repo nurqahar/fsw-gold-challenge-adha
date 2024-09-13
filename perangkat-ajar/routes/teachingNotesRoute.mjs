@@ -49,7 +49,7 @@
  *         notes : " "
  *         time : "07:00"
  *         total_content_time : "5 jp"
- *         date : "22-Agustus-2024"
+ *         date : "2024-08-22"
  *         school_year : "2024/2025"
  *         semester : "1"
  *         grade : " "
@@ -60,7 +60,7 @@
  * @swagger
  * tags:
  *   name: Teaching Notes
- *   description: The Teaching Notes of your class
+ *   description: The Teaching Notes of your class - 5
  *
  *
  * /api/teaching_notes:

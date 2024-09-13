@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *   schemas:
- *     Teacher:
+ *     Teachers:
  *       type: object
  *       required:
  *         - teacher
@@ -25,11 +25,11 @@
 /**
  * @swagger
  * tags:
- *   name: Teacher
- *   description: The teacher on school
+ *   name: Teachers
+ *   description: The teachers on school - 2
  *
  *
- * /api/teacher:
+ * /api/teachers:
  *   get:
  *     summary: Lists all the Teachers
  *     tags: [Teachers]
@@ -44,30 +44,30 @@
  *                 $ref: '#/components/schemas/Teachers'
  *   post:
  *     summary: Create a new teacher and link to course
- *     tags: [Teacher]
+ *     tags: [Teachers]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Teacher'
+ *             $ref: '#/components/schemas/Teachers'
  *     responses:
  *       201:
  *         description: The teacher added
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Teacher'
+ *               $ref: '#/components/schemas/Teachers'
  *       404:
  *         description: The course was not found
  *       500:
  *         description: Some error happened
  *
  *
- * /api/teacher/{id}:
+ * /api/teachers/{id}:
  *   get:
  *     summary: Get the teacher by id
- *     tags: [Teacher]
+ *     tags: [Teachers]
  *     parameters:
  *       - in: path
  *         name: id
@@ -81,13 +81,13 @@
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Teacher'
+ *               $ref: '#/components/schemas/Teachers'
  *       404:
  *         description: The class was not found
  *
  *   put:
  *    summary: Update The teacher by the id
- *    tags: [Teacher]
+ *    tags: [Teachers]
  *    parameters:
  *      - in: path
  *        name: id
@@ -100,14 +100,14 @@
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Teacher'
+ *            $ref: '#/components/schemas/Teachers'
  *    responses:
  *      200:
  *        description: The teacher was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Teacher'
+ *              $ref: '#/components/schemas/Teachers'
  *      404:
  *        description: The teacher was not found
  *      500:
@@ -115,7 +115,7 @@
  *
  *   delete:
  *     summary: Remove The teacher by id
- *     tags: [Teacher]
+ *     tags: [Teachers]
  *     parameters:
  *       - in: path
  *         name: id

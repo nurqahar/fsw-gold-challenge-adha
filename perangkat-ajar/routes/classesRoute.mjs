@@ -20,8 +20,8 @@
 /**
  * @swagger
  * tags:
- *   name: Class
- *   description: The Class on school
+ *   name: Classes
+ *   description: The Classes on school - 3
  *
  *
  * /api/classes:
@@ -30,7 +30,7 @@
  *     tags: [Classes]
  *     responses:
  *       200:
- *         description: The list of the teachers
+ *         description: The list of the classes
  *         content:
  *           application/json:
  *             schema:
@@ -38,21 +38,21 @@
  *               users:
  *                 $ref: '#/components/schemas/Classes'
  *   post:
- *     summary: Create a new Class and link to Subject
- *     tags: [Class]
+ *     summary: Create a new Class
+ *     tags: [Classes]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Class'
+ *             $ref: '#/components/schemas/Classes'
  *     responses:
  *       201:
  *         description: The Class added
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Class'
+ *               $ref: '#/components/schemas/Classes'
  *       404:
  *         description: The course was not found
  *       500:
@@ -61,7 +61,7 @@
  * /api/classes/{id}:
  *   get:
  *     summary: Get the Class by id
- *     tags: [Class]
+ *     tags: [Classes]
  *     parameters:
  *       - in: path
  *         name: id
@@ -75,13 +75,13 @@
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Class'
+ *               $ref: '#/components/schemas/Classes'
  *       404:
  *         description: The class was not found
  *
  *   put:
  *    summary: Update The Class by the id
- *    tags: [Class]
+ *    tags: [Classes]
  *    parameters:
  *      - in: path
  *        name: id
@@ -94,14 +94,14 @@
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Class'
+ *            $ref: '#/components/schemas/Classes'
  *    responses:
  *      200:
  *        description: The Class was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Class'
+ *              $ref: '#/components/schemas/Classes'
  *      404:
  *        description: The Class was not found
  *      500:
@@ -109,7 +109,7 @@
  *
  *   delete:
  *     summary: Remove The Class by id
- *     tags: [Class]
+ *     tags: [Classes]
  *     parameters:
  *       - in: path
  *         name: id

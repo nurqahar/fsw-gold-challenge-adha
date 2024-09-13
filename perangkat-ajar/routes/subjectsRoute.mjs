@@ -2,7 +2,7 @@
  * @swagger
  * components:
  *   schemas:
- *     Course:
+ *     Subjects:
  *       type: object
  *       required:
  *         - subject
@@ -20,39 +20,39 @@
 /**
  * @swagger
  * tags:
- *   name: Subject
- *   description: The Subject on your school
+ *   name: Subjects
+ *   description: The Subject on your school - 1
  *
  *
  * /api/subjects:
  *   get:
  *     summary: Lists all the Subject
- *     tags: [Subject]
+ *     tags: [Subjects]
  *     responses:
  *       200:
- *         description: The list of the courses
+ *         description: The list of the subjects
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               course:
- *                 $ref: '#/components/schemas/Subject'
+ *                 $ref: '#/components/schemas/Subjects'
  *   post:
  *     summary: Create a new Subject
- *     tags: [Subject]
+ *     tags: [Subjects]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Subject'
+ *             $ref: '#/components/schemas/Subjects'
  *     responses:
  *       200:
  *         description: The created Subject.
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Subject'
+ *               $ref: '#/components/schemas/Subjects'
  *       500:
  *         description: Some server error
  *
@@ -60,7 +60,7 @@
  * /api/subjects/{id}:
  *   get:
  *     summary: Get The Subject by id
- *     tags: [Subject]
+ *     tags: [Subjects]
  *     parameters:
  *       - in: path
  *         name: id
@@ -74,13 +74,13 @@
  *         contens:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/Subject'
+ *               $ref: '#/components/schemas/Subjects'
  *       404:
  *         description: The Subject was not found
  *
  *   put:
  *    summary: Update The Subject by the id
- *    tags: [Subject]
+ *    tags: [Subjects]
  *    parameters:
  *      - in: path
  *        name: id
@@ -93,14 +93,14 @@
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/Subject'
+ *            $ref: '#/components/schemas/Subjects'
  *    responses:
  *      200:
  *        description: The user was updated
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Subject'
+ *              $ref: '#/components/schemas/Subjects'
  *      404:
  *        description: The Subject was not found
  *      500:
@@ -108,7 +108,7 @@
  *
  *   delete:
  *     summary: Remove The Subject by id
- *     tags: [Subject]
+ *     tags: [Subjects]
  *     parameters:
  *       - in: path
  *         name: id
