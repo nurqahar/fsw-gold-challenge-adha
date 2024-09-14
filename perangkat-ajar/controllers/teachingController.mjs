@@ -1,6 +1,7 @@
 import TeachingNotes from "../models/teachingNotesModel.mjs";
 import teachingNotesSchema from "../schema/teachingNotesSchema.mjs";
 
+
 const DECIMAL = 10;
 export const createData = async (req, res) => {
   const { error, value } = teachingNotesSchema.validate(req.body);

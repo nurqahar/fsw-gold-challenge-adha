@@ -24,7 +24,12 @@ export const getAllData = async (req, res) => {
 };
 
 export const getDataById = async (req, res) => {
-  const data = await Student.getById(parseInt(req.params.id, DECIMAL));
+  let data='';
+  if(req.query.class_id){
+    data = await Student.getByClassId(parseInt(req.query.class_id, DECIMAL));
+  }else{
+    data = await Student.getById(parseInt(req.params.id, DECIMAL));
+  }
   if (data) {
     return res.json(data);
   }

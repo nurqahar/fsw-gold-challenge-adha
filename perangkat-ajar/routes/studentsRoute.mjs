@@ -44,29 +44,6 @@
  *                 $ref: '#/components/schemas/Students'
  *
  *
- * /api/students/class/{id}:
- *   get:
- *     summary: List all Student by Class
- *     tags: [Students]
- *     parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: class id
- *     responses:
- *       200:
- *         description: The Student & Class id response
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               users:
- *                 $ref: '#/components/schemas/Students'
- *       404:
- *         description: The student was not found
- *
  * /api/students/{id}:
  *   post:
  *     summary: Create a new Student and link to Class
@@ -105,6 +82,11 @@
  *           type: string
  *         required: true
  *         description: The Student id
+ *       - in: query
+ *         name: class_id
+ *         schema:
+ *           type: string
+ *         description: The Class id
  *     responses:
  *       200:
  *         description: The Student response by id
@@ -164,7 +146,6 @@ import {
   createData,
   getAllData,
   getDataById,
-  getClassById,
   updateData,
   deleteData,
 } from "../controllers/studentsController.mjs";
@@ -174,7 +155,6 @@ const router = express.Router();
 router.post("/:id", createData);
 router.get("/", getAllData);
 router.get("/:id", getDataById);
-router.get("/class/:id", getClassById);
 router.put("/:id", updateData);
 router.delete("/:id", deleteData);
 
