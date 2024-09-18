@@ -1,8 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { Card, Container, Row, Col, Form, Button } from "react-bootstrap";
+import {
+  Card,
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Table,
+  FloatingLabel,
+} from "react-bootstrap";
 import axios from "axios";
+import moment from "moment";
+import "./teachingNotes.css";
+
 const routeTeachingNotes = "teaching_notes";
-const apiUrl = `http://localhost:3000/api/${routeTeachingNotes}`;
+const apiUrlTeachinNotes = `http://localhost:3000/api/${routeTeachingNotes}`;
 const routeStudent = "students";
 const apiUrlStudent = `http://localhost:3000/api/${routeStudent}`;
 const routeClasses = "classes";
@@ -20,9 +32,20 @@ const TeachingNotes = () => {
   const [subjects, setSubjects] = useState([]);
   const [teachingNotes, setTeachingNotes] = useState([]);
   const [teachers, setTeachers] = useState([]);
+  const [inputSearch, setInputSearch] = useState([]);
 
   const handleEditClick = (e) => {
     console.log("Edit button clicked");
+  };
+
+  const searchTeachingNotes = async (event) => {
+    event.preventDefault();
+    const date = event.target.date.value
+    const subjectId = event.target.subject.value
+    const classId = event.target.class.value
+    const resTeachingNotes = await axios.get(`${apiUrlTeachinNotes}?date=${date}&subject_id=${subjectId}&class_id=${classId}`)
+    console.log(resTeachingNotes.data);
+    
   };
 
   useEffect(() => {
@@ -32,7 +55,7 @@ const TeachingNotes = () => {
         const resStudents = await axios.get(`${apiUrlStudent}`);
         const resSubjects = await axios.get(`${apiUrlCourse}`);
         const resTeachers = await axios.get(`${apiUrlTeacher}`);
-        const resTeachingNotes = await axios.get(`${apiUrl}`);
+        const resTeachingNotes = await axios.get(`${apiUrlTeachinNotes}`);
 
         setTeachingNotes(resTeachingNotes.data);
         setClasses(resClasses.data);
@@ -57,18 +80,37 @@ const TeachingNotes = () => {
               <strong>Search Teaching Note</strong>
             </Card.Header>
             <Card.Body>
-              <Form>
+              <Form onSubmit={searchTeachingNotes}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Date</Form.Label>
-                  <Form.Control type="date" placeholder="Enter date" />
+                  <FloatingLabel label="Date" className="mb-3">
+                    <Form.Control
+                      type="date"
+                      name="date"
+                    />
+                  </FloatingLabel>
                 </Form.Group>
 
                 <Form.Group className="mb-3">
-                  <Form.Label>Subject</Form.Label>
-                  <Form.Control type="text" placeholder="Subject" />
+                  <FloatingLabel label="Class" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Class"
+                      name="class"
+                    />
+                  </FloatingLabel>
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                  <FloatingLabel label="Subject" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Subject"
+                      name="subject"
+                    />
+                  </FloatingLabel>
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                  Submit
+                  Search
                 </Button>
               </Form>
             </Card.Body>
@@ -79,31 +121,70 @@ const TeachingNotes = () => {
       <Row className=" justify-content-center mt-5">
         <Col>
           <Card>
-            <Card.Body className="text-center">Teaching Note</Card.Body>
-            <Card.Body>
-              {teachingNotes.length !== 0 ? (
-                <Card.Text className="d-flex justify-content-between align -items-center">
-                  Date: {teachingNotes[0].date} | Subject: {subjects[0].subject} | Teacher: {teachers[0].teacher} | Class: {classes[0].class}
-                </Card.Text>
-              ) : (
-                ""
-              )}
+            <Card.Body>Teaching Notes</Card.Body>
+            <Form>
+              <Form.Group className="m-auto mb-3 w-50">
+                <FloatingLabel label="Content" className="mb-3">
+                  <Form.Control type="text" placeholder="Content" />
+                </FloatingLabel>
+              </Form.Group>
+              <Form.Group className="m-auto mb-3 w-50">
+                <FloatingLabel label="Date" className="mb-3">
+                  <Form.Control type="date" placeholder="Date" />
+                </FloatingLabel>
+              </Form.Group>
 
-              {teachingNotes.length !== 0
-                ? teachingNotes.map((teachingNote, index) => {
-                    return (
-                      <div>
-                        <ul>
-                          <li className="d-flex justify-content-between align -items-center">
-                            Student: {students && students[index].student} |{" "}
-                            {teachingNote.presence}
-                          </li>
-                        </ul>
-                      </div>
-                    );
-                  })
-                : ""}
-            </Card.Body>
+              <Form.Group className="m-auto mb-3 w-50">
+                <FloatingLabel label="Time" className="mb-3">
+                  <Form.Control type="text" placeholder="Time" />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group className="m-auto mb-3 w-50">
+                <FloatingLabel label="Total Content Time" className="mb-3">
+                  <Form.Control type="text" placeholder="Total Content Time" />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group className="m-auto mb-3 w-50">
+                <FloatingLabel label="School Year" className="mb-3">
+                  <Form.Control type="text" placeholder="School Year" />
+                </FloatingLabel>
+              </Form.Group>
+
+              <Form.Group className="m-auto mb-3 w-50">
+                <FloatingLabel label="Semester" className="mb-3">
+                  <Form.Control type="text" placeholder="Semester" />
+                </FloatingLabel>
+              </Form.Group>
+            </Form>
+          </Card>
+        </Col>
+      </Row>
+      <Row className=" justify-content-center mt-1">
+        <Col>
+          <Card>
+            <Table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Presence</th>
+                  <th>Notes</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+              {teachingNotes.length !== 0 ? (
+                ):("")}
+                <tr>
+                  <td key={1}>index</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </Table>
           </Card>
         </Col>
       </Row>

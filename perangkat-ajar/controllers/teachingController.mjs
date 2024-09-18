@@ -1,7 +1,6 @@
 import TeachingNotes from "../models/teachingNotesModel.mjs";
 import teachingNotesSchema from "../schema/teachingNotesSchema.mjs";
 
-
 const DECIMAL = 10;
 export const createData = async (req, res) => {
   const { error, value } = teachingNotesSchema.validate(req.body);
@@ -29,12 +28,23 @@ export const createData = async (req, res) => {
 };
 
 export const getAllData = async (req, res) => {
-  const data = await TeachingNotes.getAll();
+  let data = "";
+  if (req.query.class_id) {
+    data = await TeachingNotes.getBySearch(
+      parseInt(req.params.id),
+      req.query.class_id
+    );
+  } else {
+    data = await TeachingNotes.getAll();
+  }
   return res.json(data);
 };
 
 export const getDataById = async (req, res) => {
-  const data = await TeachingNotes.getById(parseInt(req.params.id, DECIMAL));
+  const data = (data = await TeachingNotes.getById(
+    parseInt(req.params.id, DECIMAL)
+  ));
+
   if (data) {
     return res.json(data);
   }

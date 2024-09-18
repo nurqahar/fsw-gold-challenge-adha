@@ -16,6 +16,10 @@ export default class TeachingNotes {
     return db("teaching_notes").where({ id }).first();
   }
 
+  static getBySearch(id, class_id) {
+    return db("teaching_notes").where({ class_id });
+  }
+
   static async update(id, data) {
     return db("teaching_notes").where({ id }).update(data);
   }
