@@ -25,54 +25,127 @@ const routeTeacher = "teachers";
 const apiUrlTeacher = `http://localhost:3000/api/${routeTeacher}`;
 
 const TeachingNotes = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
   const [subjects, setSubjects] = useState([]);
   const [teachingNotes, setTeachingNotes] = useState([]);
   const [teachers, setTeachers] = useState([]);
-  const [resultSearchClass, setResultSearchClass] = useState();
+  const [isSearch, setSearch] = useState(false);
+  const [valueSearch, setValueSearch] = useState(null);
 
   const searchTeachingNotes = async (event) => {
     event.preventDefault();
+    try {
+      setSearch(true);
+      const date = event.target.date.value;
+      const classId = event.target.class.value;
+      const subjectId = event.target.subject.value;
+      const teacherId = event.target.teacher.value;
+      setValueSearch({
+        date: date,
+        classId: classId,
+        subjectId: subjectId,
+        teacherId: teacherId,
+      });
 
-    const resSubjects = await axios.get(`${apiUrlCourse}`);
-    const resClasses = await axios.get(`${apiUrlClasses}`);
-    const resStudents = await axios.get(`${apiUrlStudent}`);
-    setSubjects(resSubjects.data);
-    setClasses(resClasses.data);
-    setStudents(resStudents.data);
+      const resTeachingNotes = await axios.get(
+        `${apiUrlTeachinNotes}?date=${date}&subject_id=${subjectId}&class_id=${classId}&teacher_id=${teacherId}`
+      );
+      setTeachingNotes(resTeachingNotes.data);
 
-    const date = event.target.date.value;
-    // const subjectId = event.target.class.value;
-    // const classId = event.target.class.value;
-    console.log(event.target.elements);
-    console.log(event.target.class.value);
+      const resStudents = await axios.get(
+        `${apiUrlStudent}?class_id=${classId}`
+      );
+      setStudents(resStudents.data);
 
-    // const resTeachingNotes = await axios.get(
-    // `${apiUrlTeachinNotes}?date=${date}&subject_id=${subjectId}&class_id=${classId}`
-    // );
-    // setTeachingNotes(resTeachingNotes.data);
+      setLoading(false);
+    } catch (error) {
+      setError("something went wrong");
+      setLoading(false);
+    }
   };
 
-  const saveChanges = (event) => {
+  const saveChanges = async (event) => {
     event.preventDefault();
     console.log(event.target.elements);
+    console.log(event.target.presence.value);
+
+    // const presence = event.target.presence.value;
+    // const content = event.target.content.value;
+    // const notes = event.target.notes.value;
+    // const time = event.target.time.value;
+    // const total_content_time = event.target.total_content_time.value;
+    // const date = event.target.date.value;
+    // const school_year = event.target.school_year.value;
+    // const semester = event.target.semester.value;
+    // const subjectId = event.target.subject.value;
+    // const teacherId = event.target.teacher.value;
+    // const classId = event.target.class.value;
+    // const studentId = event.target.student.value;
+    // const grade = event.target.grade.value
+
+    console.log(teachingNotes);
+
+    // console.log(presence, content, notes, time, total_content_time, date, school_year, semester, grade, subjectId, teacherId, classId, studentId);
+  };
+
+  const save = (event) => {
+    event.preventDefault();
+    console.log(event.target.elements);
+    // console.log(event.target[18].name);
+    // console.log(event.target.presence3);
+    // console.log(Object.keys(event.target.elements))
+
+    // let presence = "";
+    // let notes = "";
+    // let studentId = "";
+    // let grade = "";
+    // let arr = [];
+    for (const [key, value] of Object.entries(event.target.elements)) {
+      console.log(value);
+      //   if (value.name.includes("presence")) {
+      //     presence = value.value;
+      //     arr.push(presence)
+      //   }
+      //   if (value.name.includes("notes")) {
+      //     notes = value.value;
+      //     arr.push(notes)
+      //   }
+      //   if (value.name.includes("grade")) {
+      //     grade = value.value;
+      //     arr.push(grade)
+      //   }
+      //   if (value.name.includes("student")) {
+      //     studentId = value.value;
+      //     arr.push(studentId)
+      //   }
+    }
+    // console.log(arr);
+
+    // const content = event.target.content.value;
+    // const time = event.target.time.value;
+    // const total_content_time = event.target.total_content_time.value;
+    // const date = event.target.date.value;
+    // const school_year = event.target.school_year.value;
+    // const semester = event.target.semester.value;
+    // const subjectId = event.target.subject.value;
+    // const teacherId = event.target.teacher.value;
+    // const classId = event.target.class.value;
+
+    // console.log(presence, content, notes, time, total_content_time, date, school_year, semester, grade, subjectId, teacherId, classId, studentId);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const resClasses = await axios.get(`${apiUrlClasses}`);
-        // const resStudents = await axios.get(`${apiUrlStudent}`);
         const resSubjects = await axios.get(`${apiUrlCourse}`);
         const resTeachers = await axios.get(`${apiUrlTeacher}`);
-        // const resTeachingNotes = await axios.get(`${apiUrlTeachinNotes}`);
-
-        // setTeachingNotes(resTeachingNotes.data);
-        setClasses(resClasses.data);
+        // const resStudents = await axios.get(`${apiUrlStudent}`);
         // setStudents(resStudents.data);
+        setClasses(resClasses.data);
         setSubjects(resSubjects.data);
         setTeachers(resTeachers.data);
         setLoading(false);
@@ -83,6 +156,10 @@ const TeachingNotes = () => {
     };
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return <Container className="mt-4">Loading...</Container>;
+  }
 
   return (
     <Container className="mt-4">
@@ -100,27 +177,47 @@ const TeachingNotes = () => {
                     <Form.Control type="date" name="date" />
                   </FloatingLabel>
                 </Form.Group>
-
                 <Form.Group className="mb-3">
                   <Form.Select name="class">
-                    <option>Pilih Kelas</option>
-                    <option value="1">X TOI 1</option>
-                    <option value="2">X TOI 2</option>
-                    <option value="3">XI TOI 1</option>
-                    <option value="4">XI TOI 2</option>
-                    <option value="5">XII TOI 1</option>
-                    <option value="6">XII TOI 2</option>
+                    <option>Choose Class</option>
+                    {classes &&
+                      classes.map((class_name) => {
+                        return (
+                          <option key={class_name.id} value={class_name.id}>
+                            {class_name.class}
+                          </option>
+                        );
+                      })}
+                    ;
                   </Form.Select>
                 </Form.Group>
-
                 <Form.Group className="mb-3">
-                  <FloatingLabel label="Subject" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      placeholder="Subject"
-                      name="subject"
-                    />
-                  </FloatingLabel>
+                  <Form.Select name="subject">
+                    <option>Choose Subject</option>
+                    {subjects &&
+                      subjects.map((subject) => {
+                        return (
+                          <option key={subject.id} value={subject.id}>
+                            {subject.subject}
+                          </option>
+                        );
+                      })}
+                    ;
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Select name="teacher">
+                    <option>Choose Teacher</option>
+                    {teachers &&
+                      teachers.map((teacher) => {
+                        return (
+                          <option key={teacher.id} value={teacher.id}>
+                            {teacher.teacher}
+                          </option>
+                        );
+                      })}
+                    ;
+                  </Form.Select>
                 </Form.Group>
                 <Button variant="primary" type="submit">
                   Search
@@ -133,20 +230,38 @@ const TeachingNotes = () => {
       {/* READ VALUE */}
       <Row className=" justify-content-center mt-5">
         <Col>
-          {teachingNotes.length !== 0 ? (
+          {/* IF TRUE */}
+          {isSearch ? (
             <Card>
               <Card.Body>Teaching Notes</Card.Body>
-              <Form onSubmit={saveChanges}>
+              <Form onSubmit={teachingNotes.length !== 0 ? saveChanges : save}>
+                <Form.Group className="m-auto mb-3 w-50">
+                  <FloatingLabel label="Teacher" className="mb-3">
+                    <Form.Control
+                      type="text"
+                      placeholder="Teacher"
+                      name="teacher"
+                      value={
+                        teachingNotes.length !== 0
+                          ? teachers[teachingNotes[0].teacher_id - 1].teacher
+                          : teachers[valueSearch.teacherId - 1].teacher
+                      }
+                      defaultValue={null}
+                    />
+                  </FloatingLabel>
+                </Form.Group>
                 <Form.Group className="m-auto mb-3 w-50">
                   <FloatingLabel label="Class" className="mb-3">
                     <Form.Control
                       type="text"
                       placeholder="Class"
+                      name="class"
                       value={
                         teachingNotes.length !== 0
                           ? classes[teachingNotes[0].class_id - 1].class
-                          : ""
+                          : classes[valueSearch.classId - 1].class
                       }
+                      defaultValue={null}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -155,10 +270,11 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Subject"
+                      name="subject"
                       value={
                         teachingNotes.length !== 0
                           ? subjects[teachingNotes[0].subject_id - 1].subject
-                          : ""
+                          : subjects[valueSearch.subjectId - 1].subject
                       }
                     />
                   </FloatingLabel>
@@ -168,6 +284,7 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Content"
+                      name="content"
                       value={
                         teachingNotes.length !== 0
                           ? teachingNotes[0].content
@@ -181,32 +298,33 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="date"
                       placeholder="Date"
+                      name="date"
                       value={
                         teachingNotes.length !== 0
                           ? moment(teachingNotes[0].date).format("YYYY-MM-DD")
-                          : ""
+                          : valueSearch.date
                       }
                     />
                   </FloatingLabel>
                 </Form.Group>
-
                 <Form.Group className="m-auto mb-3 w-50">
                   <FloatingLabel label="Time" className="mb-3">
                     <Form.Control
                       type="text"
                       placeholder="Time"
+                      name="time"
                       value={
                         teachingNotes.length !== 0 ? teachingNotes[0].time : ""
                       }
                     />
                   </FloatingLabel>
                 </Form.Group>
-
                 <Form.Group className="m-auto mb-3 w-50">
                   <FloatingLabel label="Total Content Time" className="mb-3">
                     <Form.Control
                       type="text"
                       placeholder="Total Content Time"
+                      name="total_content_time"
                       value={
                         teachingNotes.length !== 0
                           ? teachingNotes[0].total_content_time
@@ -215,12 +333,12 @@ const TeachingNotes = () => {
                     />
                   </FloatingLabel>
                 </Form.Group>
-
                 <Form.Group className="m-auto mb-3 w-50">
                   <FloatingLabel label="School Year" className="mb-3">
                     <Form.Control
                       type="text"
                       placeholder="School Year"
+                      name="school_year"
                       value={
                         teachingNotes.length !== 0
                           ? teachingNotes[0].school_year
@@ -229,12 +347,12 @@ const TeachingNotes = () => {
                     />
                   </FloatingLabel>
                 </Form.Group>
-
                 <Form.Group className="m-auto mb-3 w-50">
                   <FloatingLabel label="Semester" className="mb-3">
                     <Form.Control
                       type="text"
                       placeholder="Semester"
+                      name="semester"
                       value={
                         teachingNotes.length !== 0
                           ? teachingNotes[0].semester
@@ -254,24 +372,33 @@ const TeachingNotes = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {teachingNotes.length !== 0
-                      ? teachingNotes.map((teachingNote, index) => {
+                    {/* if true TABLE */}
+                    {teachingNotes.length !== 0 && students.length !== 0
+                      ? teachingNotes.map((teachingNote, teachingNoteIndex) => {
                           return (
                             <tr>
-                              <td key={index}>{index + 1}</td>
+                              <td key={teachingNoteIndex + 1}>
+                                {teachingNoteIndex + 1}
+                              </td>
                               <td>
                                 <Form.Group className="m-auto mb-2 w-50">
                                   <Form.Control
                                     type="text"
-                                    value={students && students[index].student}
+                                    name={`student${teachingNoteIndex + 1}`}
+                                    value={
+                                      students &&
+                                      students[teachingNoteIndex].student
+                                    }
                                   />
                                 </Form.Group>
                               </td>
                               <td>
                                 <Form.Group className="m-auto mb-2 w-60">
-                                  <Form.Select>
+                                  <Form.Select
+                                    name={`presence${teachingNoteIndex + 1}`}
+                                  >
                                     <option value="HADIR">
-                                      {teachingNote.presence}
+                                      {teachingNote.presence || "HADIR"}
                                     </option>
                                     <option value="ALPA">ALPA</option>
                                     <option value="SAKIT">SAKIT</option>
@@ -283,7 +410,8 @@ const TeachingNotes = () => {
                                 <Form.Group className="m-auto mb-2 w-50">
                                   <Form.Control
                                     type="text"
-                                    value={teachingNote.notes}
+                                    name={`notes${teachingNoteIndex + 1}`}
+                                    value={teachingNote.notes || ""}
                                   />
                                 </Form.Group>
                               </td>
@@ -291,117 +419,74 @@ const TeachingNotes = () => {
                                 <Form.Group className="m-auto mb-2 w-50">
                                   <Form.Control
                                     type="text"
-                                    value={teachingNote.grade}
+                                    name={`grade${teachingNoteIndex + 1}`}
+                                    value={teachingNote.grade || ""}
                                   />
                                 </Form.Group>
                               </td>
                             </tr>
                           );
                         })
-                      : ""}
+                      : students.map((student, studentIndex) => {
+                          return (
+                            <tr>
+                              <td key={studentIndex + 1}>{studentIndex + 1}</td>
+                              <td>
+                                <Form.Group className="m-auto mb-2 w-50">
+                                  <Form.Control
+                                    type="text"
+                                    // name={`student${studentIndex + 1}`}
+                                    value={student.student}
+                                  />
+                                </Form.Group>
+                              </td>
+                              <td>
+                                <Form.Group className="m-auto mb-2 w-60">
+                                  <Form.Select
+                                  // name={`presence${studentIndex + 1}`}
+                                  >
+                                    <option value="HADIR">HADIR</option>
+                                    <option value="ALPA">ALPA</option>
+                                    <option value="SAKIT">SAKIT</option>
+                                    <option value="NO DATA">NO DATA</option>
+                                  </Form.Select>
+                                </Form.Group>
+                              </td>
+                              <td>
+                                <Form.Group className="m-auto mb-2 w-50">
+                                  <Form.Control
+                                    type="text"
+                                    // name={`notes${studentIndex + 1}`}
+                                  />
+                                </Form.Group>
+                              </td>
+                              <td>
+                                <Form.Group className="m-auto mb-2 w-50">
+                                  <Form.Control
+                                    type="text"
+                                    // name={`grade${studentIndex + 1}`}
+                                  />
+                                </Form.Group>
+                              </td>
+                            </tr>
+                          );
+                        })}
                   </tbody>
                 </Table>
-                <Button className="btn btn-warning">Save Changes</Button>
+                {/* button */}
+                {teachingNotes.length !== 0 ? (
+                  <Button className="btn btn-warning" type="submit">
+                    Save Changes
+                  </Button>
+                ) : (
+                  <Button className="btn btn-primary" type="submit">
+                    Save
+                  </Button>
+                )}
               </Form>
             </Card>
           ) : (
-            <Card>
-              <Card.Body>Teaching Notes</Card.Body>
-              <Form onSubmit={saveChanges}>
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="Class" className="mb-3">
-                    <Form.Control type="text" placeholder="Class" />
-                  </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="Subject" className="mb-3">
-                    <Form.Control type="text" placeholder="Subject" />
-                  </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="Content" className="mb-3">
-                    <Form.Control type="text" placeholder="Content" />
-                  </FloatingLabel>
-                </Form.Group>
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="Date" className="mb-3">
-                    <Form.Control type="date" placeholder="Date" />
-                  </FloatingLabel>
-                </Form.Group>
-
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="Time" className="mb-3">
-                    <Form.Control type="text" placeholder="Time" />
-                  </FloatingLabel>
-                </Form.Group>
-
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="Total Content Time" className="mb-3">
-                    <Form.Control
-                      type="text"
-                      placeholder="Total Content Time"
-                    />
-                  </FloatingLabel>
-                </Form.Group>
-
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="School Year" className="mb-3">
-                    <Form.Control type="text" placeholder="School Year" />
-                  </FloatingLabel>
-                </Form.Group>
-
-                <Form.Group className="m-auto mb-3 w-50">
-                  <FloatingLabel label="Semester" className="mb-3">
-                    <Form.Control type="text" placeholder="Semester" />
-                  </FloatingLabel>
-                </Form.Group>
-                <Table>
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>Name</th>
-                      <th>Presence</th>
-                      <th>Notes</th>
-                      <th>Grade</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td></td>
-                      <td>
-                        <Form.Group className="m-auto mb-2 w-50">
-                          <Form.Control
-                            type="text"
-                            value={students && students[0].student}
-                          />
-                        </Form.Group>
-                      </td>
-                      <td>
-                        <Form.Group className="m-auto mb-2 w-60">
-                          <Form.Select>
-                            <option value="HADIR">HADIR</option>
-                            <option value="ALPA">ALPA</option>
-                            <option value="SAKIT">SAKIT</option>
-                            <option value="NO DATA">NO DATA</option>
-                          </Form.Select>
-                        </Form.Group>
-                      </td>
-                      <td>
-                        <Form.Group className="m-auto mb-2 w-50">
-                          <Form.Control type="text" />
-                        </Form.Group>
-                      </td>
-                      <td>
-                        <Form.Group className="m-auto mb-2 w-50">
-                          <Form.Control type="text" />
-                        </Form.Group>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-                <Button className="btn btn-warning">Save Changes</Button>
-              </Form>
-            </Card>
+            ""
           )}
         </Col>
       </Row>

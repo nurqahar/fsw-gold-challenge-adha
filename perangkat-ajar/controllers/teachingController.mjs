@@ -31,8 +31,10 @@ export const getAllData = async (req, res) => {
   let data = "";
   if (req.query.class_id) {
     data = await TeachingNotes.getBySearch(
-      parseInt(req.params.id),
-      req.query.class_id
+      req.query.date,
+      req.query.class_id,
+      req.query.subject_id,
+      req.query.teacher_id
     );
   } else {
     data = await TeachingNotes.getAll();

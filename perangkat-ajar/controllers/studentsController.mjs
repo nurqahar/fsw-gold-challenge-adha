@@ -19,17 +19,17 @@ export const createData = async (req, res) => {
 };
 
 export const getAllData = async (req, res) => {
-  const data = await Student.getAll();
+  let data = "";
+  if (req.query.class_id) {
+    data = await Student.getByClassId(parseInt(req.query.class_id, DECIMAL));
+  } else {
+    data = await Student.getAll();
+  }
   return res.json(data);
 };
 
 export const getDataById = async (req, res) => {
-  let data='';
-  if(req.query.class_id){
-    data = await Student.getByClassId(parseInt(req.query.class_id, DECIMAL));
-  }else{
-    data = await Student.getById(parseInt(req.params.id, DECIMAL));
-  }
+  const data = await Student.getById(parseInt(req.params.id, DECIMAL));
   if (data) {
     return res.json(data);
   }
