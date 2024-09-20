@@ -14,15 +14,15 @@ import moment from "moment";
 import "./teachingNotes.css";
 
 const routeTeachingNotes = "teaching_notes";
-const apiUrlTeachinNotes = `http://localhost:3000/api/${routeTeachingNotes}`;
-const routeStudent = "students";
-const apiUrlStudent = `http://localhost:3000/api/${routeStudent}`;
-const routeClasses = "classes";
-const apiUrlClasses = `http://localhost:3000/api/${routeClasses}`;
-const routeSubject = "subjects";
-const apiUrlCourse = `http://localhost:3000/api/${routeSubject}`;
-const routeTeacher = "teachers";
-const apiUrlTeacher = `http://localhost:3000/api/${routeTeacher}`;
+const API_URL_TEACHING_NOTES = `http://localhost:3000/api/${routeTeachingNotes}`;
+const ROUTE_STUDENTS = "students";
+const API_URL_STUDENTS = `http://localhost:3000/api/${ROUTE_STUDENTS}`;
+const ROUTE_CLASSES = "classes";
+const API_URL_CLASSES = `http://localhost:3000/api/${ROUTE_CLASSES}`;
+const ROUTE_SUBJECTS = "subjects";
+const API_URL_SUBJECTS = `http://localhost:3000/api/${ROUTE_SUBJECTS}`;
+const ROUTE_TEACHERS = "teachers";
+const API_URL_TEACHERS = `http://localhost:3000/api/${ROUTE_TEACHERS}`;
 
 const TeachingNotes = () => {
   const [isLoading, setLoading] = useState(true);
@@ -51,12 +51,12 @@ const TeachingNotes = () => {
       });
 
       const resTeachingNotes = await axios.get(
-        `${apiUrlTeachinNotes}?date=${date}&subject_id=${subjectId}&class_id=${classId}&teacher_id=${teacherId}`
+        `${API_URL_TEACHING_NOTES}?date=${date}&subject_id=${subjectId}&class_id=${classId}&teacher_id=${teacherId}`
       );
       setTeachingNotes(resTeachingNotes.data);
 
       const resStudents = await axios.get(
-        `${apiUrlStudent}?class_id=${classId}`
+        `${API_URL_STUDENTS}?class_id=${classId}`
       );
       setStudents(resStudents.data);
 
@@ -69,81 +69,171 @@ const TeachingNotes = () => {
 
   const saveChanges = async (event) => {
     event.preventDefault();
-    console.log(event.target.elements);
-    console.log(event.target.presence.value);
+    let teacherId = 0;
+    let classId = 0;
+    let subjectId = 0;
+    let studentId = 0;
+    let presence = "";
+    let notes = "";
+    let grade = 0;
+    teachers.map((teacher) => {
+      if (
+        teacher.teacher.toLowerCase() ===
+        event.target.elements[0].value.toLowerCase()
+      ) {
+        teacherId = teacher.id;
+      }
+      return teacherId;
+    });
+    classes.map((class_result) => {
+      if (
+        class_result.class.toLowerCase() ===
+        event.target.elements[1].value.toLowerCase()
+      ) {
+        classId = class_result.id;
+      }
+      return classId;
+    });
+    subjects.map((subject) => {
+      if (
+        subject.subject.toLowerCase() ===
+        event.target.elements[2].value.toLowerCase()
+      ) {
+        subjectId = subject.id;
+      }
+      return subjectId;
+    });
 
-    // const presence = event.target.presence.value;
-    // const content = event.target.content.value;
-    // const notes = event.target.notes.value;
-    // const time = event.target.time.value;
-    // const total_content_time = event.target.total_content_time.value;
-    // const date = event.target.date.value;
-    // const school_year = event.target.school_year.value;
-    // const semester = event.target.semester.value;
-    // const subjectId = event.target.subject.value;
-    // const teacherId = event.target.teacher.value;
-    // const classId = event.target.class.value;
-    // const studentId = event.target.student.value;
-    // const grade = event.target.grade.value
+    const content = event.target.elements[3].value;
+    const date = event.target.elements[4].value;
+    const time = event.target.elements[5].value;
+    const total_content_time = event.target.elements[6].value;
+    const school_year = event.target.elements[7].value;
+    const semester = event.target.elements[8].value;
+    let teachingNotesData = [];
 
-    console.log(teachingNotes);
+    for (
+      let index = 9;
+      index < event.target.elements.length - 10 / 4;
+      index += 4
+    ) {
+      students.map((student) => {
+        if (
+          student.student.toLowerCase() ===
+          event.target.elements[index].value.toLowerCase()
+        ) {
+          studentId = student.id;
+        }
+        return studentId;
+      });
+      presence = event.target.elements[index + 1].value;
+      notes = event.target.elements[index + 2].value;
+      grade = event.target.elements[index + 3].value;
 
-    // console.log(presence, content, notes, time, total_content_time, date, school_year, semester, grade, subjectId, teacherId, classId, studentId);
+      await axios.post(
+        `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
+        {
+          presence: presence,
+          content: content,
+          notes: notes,
+          time: time,
+          total_content_time: total_content_time,
+          date: date,
+          school_year: school_year,
+          semester: semester,
+          grade: grade,
+        }
+      );
+    }
   };
 
-  const save = (event) => {
+  const save = async (event) => {
     event.preventDefault();
-    console.log(event.target.elements);
-    // console.log(event.target[18].name);
-    // console.log(event.target.presence3);
-    // console.log(Object.keys(event.target.elements))
+    let teacherId = 0;
+    let classId = 0;
+    let subjectId = 0;
+    let studentId = 0;
+    let presence = "";
+    let notes = "";
+    let grade = 0;
+    teachers.map((teacher) => {
+      if (
+        teacher.teacher.toLowerCase() ===
+        event.target.elements[0].value.toLowerCase()
+      ) {
+        teacherId = teacher.id;
+      }
+      return teacherId;
+    });
+    classes.map((class_result) => {
+      if (
+        class_result.class.toLowerCase() ===
+        event.target.elements[1].value.toLowerCase()
+      ) {
+        classId = class_result.id;
+      }
+      return classId;
+    });
+    subjects.map((subject) => {
+      if (
+        subject.subject.toLowerCase() ===
+        event.target.elements[2].value.toLowerCase()
+      ) {
+        subjectId = subject.id;
+      }
+      return subjectId;
+    });
 
-    // let presence = "";
-    // let notes = "";
-    // let studentId = "";
-    // let grade = "";
-    // let arr = [];
-    for (const [key, value] of Object.entries(event.target.elements)) {
-      console.log(value);
-      //   if (value.name.includes("presence")) {
-      //     presence = value.value;
-      //     arr.push(presence)
-      //   }
-      //   if (value.name.includes("notes")) {
-      //     notes = value.value;
-      //     arr.push(notes)
-      //   }
-      //   if (value.name.includes("grade")) {
-      //     grade = value.value;
-      //     arr.push(grade)
-      //   }
-      //   if (value.name.includes("student")) {
-      //     studentId = value.value;
-      //     arr.push(studentId)
-      //   }
+    const content = event.target.elements[3].value;
+    const date = event.target.elements[4].value;
+    const time = event.target.elements[5].value;
+    const total_content_time = event.target.elements[6].value;
+    const school_year = event.target.elements[7].value;
+    const semester = event.target.elements[8].value;
+    let teachingNotesData = [];
+
+    for (
+      let index = 9;
+      index < event.target.elements.length - 10 / 4;
+      index += 4
+    ) {
+      students.map((student) => {
+        if (
+          student.student.toLowerCase() ===
+          event.target.elements[index].value.toLowerCase()
+        ) {
+          studentId = student.id;
+        }
+        return studentId;
+      });
+      presence = event.target.elements[index + 1].value;
+      notes = event.target.elements[index + 2].value;
+      grade = event.target.elements[index + 3].value;
+
+      await axios.post(
+        `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
+        {
+          presence: presence,
+          content: content,
+          notes: notes,
+          time: time,
+          total_content_time: total_content_time,
+          date: date,
+          school_year: school_year,
+          semester: semester,
+          grade: grade,
+        }
+      );
     }
-    // console.log(arr);
-
-    // const content = event.target.content.value;
-    // const time = event.target.time.value;
-    // const total_content_time = event.target.total_content_time.value;
-    // const date = event.target.date.value;
-    // const school_year = event.target.school_year.value;
-    // const semester = event.target.semester.value;
-    // const subjectId = event.target.subject.value;
-    // const teacherId = event.target.teacher.value;
-    // const classId = event.target.class.value;
-
-    // console.log(presence, content, notes, time, total_content_time, date, school_year, semester, grade, subjectId, teacherId, classId, studentId);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resClasses = await axios.get(`${apiUrlClasses}`);
-        const resSubjects = await axios.get(`${apiUrlCourse}`);
-        const resTeachers = await axios.get(`${apiUrlTeacher}`);
-        // const resStudents = await axios.get(`${apiUrlStudent}`);
+        const resClasses = await axios.get(`${API_URL_CLASSES}`);
+        const resSubjects = await axios.get(`${API_URL_SUBJECTS}`);
+        const resTeachers = await axios.get(`${API_URL_TEACHERS}`);
+        // const resStudents = await axios.get(`${API_URL_STUDENTS}`);
         // setStudents(resStudents.data);
         setClasses(resClasses.data);
         setSubjects(resSubjects.data);
@@ -240,13 +330,11 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Teacher"
-                      name="teacher"
                       value={
                         teachingNotes.length !== 0
                           ? teachers[teachingNotes[0].teacher_id - 1].teacher
                           : teachers[valueSearch.teacherId - 1].teacher
                       }
-                      defaultValue={null}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -255,7 +343,6 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Class"
-                      name="class"
                       value={
                         teachingNotes.length !== 0
                           ? classes[teachingNotes[0].class_id - 1].class
@@ -270,7 +357,6 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Subject"
-                      name="subject"
                       value={
                         teachingNotes.length !== 0
                           ? subjects[teachingNotes[0].subject_id - 1].subject
@@ -284,12 +370,9 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Content"
-                      name="content"
-                      value={
-                        teachingNotes.length !== 0
-                          ? teachingNotes[0].content
-                          : ""
-                      }
+                      {...(teachingNotes.length !== 0
+                        ? `value=${teachingNotes[0].content}`
+                        : "")}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -298,7 +381,6 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="date"
                       placeholder="Date"
-                      name="date"
                       value={
                         teachingNotes.length !== 0
                           ? moment(teachingNotes[0].date).format("YYYY-MM-DD")
@@ -312,10 +394,9 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Time"
-                      name="time"
-                      value={
-                        teachingNotes.length !== 0 ? teachingNotes[0].time : ""
-                      }
+                      {...(teachingNotes.length !== 0
+                        ? `value=${teachingNotes[0].time}`
+                        : "")}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -324,12 +405,9 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Total Content Time"
-                      name="total_content_time"
-                      value={
-                        teachingNotes.length !== 0
-                          ? teachingNotes[0].total_content_time
-                          : ""
-                      }
+                      {...(teachingNotes.length !== 0
+                        ? `value=${teachingNotes[0].total_content_time}`
+                        : "")}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -338,12 +416,9 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="School Year"
-                      name="school_year"
-                      value={
-                        teachingNotes.length !== 0
-                          ? teachingNotes[0].school_year
-                          : ""
-                      }
+                      value={teachingNotes.length !== 0
+                        ? `${teachingNotes[0].school_year}`
+                        : null}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -352,12 +427,9 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="text"
                       placeholder="Semester"
-                      name="semester"
-                      value={
-                        teachingNotes.length !== 0
-                          ? teachingNotes[0].semester
-                          : ""
-                      }
+                      {...(teachingNotes.length !== 0
+                        ? `value=${teachingNotes[0].semester}`
+                        : "")}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -475,9 +547,14 @@ const TeachingNotes = () => {
                 </Table>
                 {/* button */}
                 {teachingNotes.length !== 0 ? (
-                  <Button className="btn btn-warning" type="submit">
-                    Save Changes
-                  </Button>
+                  <>
+                    <Button className="btn btn-warning" type="submit">
+                      Save Changes
+                    </Button>
+                    <Button className="mx-3 btn btn-danger" type="submit">
+                      Delete
+                    </Button>
+                  </>
                 ) : (
                   <Button className="btn btn-primary" type="submit">
                     Save

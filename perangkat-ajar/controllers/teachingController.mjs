@@ -3,6 +3,7 @@ import teachingNotesSchema from "../schema/teachingNotesSchema.mjs";
 
 const DECIMAL = 10;
 export const createData = async (req, res) => {
+
   const { error, value } = teachingNotesSchema.validate(req.body);
   if (error) {
     return res.status(400).json({ error: error.details[0].message });

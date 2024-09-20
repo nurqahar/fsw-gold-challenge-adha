@@ -41,13 +41,13 @@ exports.up = async function up(knex) {
     table.increments("id");
     table.string("presence", "100").notNullable();
     table.string("content", "328").notNullable();
-    table.string("notes", "328");
+    table.string("notes", "328").nullable();
     table.string("time", "100").notNullable();
     table.string("total_content_time", "100").notNullable();
     table.date("date").notNullable();
     table.string("school_year", "100").notNullable();
     table.string("semester", "100").notNullable();
-    table.string("grade", "100");
+    table.string("grade", "100").nullable();
     table
       .integer("subject_id")
       .unsigned()
