@@ -26,14 +26,15 @@ const API_URL_TEACHERS = `http://localhost:3000/api/${ROUTE_TEACHERS}`;
 const TeachingNotes = () => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [students, setStudents] = useState([]);
-  const [classes, setClasses] = useState([]);
-  const [subjects, setSubjects] = useState([]);
+  const [studentsDB, setStudentsDB] = useState([]);
+  const [classesDB, setClassesDB] = useState([]);
+  const [subjectsDB, setSubjectsDB] = useState([]);
   const [teachingNotesDB, setTeachingNotesDB] = useState([]);
-  const [teachers, setTeachers] = useState([]);
+  const [teachersDB, setTeachersDB] = useState([]);
   const [isSearch, setSearch] = useState(false);
   const [teachingNotes, setTeachingNotes] = useState();
   const [valueSearch, setValueSearch] = useState();
+  const [students, setStudents] = useState([]);
 
   const onChangeUser = (event) => {
     setTeachingNotes({
@@ -72,7 +73,7 @@ const TeachingNotes = () => {
       const resStudents = await axios.get(
         `${API_URL_STUDENTS}?class_id=${classId}`
       );
-      setStudents(resStudents.data);
+      setStudentsDB(resStudents.data);
 
       setLoading(false);
     } catch (error) {
@@ -90,7 +91,7 @@ const TeachingNotes = () => {
     let presence = "";
     let notes = "";
     let grade = 0;
-    teachers.map((teacher) => {
+    teachersDB.map((teacher) => {
       if (
         teacher.teacher.toLowerCase() ===
         event.target.elements[0].value.toLowerCase()
@@ -99,7 +100,7 @@ const TeachingNotes = () => {
       }
       return teacherId;
     });
-    classes.map((class_result) => {
+    classesDB.map((class_result) => {
       if (
         class_result.class.toLowerCase() ===
         event.target.elements[1].value.toLowerCase()
@@ -108,7 +109,7 @@ const TeachingNotes = () => {
       }
       return classId;
     });
-    subjects.map((subject) => {
+    subjectsDB.map((subject) => {
       if (
         subject.subject.toLowerCase() ===
         event.target.elements[2].value.toLowerCase()
@@ -131,7 +132,7 @@ const TeachingNotes = () => {
       index < event.target.elements.length - 10 / 4;
       index += 4
     ) {
-      students.map((student) => {
+      studentsDB.map((student) => {
         if (
           student.student.toLowerCase() ===
           event.target.elements[index].value.toLowerCase()
@@ -170,7 +171,7 @@ const TeachingNotes = () => {
     let presence = "";
     let notes = "";
     let grade = 0;
-    teachers.map((teacher) => {
+    teachersDB.map((teacher) => {
       if (
         teacher.teacher.toLowerCase() ===
         event.target.elements[0].value.toLowerCase()
@@ -179,7 +180,7 @@ const TeachingNotes = () => {
       }
       return teacherId;
     });
-    classes.map((class_result) => {
+    classesDB.map((class_result) => {
       if (
         class_result.class.toLowerCase() ===
         event.target.elements[1].value.toLowerCase()
@@ -188,7 +189,7 @@ const TeachingNotes = () => {
       }
       return classId;
     });
-    subjects.map((subject) => {
+    subjectsDB.map((subject) => {
       if (
         subject.subject.toLowerCase() ===
         event.target.elements[2].value.toLowerCase()
@@ -211,7 +212,7 @@ const TeachingNotes = () => {
       index < event.target.elements.length - 10 / 4;
       index += 4
     ) {
-      students.map((student) => {
+      studentsDB.map((student) => {
         if (
           student.student.toLowerCase() ===
           event.target.elements[index].value.toLowerCase()
@@ -247,9 +248,9 @@ const TeachingNotes = () => {
         const resClasses = await axios.get(`${API_URL_CLASSES}`);
         const resSubjects = await axios.get(`${API_URL_SUBJECTS}`);
         const resTeachers = await axios.get(`${API_URL_TEACHERS}`);
-        setClasses(resClasses.data);
-        setSubjects(resSubjects.data);
-        setTeachers(resTeachers.data);
+        setClassesDB(resClasses.data);
+        setSubjectsDB(resSubjects.data);
+        setTeachersDB(resTeachers.data);
 
         setLoading(false);
       } catch (err) {
@@ -265,9 +266,9 @@ const TeachingNotes = () => {
         if (teachingNotesDB.length !== 0) {
           setTeachingNotes({
             date: moment(teachingNotesDB[0].date).format("YYYY-MM-DD"),
-            class: classes[teachingNotesDB[0].class_id - 1].class,
-            subject: subjects[teachingNotesDB[0].subject_id - 1].subject,
-            teacher: teachers[teachingNotesDB[0].teacher_id - 1].teacher,
+            class: classesDB[teachingNotesDB[0].class_id - 1].class,
+            subject: subjectsDB[teachingNotesDB[0].subject_id - 1].subject,
+            teacher: teachersDB[teachingNotesDB[0].teacher_id - 1].teacher,
             content: teachingNotesDB[0].content,
             time: teachingNotesDB[0].time,
             total_content_time: teachingNotesDB[0].total_content_time,
@@ -278,9 +279,9 @@ const TeachingNotes = () => {
         if (valueSearch && teachingNotesDB.length == 0) {
           setTeachingNotes({
             date: valueSearch.date,
-            class: classes[valueSearch.classId].class,
-            subject: subjects[valueSearch.subjectId].subject,
-            teacher: teachers[valueSearch.teacherId].teacher,
+            class: classesDB[valueSearch.classId].class,
+            subject: subjectsDB[valueSearch.subjectId].subject,
+            teacher: teachersDB[valueSearch.teacherId].teacher,
             content: "",
             time: "",
             total_content_time: "",
@@ -325,8 +326,8 @@ const TeachingNotes = () => {
                 <Form.Group className="mb-3">
                   <Form.Select name="class">
                     <option>Choose Class</option>
-                    {classes &&
-                      classes.map((class_name) => {
+                    {classesDB &&
+                      classesDB.map((class_name) => {
                         return (
                           <option key={class_name.id} value={class_name.id}>
                             {class_name.class}
@@ -339,8 +340,8 @@ const TeachingNotes = () => {
                 <Form.Group className="mb-3">
                   <Form.Select name="subject">
                     <option>Choose Subject</option>
-                    {subjects &&
-                      subjects.map((subject) => {
+                    {subjectsDB &&
+                      subjectsDB.map((subject) => {
                         return (
                           <option key={subject.id} value={subject.id}>
                             {subject.subject}
@@ -353,8 +354,8 @@ const TeachingNotes = () => {
                 <Form.Group className="mb-3">
                   <Form.Select name="teacher">
                     <option>Choose Teacher</option>
-                    {teachers &&
-                      teachers.map((teacher) => {
+                    {teachersDB &&
+                      teachersDB.map((teacher) => {
                         return (
                           <option key={teacher.id} value={teacher.id}>
                             {teacher.teacher}
@@ -529,7 +530,7 @@ const TeachingNotes = () => {
                   </thead>
                   <tbody>
                     {/* if true TABLE */}
-                    {teachingNotesDB.length !== 0 && students.length !== 0
+                    {teachingNotesDB.length !== 0 && studentsDB.length !== 0
                       ? teachingNotesDB.map(
                           (teachingNote, teachingNoteIndex) => {
                             return (
@@ -543,8 +544,8 @@ const TeachingNotes = () => {
                                       type="text"
                                       name={`student${teachingNoteIndex + 1}`}
                                       value={
-                                        students &&
-                                        students[teachingNoteIndex].student
+                                        studentsDB &&
+                                        studentsDB[teachingNoteIndex].student
                                       }
                                     />
                                   </Form.Group>
@@ -585,7 +586,7 @@ const TeachingNotes = () => {
                             );
                           }
                         )
-                      : students.map((student, studentIndex) => {
+                      : studentsDB.map((student, studentIndex) => {
                           return (
                             <tr>
                               <td key={studentIndex + 1}>{studentIndex + 1}</td>
@@ -593,16 +594,13 @@ const TeachingNotes = () => {
                                 <Form.Group className="m-auto mb-2 w-50">
                                   <Form.Control
                                     type="text"
-                                    // name={`student${studentIndex + 1}`}
                                     value={student.student}
                                   />
                                 </Form.Group>
                               </td>
                               <td>
                                 <Form.Group className="m-auto mb-2 w-60">
-                                  <Form.Select
-                                  // name={`presence${studentIndex + 1}`}
-                                  >
+                                  <Form.Select>
                                     <option value="HADIR">HADIR</option>
                                     <option value="ALPA">ALPA</option>
                                     <option value="SAKIT">SAKIT</option>
@@ -612,18 +610,12 @@ const TeachingNotes = () => {
                               </td>
                               <td>
                                 <Form.Group className="m-auto mb-2 w-50">
-                                  <Form.Control
-                                    type="text"
-                                    // name={`notes${studentIndex + 1}`}
-                                  />
+                                  <Form.Control type="text" />
                                 </Form.Group>
                               </td>
                               <td>
                                 <Form.Group className="m-auto mb-2 w-50">
-                                  <Form.Control
-                                    type="text"
-                                    // name={`grade${studentIndex + 1}`}
-                                  />
+                                  <Form.Control type="text" />
                                 </Form.Group>
                               </td>
                             </tr>
