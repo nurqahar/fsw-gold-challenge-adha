@@ -36,7 +36,25 @@ const TeachingNotes = () => {
   const [valueSearch, setValueSearch] = useState();
   const [students, setStudents] = useState([]);
 
-  const onChangeUser = (event) => {
+  const onChangeStudent = (event) => {
+    console.log(event);
+    const studentEdit = event.student;
+    const studentDef = students[event.index].student;
+    const studentId = students[event.index].id;
+    const studentSex = students[event.index].sex;
+    const updatedStudent = students.map((student, studentIndex) => {
+      if (studentIndex === event.index) {
+        return { id: studentId, student: studentEdit, sex: studentSex };
+      }
+    });
+
+    console.log("--1", updatedStudent);
+    console.log({ id: studentId, student: studentEdit, sex: studentSex });
+    console.log("--2", students);
+    console.log("--3", students[event.index]);
+  };
+
+  const onChangeValue = (event) => {
     setTeachingNotes({
       date: event.date,
       class: event.class,
@@ -74,6 +92,8 @@ const TeachingNotes = () => {
         `${API_URL_STUDENTS}?class_id=${classId}`
       );
       setStudentsDB(resStudents.data);
+
+      setStudents(resStudents.data);
 
       setLoading(false);
     } catch (error) {
@@ -205,7 +225,6 @@ const TeachingNotes = () => {
     const total_content_time = event.target.elements[6].value;
     const school_year = event.target.elements[7].value;
     const semester = event.target.elements[8].value;
-    let teachingNotesData = [];
 
     for (
       let index = 9;
@@ -225,20 +244,20 @@ const TeachingNotes = () => {
       notes = event.target.elements[index + 2].value;
       grade = event.target.elements[index + 3].value;
 
-      await axios.post(
-        `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
-        {
-          presence: presence,
-          content: content,
-          notes: notes,
-          time: time,
-          total_content_time: total_content_time,
-          date: date,
-          school_year: school_year,
-          semester: semester,
-          grade: grade,
-        }
-      );
+      // await axios.post(
+      //   `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
+      //   {
+      //     presence: presence,
+      //     content: content,
+      //     notes: notes,
+      //     time: time,
+      //     total_content_time: total_content_time,
+      //     date: date,
+      //     school_year: school_year,
+      //     semester: semester,
+      //     grade: grade,
+      //   }
+      // );
     }
   };
 
@@ -289,6 +308,10 @@ const TeachingNotes = () => {
             semester: "",
           });
         }
+
+        if (studentsDB) {
+          console.log(students);
+        }
         setLoading(false);
       } catch (error) {
         setError("something went wrong");
@@ -298,7 +321,7 @@ const TeachingNotes = () => {
 
     fetchData();
     setResultData();
-  }, [teachingNotesDB]);
+  }, [teachingNotesDB, studentsDB]);
 
   if (isLoading) {
     return <Container className="mt-4">Loading...</Container>;
@@ -390,7 +413,7 @@ const TeachingNotes = () => {
                       placeholder="Teacher"
                       value={teachingNotes && teachingNotes.teacher}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           teacher: e.target.value,
                         });
@@ -405,7 +428,7 @@ const TeachingNotes = () => {
                       placeholder="Class"
                       value={teachingNotes && teachingNotes.class}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           class: e.target.value,
                         });
@@ -420,7 +443,7 @@ const TeachingNotes = () => {
                       placeholder="Subject"
                       value={teachingNotes && teachingNotes.subject}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           subject: e.target.value,
                         });
@@ -435,7 +458,7 @@ const TeachingNotes = () => {
                       placeholder="Content"
                       value={teachingNotes && teachingNotes.content}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           content: e.target.value,
                         });
@@ -450,7 +473,7 @@ const TeachingNotes = () => {
                       placeholder="Date"
                       value={teachingNotes && teachingNotes.date}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           date: e.target.value,
                         });
@@ -465,7 +488,7 @@ const TeachingNotes = () => {
                       placeholder="Time"
                       value={teachingNotes && teachingNotes.time}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           time: e.target.value,
                         });
@@ -480,7 +503,7 @@ const TeachingNotes = () => {
                       placeholder="Total Content Time"
                       value={teachingNotes && teachingNotes.total_content_time}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           total_content_time: e.target.value,
                         });
@@ -495,7 +518,7 @@ const TeachingNotes = () => {
                       placeholder="School Year"
                       value={teachingNotes && teachingNotes.school_year}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           school_year: e.target.value,
                         });
@@ -510,7 +533,7 @@ const TeachingNotes = () => {
                       placeholder="Semester"
                       value={teachingNotes && teachingNotes.semester}
                       onChange={(e) => {
-                        onChangeUser({
+                        onChangeValue({
                           ...teachingNotes,
                           semester: e.target.value,
                         });
@@ -530,97 +553,56 @@ const TeachingNotes = () => {
                   </thead>
                   <tbody>
                     {/* if true TABLE */}
-                    {teachingNotesDB.length !== 0 && studentsDB.length !== 0
-                      ? teachingNotesDB.map(
-                          (teachingNote, teachingNoteIndex) => {
-                            return (
-                              <tr>
-                                <td key={teachingNoteIndex + 1}>
-                                  {teachingNoteIndex + 1}
-                                </td>
-                                <td>
-                                  <Form.Group className="m-auto mb-2 w-50">
-                                    <Form.Control
-                                      type="text"
-                                      name={`student${teachingNoteIndex + 1}`}
-                                      value={
-                                        studentsDB &&
-                                        studentsDB[teachingNoteIndex].student
-                                      }
-                                    />
-                                  </Form.Group>
-                                </td>
-                                <td>
-                                  <Form.Group className="m-auto mb-2 w-60">
-                                    <Form.Select
-                                      name={`presence${teachingNoteIndex + 1}`}
-                                    >
-                                      <option value="HADIR">
-                                        {teachingNote.presence || "HADIR"}
-                                      </option>
-                                      <option value="ALPA">ALPA</option>
-                                      <option value="SAKIT">SAKIT</option>
-                                      <option value="NO DATA">NO DATA</option>
-                                    </Form.Select>
-                                  </Form.Group>
-                                </td>
-                                <td>
-                                  <Form.Group className="m-auto mb-2 w-50">
-                                    <Form.Control
-                                      type="text"
-                                      name={`notes${teachingNoteIndex + 1}`}
-                                      value={teachingNote.notes || ""}
-                                    />
-                                  </Form.Group>
-                                </td>
-                                <td>
-                                  <Form.Group className="m-auto mb-2 w-50">
-                                    <Form.Control
-                                      type="text"
-                                      name={`grade${teachingNoteIndex + 1}`}
-                                      value={teachingNote.grade || ""}
-                                    />
-                                  </Form.Group>
-                                </td>
-                              </tr>
-                            );
-                          }
-                        )
-                      : studentsDB.map((student, studentIndex) => {
-                          return (
-                            <tr>
-                              <td key={studentIndex + 1}>{studentIndex + 1}</td>
-                              <td>
-                                <Form.Group className="m-auto mb-2 w-50">
-                                  <Form.Control
-                                    type="text"
-                                    value={student.student}
-                                  />
-                                </Form.Group>
-                              </td>
-                              <td>
-                                <Form.Group className="m-auto mb-2 w-60">
-                                  <Form.Select>
-                                    <option value="HADIR">HADIR</option>
-                                    <option value="ALPA">ALPA</option>
-                                    <option value="SAKIT">SAKIT</option>
-                                    <option value="NO DATA">NO DATA</option>
-                                  </Form.Select>
-                                </Form.Group>
-                              </td>
-                              <td>
-                                <Form.Group className="m-auto mb-2 w-50">
-                                  <Form.Control type="text" />
-                                </Form.Group>
-                              </td>
-                              <td>
-                                <Form.Group className="m-auto mb-2 w-50">
-                                  <Form.Control type="text" />
-                                </Form.Group>
-                              </td>
-                            </tr>
-                          );
-                        })}
+                    {students.length !== 0 &&
+                      students.map((student, studentIndex) => {
+                        return (
+                          <tr>
+                            <td></td>
+                            <td>
+                              <Form.Group className="m-auto mb-2 w-50">
+                                <Form.Control
+                                  type="text"
+                                  value={student.student}
+                                  onChange={(e) => {
+                                    onChangeStudent({
+                                      index: studentIndex,
+                                      student: e.target.value,
+                                    });
+                                  }}
+                                />
+                              </Form.Group>
+                            </td>
+                            <td>
+                              <Form.Group className="m-auto mb-2 w-60">
+                                <Form.Select
+                                // name={`presence${teachingNoteIndex + 1}`}
+                                >
+                                  <option value="HADIR"></option>
+                                  <option value="ALPA">ALPA</option>
+                                  <option value="SAKIT">SAKIT</option>
+                                  <option value="NO DATA">NO DATA</option>
+                                </Form.Select>
+                              </Form.Group>
+                            </td>
+                            <td>
+                              <Form.Group className="m-auto mb-2 w-50">
+                                <Form.Control
+                                  type="text"
+                                  // name={`notes${teachingNoteIndex + 1}`}
+                                />
+                              </Form.Group>
+                            </td>
+                            <td>
+                              <Form.Group className="m-auto mb-2 w-50">
+                                <Form.Control
+                                  type="text"
+                                  // name={`grade${teachingNoteIndex + 1}`}
+                                />
+                              </Form.Group>
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </Table>
                 {/* button */}
