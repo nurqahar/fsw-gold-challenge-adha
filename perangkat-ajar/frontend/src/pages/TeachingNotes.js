@@ -39,19 +39,19 @@ const TeachingNotes = () => {
   const onChangeStudent = (event) => {
     console.log(event);
     const studentEdit = event.student;
-    const studentDef = students[event.index].student;
-    const studentId = students[event.index].id;
     const studentSex = students[event.index].sex;
     const updatedStudent = students.map((student, studentIndex) => {
+      const studentDef = students[studentIndex].student;
+      const studentId = students[studentIndex].id;
       if (studentIndex === event.index) {
         return { id: studentId, student: studentEdit, sex: studentSex };
+      } else {
+        return { id: studentId, student: studentDef, sex: studentSex };
       }
     });
 
     console.log("--1", updatedStudent);
-    console.log({ id: studentId, student: studentEdit, sex: studentSex });
-    console.log("--2", students);
-    console.log("--3", students[event.index]);
+    setStudents(updatedStudent);
   };
 
   const onChangeValue = (event) => {
@@ -575,7 +575,13 @@ const TeachingNotes = () => {
                             <td>
                               <Form.Group className="m-auto mb-2 w-60">
                                 <Form.Select
-                                // name={`presence${teachingNoteIndex + 1}`}
+                                  // name={`presence${teachingNoteIndex + 1}`}
+
+                                  onChange={(e) => {
+                                    onChangeStudent({
+                                      presence: e.target.value,
+                                    });
+                                  }}
                                 >
                                   <option value="HADIR"></option>
                                   <option value="ALPA">ALPA</option>
