@@ -35,23 +35,113 @@ const TeachingNotes = () => {
   const [teachingNotes, setTeachingNotes] = useState();
   const [valueSearch, setValueSearch] = useState();
   const [students, setStudents] = useState([]);
+  const [studentsStatus, setStudentsStatus] = useState([]);
 
   const onChangeStudent = (event) => {
-    console.log(event);
-    const studentEdit = event.student;
-    const studentSex = students[event.index].sex;
-    const updatedStudent = students.map((student, studentIndex) => {
-      const studentDef = students[studentIndex].student;
-      const studentId = students[studentIndex].id;
-      if (studentIndex === event.index) {
-        return { id: studentId, student: studentEdit, sex: studentSex };
-      } else {
-        return { id: studentId, student: studentDef, sex: studentSex };
-      }
-    });
+    //  students name
+    if (event.student) {
+      const studentEdit = event.student;
+      const updatedStudent = students.map((student, studentIndex) => {
+        const studentDef = students[studentIndex].student;
+        const studentId = students[studentIndex].id;
+        const studentSex = students[studentIndex].sex;
+        if (studentIndex === event.index) {
+          return { id: studentId, student: studentEdit, sex: studentSex };
+        } else {
+          return { id: studentId, student: studentDef, sex: studentSex };
+        }
+      });
+      setStudents(updatedStudent);
+    }
 
-    console.log("--1", updatedStudent);
-    setStudents(updatedStudent);
+    if (event.presence) {
+      const studentStatusEdit = event.presence;
+      const updatedStudentStatus = studentsStatus.map(
+        (studentStatus, studentStatusIndex) => {
+          const studentPresenceDefault =
+            studentsStatus[studentStatusIndex].presence;
+          const studentNotesDefault = studentsStatus[studentStatusIndex].notes;
+          const studentGradeDefault = studentsStatus[studentStatusIndex].grade;
+          const teachingNotesId =
+            studentsStatus[studentStatusIndex].teachingNotesId;
+          if (studentStatusIndex === event.index) {
+            return {
+              teachingNotesId: teachingNotesId,
+              presence: studentStatusEdit,
+              notes: studentNotesDefault,
+              grade: studentGradeDefault,
+            };
+          } else {
+            return {
+              teachingNotesId: teachingNotesId,
+              presence: studentPresenceDefault,
+              notes: studentNotesDefault,
+              grade: studentGradeDefault,
+            };
+          }
+        }
+      );
+      setStudentsStatus(updatedStudentStatus);
+    }
+
+    if (event.notes) {
+      const studentStatusEdit = event.notes;
+      const updatedStudentStatus = studentsStatus.map(
+        (studentStatus, studentStatusIndex) => {
+          const studentPresenceDefault =
+            studentsStatus[studentStatusIndex].presence;
+          const studentNotesDefault = studentsStatus[studentStatusIndex].notes;
+          const studentGradeDefault = studentsStatus[studentStatusIndex].grade;
+          const teachingNotesId =
+            studentsStatus[studentStatusIndex].teachingNotesId;
+          if (studentStatusIndex === event.index) {
+            return {
+              teachingNotesId: teachingNotesId,
+              presence: studentPresenceDefault,
+              notes: studentStatusEdit,
+              grade: studentGradeDefault,
+            };
+          } else {
+            return {
+              teachingNotesId: teachingNotesId,
+              presence: studentPresenceDefault,
+              notes: studentNotesDefault,
+              grade: studentGradeDefault,
+            };
+          }
+        }
+      );
+      setStudentsStatus(updatedStudentStatus);
+    }
+
+    if (event.grade) {
+      const studentStatusEdit = event.grade;
+      const updatedStudentStatus = studentsStatus.map(
+        (studentStatus, studentStatusIndex) => {
+          const studentPresenceDefault =
+            studentsStatus[studentStatusIndex].presence;
+          const studentNotesDefault = studentsStatus[studentStatusIndex].notes;
+          const studentGradeDefault = studentsStatus[studentStatusIndex].grade;
+          const studentId = studentsStatus[studentStatusIndex].teachingNotesId;
+          if (studentStatusIndex === event.index) {
+            return {
+              teachingNotesId: studentId,
+              presence: studentPresenceDefault,
+              notes: studentNotesDefault,
+              grade: studentStatusEdit,
+            };
+          } else {
+            return {
+              teachingNotesId: studentId,
+              presence: studentPresenceDefault,
+              notes: studentNotesDefault,
+              grade: studentGradeDefault,
+            };
+          }
+        }
+      );
+      setStudentsStatus(updatedStudentStatus);
+    }
   };
 
   const onChangeValue = (event) => {
@@ -92,8 +182,21 @@ const TeachingNotes = () => {
         `${API_URL_STUDENTS}?class_id=${classId}`
       );
       setStudentsDB(resStudents.data);
-
       setStudents(resStudents.data);
+
+      const addStudentStatus = resTeachingNotesDB.data.map((teachingNote) => {
+        const teachingNotesId = teachingNote.id;
+        const presence = teachingNote.presence;
+        const notes = teachingNote.notes;
+        const grade = teachingNote.grade;
+        return {
+          teachingNotesId: teachingNotesId,
+          presence: presence,
+          notes: notes,
+          grade: grade,
+        };
+      });
+      setStudentsStatus(addStudentStatus);
 
       setLoading(false);
     } catch (error) {
@@ -104,146 +207,53 @@ const TeachingNotes = () => {
 
   const saveChanges = async (event) => {
     event.preventDefault();
-    let teacherId = 0;
-    let classId = 0;
-    let subjectId = 0;
-    let studentId = 0;
-    let presence = "";
-    let notes = "";
-    let grade = 0;
-    teachersDB.map((teacher) => {
-      if (
-        teacher.teacher.toLowerCase() ===
-        event.target.elements[0].value.toLowerCase()
-      ) {
-        teacherId = teacher.id;
-      }
-      return teacherId;
-    });
-    classesDB.map((class_result) => {
-      if (
-        class_result.class.toLowerCase() ===
-        event.target.elements[1].value.toLowerCase()
-      ) {
-        classId = class_result.id;
-      }
-      return classId;
-    });
-    subjectsDB.map((subject) => {
-      if (
-        subject.subject.toLowerCase() ===
-        event.target.elements[2].value.toLowerCase()
-      ) {
-        subjectId = subject.id;
-      }
-      return subjectId;
-    });
 
-    const content = event.target.elements[3].value;
-    const date = event.target.elements[4].value;
-    const time = event.target.elements[5].value;
-    const total_content_time = event.target.elements[6].value;
-    const school_year = event.target.elements[7].value;
-    const semester = event.target.elements[8].value;
-    let teachingNotesData = [];
-
-    for (
-      let index = 9;
-      index < event.target.elements.length - 10 / 4;
-      index += 4
-    ) {
-      studentsDB.map((student) => {
-        if (
-          student.student.toLowerCase() ===
-          event.target.elements[index].value.toLowerCase()
-        ) {
-          studentId = student.id;
-        }
-        return studentId;
-      });
-      presence = event.target.elements[index + 1].value;
-      notes = event.target.elements[index + 2].value;
-      grade = event.target.elements[index + 3].value;
-
-      await axios.post(
-        `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
-        {
-          presence: presence,
-          content: content,
-          notes: notes,
-          time: time,
-          total_content_time: total_content_time,
-          date: date,
-          school_year: school_year,
-          semester: semester,
-          grade: grade,
-        }
-      );
-    }
+    studentsStatus.map((studentStatus, index) => {
+      const teachingNotesId = studentStatus.teachingNotesId;
+      console.log(teachingNotesId, teachingNotes, studentStatus);
+      // await axios.put(
+      //   `${API_URL_TEACHING_NOTES}/${teachingNotesId}`,
+      //   {
+      //     presence: presence,
+      //     content: content,
+      //     notes: notes,
+      //     time: time,
+      //     total_content_time: total_content_time,
+      //     date: date,
+      //     school_year: school_year,
+      //     semester: semester,
+      //     grade: grade,
+      //   }
+      // );
+    });
   };
 
   const save = async (event) => {
-    event.preventDefault();
-    let teacherId = 0;
-    let classId = 0;
-    let subjectId = 0;
-    let studentId = 0;
-    let presence = "";
-    let notes = "";
-    let grade = 0;
-    teachersDB.map((teacher) => {
-      if (
-        teacher.teacher.toLowerCase() ===
-        event.target.elements[0].value.toLowerCase()
-      ) {
-        teacherId = teacher.id;
-      }
-      return teacherId;
-    });
-    classesDB.map((class_result) => {
-      if (
-        class_result.class.toLowerCase() ===
-        event.target.elements[1].value.toLowerCase()
-      ) {
-        classId = class_result.id;
-      }
-      return classId;
-    });
+    let subjectId;
+    let teacherId;
+    let classId;
+    let studentId;
+
     subjectsDB.map((subject) => {
-      if (
-        subject.subject.toLowerCase() ===
-        event.target.elements[2].value.toLowerCase()
-      ) {
+      if (subject.subject === teachingNotes.subject) {
         subjectId = subject.id;
       }
-      return subjectId;
+    });
+    teachersDB.map((teacher) => {
+      if (teacher.teacher === teachingNotes.teacher) {
+        teacherId = teacher.id;
+      }
+    });
+    classesDB.map((class_name) => {
+      if (class_name.class === teachingNotes.class) {
+        classId = class_name.id;
+      }
     });
 
-    const content = event.target.elements[3].value;
-    const date = event.target.elements[4].value;
-    const time = event.target.elements[5].value;
-    const total_content_time = event.target.elements[6].value;
-    const school_year = event.target.elements[7].value;
-    const semester = event.target.elements[8].value;
-
-    for (
-      let index = 9;
-      index < event.target.elements.length - 10 / 4;
-      index += 4
-    ) {
-      studentsDB.map((student) => {
-        if (
-          student.student.toLowerCase() ===
-          event.target.elements[index].value.toLowerCase()
-        ) {
-          studentId = student.id;
-        }
-        return studentId;
-      });
-      presence = event.target.elements[index + 1].value;
-      notes = event.target.elements[index + 2].value;
-      grade = event.target.elements[index + 3].value;
-
+    studentsStatus.map((studentStatus, index) => {
+      console.log(students[index], studentStatus);
+      studentId = students[index].id;
+      console.log(subjectId, teacherId, classId, studentId);
       // await axios.post(
       //   `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
       //   {
@@ -258,7 +268,7 @@ const TeachingNotes = () => {
       //     grade: grade,
       //   }
       // );
-    }
+    });
   };
 
   useEffect(() => {
@@ -309,9 +319,6 @@ const TeachingNotes = () => {
           });
         }
 
-        if (studentsDB) {
-          console.log(students);
-        }
         setLoading(false);
       } catch (error) {
         setError("something went wrong");
@@ -557,7 +564,7 @@ const TeachingNotes = () => {
                       students.map((student, studentIndex) => {
                         return (
                           <tr>
-                            <td></td>
+                            <td>{studentIndex + 1}</td>
                             <td>
                               <Form.Group className="m-auto mb-2 w-50">
                                 <Form.Control
@@ -575,15 +582,15 @@ const TeachingNotes = () => {
                             <td>
                               <Form.Group className="m-auto mb-2 w-60">
                                 <Form.Select
-                                  // name={`presence${teachingNoteIndex + 1}`}
-
                                   onChange={(e) => {
                                     onChangeStudent({
+                                      index: studentIndex,
                                       presence: e.target.value,
                                     });
                                   }}
+                                  value={studentsStatus[studentIndex].presence}
                                 >
-                                  <option value="HADIR"></option>
+                                  <option value="HADIR">HADIR</option>
                                   <option value="ALPA">ALPA</option>
                                   <option value="SAKIT">SAKIT</option>
                                   <option value="NO DATA">NO DATA</option>
@@ -594,7 +601,13 @@ const TeachingNotes = () => {
                               <Form.Group className="m-auto mb-2 w-50">
                                 <Form.Control
                                   type="text"
-                                  // name={`notes${teachingNoteIndex + 1}`}
+                                  onChange={(e) => {
+                                    onChangeStudent({
+                                      index: studentIndex,
+                                      notes: e.target.value,
+                                    });
+                                  }}
+                                  value={studentsStatus[studentIndex].notes}
                                 />
                               </Form.Group>
                             </td>
@@ -602,7 +615,13 @@ const TeachingNotes = () => {
                               <Form.Group className="m-auto mb-2 w-50">
                                 <Form.Control
                                   type="text"
-                                  // name={`grade${teachingNoteIndex + 1}`}
+                                  onChange={(e) => {
+                                    onChangeStudent({
+                                      index: studentIndex,
+                                      grade: e.target.value,
+                                    });
+                                  }}
+                                  value={studentsStatus[studentIndex].grade}
                                 />
                               </Form.Group>
                             </td>
