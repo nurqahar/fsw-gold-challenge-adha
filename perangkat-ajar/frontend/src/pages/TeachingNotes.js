@@ -184,19 +184,35 @@ const TeachingNotes = () => {
       setStudentsDB(resStudents.data);
       setStudents(resStudents.data);
 
-      const addStudentStatus = resTeachingNotesDB.data.map((teachingNote) => {
-        const teachingNotesId = teachingNote.id;
-        const presence = teachingNote.presence;
-        const notes = teachingNote.notes;
-        const grade = teachingNote.grade;
-        return {
-          teachingNotesId: teachingNotesId,
-          presence: presence,
-          notes: notes,
-          grade: grade,
-        };
-      });
-      setStudentsStatus(addStudentStatus);
+      if (resTeachingNotesDB.data.length !== 0) {
+        const addStudentStatus = resTeachingNotesDB.data.map((teachingNote) => {
+          const teachingNotesId = teachingNote.id;
+          const presence = teachingNote.presence;
+          const notes = teachingNote.notes;
+          const grade = teachingNote.grade;
+          return {
+            teachingNotesId: teachingNotesId,
+            presence: presence,
+            notes: notes,
+            grade: grade,
+          };
+        });
+        setStudentsStatus(addStudentStatus);
+      }
+      if (
+        resStudents.data.length !== 0 &&
+        resTeachingNotesDB.data.length === 0
+      ) {
+        const addStudentStatus = students.map(() => {
+          return {
+            teachingNotesId: " ",
+            presence: "HADIR",
+            notes: " ",
+            grade: " ",
+          };
+        });
+        setStudentsStatus(addStudentStatus);
+      }
 
       setLoading(false);
     } catch (error) {
@@ -208,27 +224,50 @@ const TeachingNotes = () => {
   const saveChanges = async (event) => {
     event.preventDefault();
 
-    studentsStatus.map((studentStatus, index) => {
+    let subjectId;
+    let teacherId;
+
+    subjectsDB.map((subject) => {
+      if (subject.subject === teachingNotes.subject) {
+        subjectId = subject.id;
+      }
+    });
+    teachersDB.map((teacher) => {
+      if (teacher.teacher === teachingNotes.teacher) {
+        teacherId = teacher.id;
+      }
+    });
+
+    studentsStatus.map(async (studentStatus, index) => {
       const teachingNotesId = studentStatus.teachingNotesId;
-      console.log(teachingNotesId, teachingNotes, studentStatus);
-      // await axios.put(
-      //   `${API_URL_TEACHING_NOTES}/${teachingNotesId}`,
-      //   {
-      //     presence: presence,
-      //     content: content,
-      //     notes: notes,
-      //     time: time,
-      //     total_content_time: total_content_time,
-      //     date: date,
-      //     school_year: school_year,
-      //     semester: semester,
-      //     grade: grade,
-      //   }
-      // );
+      const presence = studentStatus.presence;
+      const content = teachingNotes.content;
+      const notes = studentStatus.notes;
+      const time = teachingNotes.time;
+      const total_content_time = teachingNotes.total_content_time;
+      const date = teachingNotes.date;
+      const school_year = teachingNotes.school_year;
+      const semester = teachingNotes.semester;
+      const grade = studentStatus.grade;
+      await axios.put(
+        `${API_URL_TEACHING_NOTES}/${teachingNotesId}/${subjectId}/${teacherId}`,
+        {
+          presence: presence,
+          content: content,
+          notes: notes,
+          time: time,
+          total_content_time: total_content_time,
+          date: date,
+          school_year: school_year,
+          semester: semester,
+          grade: grade,
+        }
+      );
     });
   };
 
   const save = async (event) => {
+    event.preventDefault();
     let subjectId;
     let teacherId;
     let classId;
@@ -250,26 +289,41 @@ const TeachingNotes = () => {
       }
     });
 
-    studentsStatus.map((studentStatus, index) => {
-      console.log(students[index], studentStatus);
+    studentsStatus.map(async (studentStatus, index) => {
       studentId = students[index].id;
-      console.log(subjectId, teacherId, classId, studentId);
-      // await axios.post(
-      //   `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
-      //   {
-      //     presence: presence,
-      //     content: content,
-      //     notes: notes,
-      //     time: time,
-      //     total_content_time: total_content_time,
-      //     date: date,
-      //     school_year: school_year,
-      //     semester: semester,
-      //     grade: grade,
-      //   }
-      // );
+      const presence = studentStatus.presence;
+      const content = teachingNotes.content;
+      const notes = studentStatus.notes;
+      const time = teachingNotes.time;
+      const total_content_time = teachingNotes.total_content_time;
+      const date = teachingNotes.date;
+      const school_year = teachingNotes.school_year;
+      const semester = teachingNotes.semester;
+      const grade = studentStatus.grade;
+      await axios.post(
+        `${API_URL_TEACHING_NOTES}/${subjectId}/${teacherId}/${classId}/${studentId}`,
+        {
+          presence: presence,
+          content: content,
+          notes: notes,
+          time: time,
+          total_content_time: total_content_time,
+          date: date,
+          school_year: school_year,
+          semester: semester,
+          grade: grade,
+        }
+      );
     });
   };
+
+  const deleteItem = async (event)=>{
+    
+  }
+
+  function refreshPage() {
+    window.location.reload();
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -308,9 +362,9 @@ const TeachingNotes = () => {
         if (valueSearch && teachingNotesDB.length == 0) {
           setTeachingNotes({
             date: valueSearch.date,
-            class: classesDB[valueSearch.classId].class,
-            subject: subjectsDB[valueSearch.subjectId].subject,
-            teacher: teachersDB[valueSearch.teacherId].teacher,
+            class: classesDB[valueSearch.classId - 1].class,
+            subject: subjectsDB[valueSearch.subjectId - 1].subject,
+            teacher: teachersDB[valueSearch.teacherId - 1].teacher,
             content: "",
             time: "",
             total_content_time: "",
@@ -334,7 +388,12 @@ const TeachingNotes = () => {
     return <Container className="mt-4">Loading...</Container>;
   }
   if (error) {
-    return <Container className="mt-4">{error}! Please try again.</Container>;
+    return (
+      <Container className="mt-4">
+        <h2>{error}! Please try again.</h2>
+        <Button onClick={refreshPage}>REFRESH PAGE</Button>
+      </Container>
+    );
   }
 
   return (
@@ -350,7 +409,11 @@ const TeachingNotes = () => {
               <Form onSubmit={searchTeachingNotes}>
                 <Form.Group className="mb-3">
                   <FloatingLabel label="Date" className="mb-3">
-                    <Form.Control type="date" name="date" />
+                    <Form.Control
+                      type="date"
+                      name="date"
+                      value={moment().format("YYYY-MM-DD")}
+                    />
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -425,6 +488,7 @@ const TeachingNotes = () => {
                           teacher: e.target.value,
                         });
                       }}
+                      disabled
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -440,6 +504,7 @@ const TeachingNotes = () => {
                           class: e.target.value,
                         });
                       }}
+                      disabled
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -455,6 +520,7 @@ const TeachingNotes = () => {
                           subject: e.target.value,
                         });
                       }}
+                      disabled
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -485,6 +551,7 @@ const TeachingNotes = () => {
                           date: e.target.value,
                         });
                       }}
+                      disabled
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -576,6 +643,7 @@ const TeachingNotes = () => {
                                       student: e.target.value,
                                     });
                                   }}
+                                  disabled
                                 />
                               </Form.Group>
                             </td>
@@ -588,7 +656,10 @@ const TeachingNotes = () => {
                                       presence: e.target.value,
                                     });
                                   }}
-                                  value={studentsStatus[studentIndex].presence}
+                                  value={
+                                    studentsStatus.length !== 0 &&
+                                    studentsStatus[studentIndex].presence
+                                  }
                                 >
                                   <option value="HADIR">HADIR</option>
                                   <option value="ALPA">ALPA</option>
@@ -607,7 +678,10 @@ const TeachingNotes = () => {
                                       notes: e.target.value,
                                     });
                                   }}
-                                  value={studentsStatus[studentIndex].notes}
+                                  value={
+                                    studentsStatus.length !== 0 &&
+                                    studentsStatus[studentIndex].notes
+                                  }
                                 />
                               </Form.Group>
                             </td>
@@ -621,7 +695,10 @@ const TeachingNotes = () => {
                                       grade: e.target.value,
                                     });
                                   }}
-                                  value={studentsStatus[studentIndex].grade}
+                                  value={
+                                    studentsStatus.length !== 0 &&
+                                    studentsStatus[studentIndex].grade
+                                  }
                                 />
                               </Form.Group>
                             </td>
@@ -636,7 +713,7 @@ const TeachingNotes = () => {
                     <Button className="btn btn-warning" type="submit">
                       Save Changes
                     </Button>
-                    <Button className="mx-3 btn btn-danger" type="submit">
+                    <Button className="mx-3 btn btn-danger" onClick={deleteItem}>
                       Delete
                     </Button>
                   </>

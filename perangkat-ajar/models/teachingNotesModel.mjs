@@ -17,7 +17,11 @@ export default class TeachingNotes {
   }
 
   static getBySearch(date, class_id, subject_id, teacher_id) {
-    return db("teaching_notes").where({ date }).andWhere({ class_id }).andWhere({ subject_id }).andWhere({ teacher_id });
+    return db("teaching_notes")
+      .where({ date })
+      .andWhere({ class_id })
+      .andWhere({ subject_id })
+      .andWhere({ teacher_id });
   }
 
   static async update(id, data) {

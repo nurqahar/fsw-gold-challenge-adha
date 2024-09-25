@@ -125,6 +125,47 @@
  *       500:
  *         description: Some error happened
  *
+ * /api/teaching_notes/{id1}/{id2}/{id3}:
+ *   put:
+ *     summary: Update The Teaching Notes by the id
+ *     tags: [Teaching Notes]
+ *     parameters:
+ *      - in: path
+ *        name: id1
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The Teaching Notes id
+ *      - in: path
+ *        name: id2
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The subject id
+ *      - in: path
+ *        name: id3
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The teacher id
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Teaching Notes'
+ *     responses:
+ *       201:
+ *         description: The Teaching Notes added
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Teaching Notes'
+ *       404:
+ *         description: The Teaching Notes was not found
+ *       500:
+ *         description: Some error happened
+ *
  * /api/teaching_notes/{id}:
  *   get:
  *     summary: Get the Teaching Notes by id
@@ -146,33 +187,6 @@
  *       404:
  *         description: The Teaching Notes was not found
  *
- *   put:
- *    summary: Update The Teaching Notes by the id
- *    tags: [Teaching Notes]
- *    parameters:
- *      - in: path
- *        name: id
- *        schema:
- *          type: string
- *        required: true
- *        description: The Teaching Notes id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            $ref: '#/components/schemas/Teaching Notes'
- *    responses:
- *      200:
- *        description: The Teaching Notes was updated
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Teaching Notes'
- *      404:
- *        description: The Teaching Notes was not found
- *      500:
- *        description: Some error happened
  *
  *   delete:
  *     summary: Remove The Teaching Notes by id
@@ -204,7 +218,7 @@ const router = express.Router();
 router.post("/:id1/:id2/:id3/:id4", createData);
 router.get("/", getAllData);
 router.get("/:id", getDataById);
-router.put("/:id", updateData);
+router.put("/:id1/:id2/:id3", updateData);
 router.delete("/:id", deleteData);
 
 export default router;

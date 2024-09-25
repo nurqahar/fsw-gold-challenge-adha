@@ -3,7 +3,6 @@ import teachingNotesSchema from "../schema/teachingNotesSchema.mjs";
 
 const DECIMAL = 10;
 export const createData = async (req, res) => {
-
   const { error, value } = teachingNotesSchema.validate(req.body);
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
@@ -44,9 +43,7 @@ export const getAllData = async (req, res) => {
 };
 
 export const getDataById = async (req, res) => {
-  const data = (data = await TeachingNotes.getById(
-    parseInt(req.params.id, DECIMAL)
-  ));
+  const data = await TeachingNotes.getById(parseInt(req.params.id, DECIMAL));
 
   if (data) {
     return res.json(data);
@@ -56,15 +53,27 @@ export const getDataById = async (req, res) => {
 
 export const updateData = async (req, res) => {
   const { error, value } = teachingNotesSchema.validate(req.body);
+
   if (error) {
     return res.status(400).json({ error: error.details[0].message });
   }
 
-  const dataId = parseInt(req.params.id, DECIMAL);
-  const data = await TeachingNotes.getById(dataId);
+  const id = parseInt(req.params.id1, DECIMAL);
+  const data = await TeachingNotes.getById(id);
+  const subject_id = parseInt(req.params.id2, DECIMAL);
+  const teacher_id = parseInt(req.params.id3, DECIMAL);
+  const class_id = parseInt(data.class_id, DECIMAL);
+  const student_id = parseInt(data.student_id, DECIMAL);
+
   if (!data) return res.status(404).send("teaching note not found!");
   try {
-    const updateData = await TeachingNotes.update(dataId, value);
+    const updateData = await TeachingNotes.update(id, {
+      subject_id,
+      teacher_id,
+      class_id,
+      student_id,
+      ...value,
+    });
     return res.status(201).json(updateData);
   } catch (err) {
     const { detail } = err;
