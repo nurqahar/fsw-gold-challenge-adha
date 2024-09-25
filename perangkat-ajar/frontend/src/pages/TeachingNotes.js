@@ -432,11 +432,7 @@ const TeachingNotes = () => {
               <Form onSubmit={searchTeachingNotes}>
                 <Form.Group className="mb-3">
                   <FloatingLabel label="Date" className="mb-3">
-                    <Form.Control
-                      type="date"
-                      name="date"
-                      // value={moment().format("YYYY-MM-DD")}
-                    />
+                    <Form.Control type="date" name="date" />
                   </FloatingLabel>
                 </Form.Group>
                 <Form.Group className="mb-3">

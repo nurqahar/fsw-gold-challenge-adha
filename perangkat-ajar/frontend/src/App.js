@@ -16,11 +16,11 @@ export default function App() {
     <BrowserRouter>
       <LandingPage />
       <Routes>
-        <Route path="/teacher" element={<Teachers />} />
+        <Route path="/teachers" element={<Teachers />} />
         <Route path="/classes" element={<Classes />} />
         <Route path="/teaching_notes" element={<TeachingNotes />} />
         <Route path="/students" element={<Students />} />
-        <Route path="/subject" element={<Subjects />} />
+        <Route path="/subjects" element={<Subjects />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
