@@ -317,8 +317,31 @@ const TeachingNotes = () => {
     });
   };
 
-  const deleteItem = async (event)=>{
-    
+  async function deleteItem() {
+    studentsStatus.map(async (studentStatus, index) => {
+      const teachingNotesId = studentStatus.teachingNotesId;
+      const presence = studentStatus.presence;
+      const content = teachingNotes.content;
+      const notes = studentStatus.notes;
+      const time = teachingNotes.time;
+      const total_content_time = teachingNotes.total_content_time;
+      const date = teachingNotes.date;
+      const school_year = teachingNotes.school_year;
+      const semester = teachingNotes.semester;
+      const grade = studentStatus.grade;
+      await axios.delete(`${API_URL_TEACHING_NOTES}/${teachingNotesId}`, {
+        presence: presence,
+        content: content,
+        notes: notes,
+        time: time,
+        total_content_time: total_content_time,
+        date: date,
+        school_year: school_year,
+        semester: semester,
+        grade: grade,
+      });
+    });
+    window.location.reload();
   }
 
   function refreshPage() {
@@ -412,7 +435,7 @@ const TeachingNotes = () => {
                     <Form.Control
                       type="date"
                       name="date"
-                      value={moment().format("YYYY-MM-DD")}
+                      // value={moment().format("YYYY-MM-DD")}
                     />
                   </FloatingLabel>
                 </Form.Group>
@@ -713,7 +736,10 @@ const TeachingNotes = () => {
                     <Button className="btn btn-warning" type="submit">
                       Save Changes
                     </Button>
-                    <Button className="mx-3 btn btn-danger" onClick={deleteItem}>
+                    <Button
+                      className="mx-3 btn btn-danger"
+                      onClick={deleteItem}
+                    >
                       Delete
                     </Button>
                   </>
