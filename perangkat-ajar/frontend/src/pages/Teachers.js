@@ -14,18 +14,78 @@ const ROUTE_TEACHERS = "teachers";
 const API_URL_TEACHERS = `http://localhost:3000/api/${ROUTE_TEACHERS}`;
 
 const Teachers = () => {
-  const [teachers, setTeacher] = useState([]);
+  const [teachers, setTeachers] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const handleEditClick = (e) => {
-    console.log("Edit button clicked");
+
+  const onChangeTeachers = (event) => {
+    const updatedTeacher = teachers.map((teacher) => {
+      if (event.id === teacher.id && event.teacher) {
+        return {
+          id: teacher.id,
+          teacher: event.teacher,
+          sex: teacher.sex,
+        };
+      } else if (event.id === teacher.id && event.sex) {
+        return {
+          id: teacher.id,
+          teacher: teacher.teacher,
+          sex: event.sex,
+        };
+      } else {
+        return {
+          id: teacher.id,
+          teacher: teacher.teacher,
+          sex: teacher.sex,
+        };
+      }
+    });
+    setTeachers(updatedTeacher);
   };
+
+  const addTeacher = async (event) => {
+    event.preventDefault();
+    const teacher = event.target.elements[0].value;
+    const sex = event.target.elements[1].value;
+    await axios.post(`${API_URL_TEACHERS}`, {
+      teacher: teacher,
+      sex: sex,
+    });
+    event.target.elements[0].value = "";
+    event.target.elements[1].value = "LAKI-LAKI";
+
+    const response = await axios.get(`${API_URL_TEACHERS}`);
+    setTeachers(await response.data);
+  };
+
+  async function saveChanges(index) {
+    const teacher = teachers[index].teacher;
+    const sex = teachers[index].sex;
+    const id = teachers[index].id;
+
+    await axios.put(`${API_URL_TEACHERS}/${id}`, {
+      teacher: teacher,
+      sex: sex,
+    });
+
+    const response = await axios.get(`${API_URL_TEACHERS}`);
+    setTeachers(await response.data);
+  }
+
+  async function deleteItem(index) {
+    const id = teachers[index].id;
+
+    await axios.delete(`${API_URL_TEACHERS}/${id}`);
+
+    const response = await axios.get(`${API_URL_TEACHERS}`);
+    setTeachers(await response.data);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL_TEACHERS}`);
-        setTeacher(await response.data);
+        setTeachers(await response.data);
         setLoading(false);
       } catch (err) {
         setError("something went wrong");
@@ -60,13 +120,21 @@ const Teachers = () => {
               <strong>Teachers</strong>
             </Card.Header>
             <Card.Body>
-              <Form>
+              <Form onSubmit={addTeacher}>
                 <Form.Group className="mb-3">
                   <FloatingLabel label="Teacher Name" className="mb-3">
                     <Form.Control type="text" placeholder="Teacher Name" />
                   </FloatingLabel>
                 </Form.Group>
-                <Button className="btn btn-primary mx-1">Add Teacher</Button>
+                <Form.Group className="m-auto mb-2 w-55">
+                  <Form.Select>
+                    <option value="LAKI-LAKI">LAKI-LAKI</option>
+                    <option value="PEREMPUAN">PEREMPUAN</option>
+                  </Form.Select>
+                </Form.Group>
+                <Button className="btn btn-primary mx-1" type="submit">
+                  Add Teacher
+                </Button>
                 <Table>
                   <thead>
                     <tr>
@@ -87,12 +155,26 @@ const Teachers = () => {
                                 <Form.Control
                                   type="text"
                                   value={teacher.teacher}
+                                  onChange={(e) => {
+                                    onChangeTeachers({
+                                      id: teacher.id,
+                                      teacher: e.target.value,
+                                    });
+                                  }}
                                 />
                               </Form.Group>
                             </td>
                             <td>
                               <Form.Group className="m-auto mb-2 w-55">
-                                <Form.Select value={teacher.sex}>
+                                <Form.Select
+                                  value={teacher.sex}
+                                  onChange={(e) => {
+                                    onChangeTeachers({
+                                      id: teacher.id,
+                                      sex: e.target.value,
+                                    });
+                                  }}
+                                >
                                   <option value="LAKI-LAKI">LAKI-LAKI</option>
                                   <option value="PEREMPUAN">PEREMPUAN</option>
                                 </Form.Select>
@@ -100,10 +182,20 @@ const Teachers = () => {
                             </td>
                             <td>
                               <>
-                                <Button className="btn btn-warning mx-1">
+                                <Button
+                                  className="btn btn-warning mx-1"
+                                  onClick={() => {
+                                    saveChanges(index);
+                                  }}
+                                >
                                   Save
                                 </Button>
-                                <Button className="btn btn-danger mx-1">
+                                <Button
+                                  className="btn btn-danger mx-1"
+                                  onClick={() => {
+                                    deleteItem(index);
+                                  }}
+                                >
                                   Delete
                                 </Button>
                               </>

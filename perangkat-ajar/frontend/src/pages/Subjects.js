@@ -18,9 +18,55 @@ const Subjects = () => {
   const [isLoading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const handleEditClick = (e) => {
-    console.log("Edit button clicked");
+  const onChangeSubject = (event) => {
+    const updatedSubject = subjects.map((subject) => {
+      if (event.id === subject.id) {
+        return {
+          id: subject.id,
+          subject: event.subject,
+        };
+      } else {
+        return {
+          id: subject.id,
+          subject: subject.subject,
+        };
+      }
+    });
+    setSubject(updatedSubject);
   };
+
+  const addSubject = async (event) => {
+    event.preventDefault();
+    const subject = event.target.elements[0].value;
+    await axios.post(`${API_URL_SUBJECTS}`, {
+      subject: subject,
+    });
+    event.target.elements[0].value = "";
+
+    const response = await axios.get(`${API_URL_SUBJECTS}`);
+    setSubject(await response.data);
+  };
+
+  async function saveChanges(index) {
+    const subject = subjects[index].subject;
+    const id = subjects[index].id;
+
+    await axios.put(`${API_URL_SUBJECTS}/${id}`, {
+      subject: subject,
+    });
+
+    const response = await axios.get(`${API_URL_SUBJECTS}`);
+    setSubject(await response.data);
+  }
+
+  async function deleteItem(index) {
+    const id = subjects[index].id;
+
+    await axios.delete(`${API_URL_SUBJECTS}/${id}`);
+
+    const response = await axios.get(`${API_URL_SUBJECTS}`);
+    setSubject(await response.data);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -61,13 +107,15 @@ const Subjects = () => {
               <strong>Subjects</strong>
             </Card.Header>
             <Card.Body>
-              <Form>
+              <Form onSubmit={addSubject}>
                 <Form.Group className="mb-3">
                   <FloatingLabel label="Subject Name" className="mb-3">
                     <Form.Control type="text" placeholder="Subject Name" />
                   </FloatingLabel>
                 </Form.Group>
-                <Button className="btn btn-primary mx-1">Add Subject</Button>
+                <Button className="btn btn-primary mx-1" type="submit">
+                  Add Subject
+                </Button>
                 <Table>
                   <thead>
                     <tr>
@@ -87,16 +135,32 @@ const Subjects = () => {
                                 <Form.Control
                                   type="text"
                                   value={subject.subject}
+                                  onChange={(e) => {
+                                    onChangeSubject({
+                                      id: subject.id,
+                                      subject: e.target.value,
+                                    });
+                                  }}
                                 />
                               </Form.Group>
                             </td>
 
                             <td>
                               <>
-                                <Button className="btn btn-warning mx-1">
+                                <Button
+                                  className="btn btn-warning mx-1"
+                                  onClick={() => {
+                                    saveChanges(index);
+                                  }}
+                                >
                                   Save
                                 </Button>
-                                <Button className="btn btn-danger mx-1">
+                                <Button
+                                  className="btn btn-danger mx-1"
+                                  onClick={() => {
+                                    deleteItem(index);
+                                  }}
+                                >
                                   Delete
                                 </Button>
                               </>
