@@ -382,7 +382,8 @@ const TeachingNotes = () => {
             semester: teachingNotesDB[0].semester,
           });
         }
-        if (valueSearch && teachingNotesDB.length == 0) {
+        if (valueSearch && teachingNotesDB.length === 0) {
+          const teacher = teachersDB.filter(item=>item.teacher)
           setTeachingNotes({
             date: valueSearch.date,
             class: classesDB[valueSearch.classId - 1].class,
@@ -405,7 +406,7 @@ const TeachingNotes = () => {
 
     fetchData();
     setResultData();
-  }, [teachingNotesDB, studentsDB]);
+  }, []);
 
   if (isLoading) {
     return <Container className="mt-4">Loading...</Container>;
@@ -421,7 +422,7 @@ const TeachingNotes = () => {
 
   return (
     <Container className="mt-4">
-      {/* SEARCH */}
+      {/* SEARCH */ console.log(valueSearch, teachersDB)}
       <Row className="justify-content-center">
         <Col lg={6}>
           <Card border="primary">
@@ -488,7 +489,7 @@ const TeachingNotes = () => {
       {/* READ VALUE */}
       <Row className=" justify-content-center mt-5">
         <Col>
-          {/* IF TRUE */}
+          {/* IF SEARCH */}
           {isSearch ? (
             <Card>
               <Card.Body>Teaching Notes</Card.Body>
