@@ -89,6 +89,21 @@ exports.up = async function up(knex) {
     table.timestamp("createdAt").defaultTo(knex.raw("CURRENT_TIMESTAMP"));
     table.timestamp("updateAt").defaultTo(knex.raw("CURRENT_TIMESTAMP"));
   });
+
+  await knex.schema.createTable("user_profiles", (table) => {
+    table.increments("id").primary();
+    table
+      .integer("user_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("users")
+      .onDelete("CASCADE");
+    table.string("bio", "255").notNullable();
+    table.string("image", "255").nullable();
+    table.timestamp("createdAt").defaultTo(knex.raw("CURRENT_TIMESTAMP"));
+    table.timestamp("updateAt").defaultTo(knex.raw("CURRENT_TIMESTAMP"));
+  });
 };
 
 /**
@@ -96,10 +111,11 @@ exports.up = async function up(knex) {
  * @returns { Promise<void> }
  */
 exports.down = async function (knex) {
+  await knex.schema.dropTable("teaching_notes");
+  await knex.schema.dropTable("user_profiles");
+  await knex.schema.dropTable("students");
   await knex.schema.dropTable("classes");
   await knex.schema.dropTable("teachers");
   await knex.schema.dropTable("subjects");
-  await knex.schema.dropTable("students");
-  await knex.schema.dropTable("teaching_notes");
   await knex.schema.dropTable("users");
 };
